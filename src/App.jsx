@@ -13,6 +13,7 @@ const App = () => {
         <Box sx={{ height: "100vh", width: "100wh", display: "flex", flexDirection: "column" }} >
             <AppBar />
             <Box sx={{ height: "100%", width: "100%", overflow: "hidden", display: "flex" }} >
+                <AppMenu />
                 <Box sx={{ height: "100%", width: "100%", overflow: "auto", overflowX: "hidden" }} >
                     <Outlet />
                 </Box>
