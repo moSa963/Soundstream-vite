@@ -9,7 +9,7 @@ const AppBar = () => {
 
 
     return (
-        <MuiAppBar elevation={0} position="sticky">
+        <MuiAppBar elevation={0} position="sticky" color="default">
             <Toolbar variant="dense">
 
             </Toolbar>
