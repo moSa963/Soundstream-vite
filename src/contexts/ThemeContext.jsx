@@ -59,9 +59,9 @@ const create = (mode) => {
             palette: {
                 mode: "dark",
                 primary: {
-                    main: indigo[300],
-                    dark: indigo[300],
-                    light: indigo[300],
+                    main: indigo[400],
+                    dark: indigo[400],
+                    light: indigo[400],
                 },
                 secondary: {
                     main: purple[300],
