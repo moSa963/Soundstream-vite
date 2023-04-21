@@ -17,7 +17,7 @@ const CreatePlaylistCard = () => {
         <React.Fragment>
             <MenuItemLink Icon={PlaylistAdd} title="Creat Playlist" onClick={() => setOpen(true)} />
 
-            <Backdrop open={open} onClick={(e) => e.currentTarget == e.target && setOpen(false)}>
+            <Backdrop open={open} onClick={(e) => e.currentTarget == e.target && setOpen(false)} sx={{ zIndex: 10000 }}>
                 <Paper sx={{ width: "100%", p: 3, maxWidth: 550, }}>
                     <Stack spacing={2} sx={{ width: "100%", alignItems: "end" }}>
                         <TextField fullWidth placeholder="Title..." />
