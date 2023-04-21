@@ -9,9 +9,8 @@ const AppBar = () => {
 
 
     return (
-        <MuiAppBar elevation={0} position="sticky" color="default">
+        <MuiAppBar elevation={0} position="absolute" color="transparent">
             <Toolbar variant="dense">
-
             </Toolbar>
         </MuiAppBar>
     );
