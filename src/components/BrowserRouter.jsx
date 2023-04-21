@@ -14,7 +14,10 @@ export const createRoutes = () => createBrowserRouter([
         element: <App />,
         errorElement: <ErrorPage status={404} errorText="NotFound" />,
         children: [
-
+            {
+                index: true,
+                element: <HomePage />,
+            },
             {
                 path: "likes",
                 element: <LikesPage />,
