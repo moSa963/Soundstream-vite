@@ -11,7 +11,7 @@ const AppMenu = ({ playlists }) => {
     return (
         <Paper elevation={0} sx={{ borderRadius: 0 }}>
             <MenuList sx={{ height: "100%", width: 300, display: "flex", flexDirection: "column", overflow: "auto", overflowX: "hidden" }}>
-                <MenuItemLink Icon={Home} title="Home" to="home" />
+                <MenuItemLink Icon={Home} title="Home" to="/" />
                 <MenuItemLink Icon={Search} title="Search" to="search" />
                 <MenuItemLink Icon={LibraryAdd} title="Library" to="library" />
                 
