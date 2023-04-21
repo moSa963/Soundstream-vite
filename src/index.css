@@ -8,3 +8,19 @@ a{
   all: unset;
   cursor: pointer;
 }
+
+::-webkit-scrollbar{
+  background-color: rgba(100, 40, 219, 0);
+  width: 6px;
+}
+
+::-webkit-scrollbar-button{
+  display: none;
+}
+
+::-moz-scrol
+
+::-webkit-scrollbar-thumb{
+  background-color: rgba(90, 90, 90, 0.43);
+  border-radius: 6px;
+}
