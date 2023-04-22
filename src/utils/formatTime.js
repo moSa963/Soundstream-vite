@@ -6,7 +6,7 @@
  * @returns time string hh:mm:ss
  */
 const formatTime = (seconds) => {
-    if (seconds == null) return "0:00";
+    if (!seconds) return "0:00";
 
     const hours = Math.floor(seconds / 3600);
     const minutes = Math.floor((seconds - (hours * 3600)) / 60);
