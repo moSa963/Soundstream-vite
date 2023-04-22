@@ -44,7 +44,7 @@ const AudioPlayer = ({ track, onForward, onBackward }) => {
     }, [audioRef.current, options?.repeat]);
 
     return (
-        <Paper sx={{ display: "flex", width: "100%", overflow: 'hidden', height: 100, borderRadius: 0 }} elevation={2}>
+        <Paper sx={{ display: "flex", width: "100%", overflow: 'hidden', height: 100, borderRadius: 0, borderTop: "1px solid", borderColor: "divider" }} elevation={2}>
             <Box sx={{ flex: 1, display: "flex", alignItems: "center" }}>
                 <Track track={track}/>
             </Box>
