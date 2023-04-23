@@ -31,7 +31,7 @@ const AudioPlayer = ({ track, onForward, onBackward }) => {
             }
 
             if (options?.repeat == "list"){
-                onForward && onForward(true)
+                onForward && onForward(Boolean(options?.shuffle))
                 return;
             }
         }
@@ -54,7 +54,7 @@ const AudioPlayer = ({ track, onForward, onBackward }) => {
                     audio={audioRef} 
                     options={options} 
                     onOptionChange={setOptions} 
-                    onForward={() => onForward && onForward()} 
+                    onForward={() => onForward && onForward(options?.shuffle)} 
                     onBackward={() => onBackward && onBackward()} />
 
                 <ProgressLine audio={audioRef} />
