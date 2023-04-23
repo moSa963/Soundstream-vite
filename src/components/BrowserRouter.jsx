@@ -5,6 +5,7 @@ import HomePage from "../pages/HomePage";
 import LikesPage from "../pages/LikesPage";
 import SearchPage from "../pages/SearchPage";
 import ShowPlaylistPage from "../pages/ShowPlaylistPage";
+import PlaylistsPage from "../pages/PlaylistsPage";
 
 
 
@@ -27,8 +28,18 @@ export const createRoutes = () => createBrowserRouter([
                 element: <SearchPage  />,
             },
             {
-                path: "playlist:id",
+                path: "playlist",
                 element: <ShowPlaylistPage />,
+                children: [
+                    {
+                        index: true,
+                        element: <PlaylistsPage  />,
+                    },
+                    {
+                        path: ":id",
+                        element: <ShowPlaylistPage  />,
+                    },
+                ]
             }
         ]
     }
