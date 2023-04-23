@@ -1,6 +1,6 @@
 import { Box, Paper, Stack } from "@mui/material";
 import React from "react";
-import Track from "../Track";
+import Track from "../Track/Track";
 import PlayerController from "./PlayerController";
 import PlayerButtons from "./PlayerButtons";
 import ProgressLine from "./ProgressLine";

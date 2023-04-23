@@ -1,7 +1,7 @@
 import { FavoriteBorderRounded, FavoriteRounded, PlayCircle } from "@mui/icons-material";
 import { Box, IconButton, TableCell, TableRow } from "@mui/material";
 import React from "react";
-import Track from "../Track";
+import Track from "../Track/Track";
 
 
 const TracksTableRow = ({ row, index }) => {
