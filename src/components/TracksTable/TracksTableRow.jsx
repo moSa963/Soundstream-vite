@@ -2,6 +2,7 @@ import { FavoriteBorderRounded, FavoriteRounded, PlayCircle } from "@mui/icons-m
 import { Box, IconButton, TableCell, TableRow } from "@mui/material";
 import React from "react";
 import Track from "../Track/Track";
+import LikeTrackButton from "../Track/LikeTrackButton";
 
 
 const TracksTableRow = ({ row, index }) => {
@@ -26,7 +27,7 @@ const TracksTableRow = ({ row, index }) => {
             <TableCell  align="left" ><Track small /></TableCell>
             <TableCell align="right">-</TableCell>
             <TableCell align="right">{row.created_at}</TableCell>
-            <TableCell align="right"> <IconButton size="small"><FavoriteBorderRounded /></IconButton></TableCell>
+            <TableCell align="right"><LikeTrackButton /></TableCell>
             <TableCell align="right">{row.duration}</TableCell>
         </TableRow>
     );
