@@ -6,6 +6,7 @@ import LikesPage from "../pages/LikesPage";
 import SearchPage from "../pages/SearchPage";
 import ShowPlaylistPage from "../pages/ShowPlaylistPage";
 import PlaylistsPage from "../pages/PlaylistsPage";
+import LibraryPage from "../pages/LibraryPage";
 
 
 
@@ -26,6 +27,10 @@ export const createRoutes = () => createBrowserRouter([
             {
                 path: "search",
                 element: <SearchPage  />,
+            },
+            {
+                path: "library",
+                element: <LibraryPage  />,
             },
             {
                 path: "playlist",
