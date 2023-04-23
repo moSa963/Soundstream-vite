@@ -3,8 +3,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 
-const Track = ({ small }) => {
-
+const Track = ({ small, children }) => {
+    
     return (
         <Stack spacing={2} direction="row"  sx={{ height: "100%", minWidth: 100, p: small ? 0 : 1, }} alignItems="center">
             <Avatar variant="square" sx={{ width: small ? 35 : 65, height: small ? 35 : 65 }} />
@@ -12,6 +12,7 @@ const Track = ({ small }) => {
                 <Link><Typography noWrap>{track.title}</Typography></Link>
                 <Link><Typography variant="caption" color="GrayText">{track.user.username}</Typography></Link>
             </Stack>
+            {children}
         </Stack>
     );
 }
