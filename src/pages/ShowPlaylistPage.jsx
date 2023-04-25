@@ -12,8 +12,9 @@ const ShowPlaylistPage = () => {
     const [tracks, setTracks] = React.useState([]);
     
     React.useEffect(() => {
+        setTracks([]);
         loadTracks(data, setTracks);
-    }, []);
+    }, [data]);
 
     return (
         <Box sx={{ width: "100%" }}>
