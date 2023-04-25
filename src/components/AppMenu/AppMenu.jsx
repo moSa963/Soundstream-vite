@@ -1,12 +1,17 @@
 import { Divider, MenuList, Paper } from "@mui/material";
 import React from "react";
 import MenuItemLink from "./MenuItemLink";
-import { Favorite, HeartBrokenOutlined, HeatPumpRounded, Home, HomeMax, LibraryAdd, PlaylistAdd, Search } from "@mui/icons-material";
+import { Favorite, Home, LibraryAdd, Search } from "@mui/icons-material";
 import CreatePlaylistCard from "../CreatePlaylistCard";
+import request from "../../utils/Request";
 
 
-const AppMenu = ({ playlists }) => {
+const AppMenu = () => {
+    const [playlists, SetPlaylists] = React.useState([]);
 
+    React.useEffect(() => {
+        loadData(SetPlaylists);
+    }, []);
 
     return (
         <Paper elevation={0} sx={{ borderRadius: 0 }}>
@@ -17,12 +22,13 @@ const AppMenu = ({ playlists }) => {
                 
                 <MenuItemLink  />
 
-                <CreatePlaylistCard />
+                <CreatePlaylistCard onPlaylistAdded={(playlist) => SetPlaylists(ps => [...ps, playlist])}/>
+
                 <MenuItemLink Icon={Favorite} title="Likes" to="likes" />
 
                 <Divider sx={{ my: 2, mx: .5 }}/>
 
-                { playlists?.map((e) => <MenuItemLink key={e.id} title={e?.name} small/>) }
+                { playlists?.map((e) => <MenuItemLink key={e.id} title={e?.title} small to={`/playlist/${e.id}`}/>) }
 
             </MenuList>
         </Paper>
@@ -30,5 +36,13 @@ const AppMenu = ({ playlists }) => {
     );
 }
 
+const loadData = async (setData) => {
+    const res = await request("api/playlists");
+
+    if (res.ok){
+        const js = await res.json();
+        setData(js.data);
+    }
+}
 
 export default AppMenu;
