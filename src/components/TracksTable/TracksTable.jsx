@@ -11,7 +11,12 @@ import { Timelapse } from "@mui/icons-material";
 
 
 
-const TracksTable = ({ tracks }) => {
+const TracksTable = ({ tracks, setTracks }) => {
+
+    const handleSetLiked = (track, liked) => {
+        track.liked = liked;
+        setTracks(t => [...t]);
+    }   
 
     return (
         <TableContainer component={Paper}>
@@ -27,12 +32,13 @@ const TracksTable = ({ tracks }) => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {tracks?.map((track, index) => <TracksTableRow row={track} key={track?.id} index={index}/>)}
+                    {tracks?.map((track, index) => <TracksTableRow track={track} key={track?.id} index={index} setLiked={(v) => handleSetLiked(track, v)}/>)}
                 </TableBody>
             </Table>
         </TableContainer>
     );
 }
+
 
 
 export default TracksTable;

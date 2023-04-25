@@ -5,15 +5,13 @@ import Track from "../Track/Track";
 import LikeTrackButton from "../Track/LikeTrackButton";
 
 
-const TracksTableRow = ({ row, index }) => {
+const TracksTableRow = ({ track, index, setLiked }) => {
     const [hover, setHover] = React.useState(false);
-
 
     return (
         <TableRow
             onMouseEnter={() => setHover(true)}
             onMouseLeave={() => setHover(false)}
-            key={row.id}
             sx={{ '&:last-child td, &:last-child th': { border: 0 }, cursor: "pointer", ":hover": { bgcolor: t => t.palette.action.hover } }}
         >
             <TableCell  component="th" scope="row">
@@ -24,11 +22,11 @@ const TracksTableRow = ({ row, index }) => {
                     }
                 </Box>
             </TableCell>
-            <TableCell  align="left" ><Track small /></TableCell>
-            <TableCell align="right">-</TableCell>
-            <TableCell align="right">{row.created_at}</TableCell>
-            <TableCell align="right"><LikeTrackButton /></TableCell>
-            <TableCell align="right">{row.duration}</TableCell>
+            <TableCell align="left" sx={{ maxWidth: 300, overflow: "hidden" }}><Track small track={track}/></TableCell>
+            <TableCell align="right">{track.album?.title || '-'}</TableCell>
+            <TableCell align="right">{new Date(track.created_at).toLocaleDateString()}</TableCell>
+            <TableCell align="right"><LikeTrackButton track={track} setLiked={setLiked}/></TableCell>
+            <TableCell align="right">{track.duration}</TableCell>
         </TableRow>
     );
 }
