@@ -7,6 +7,7 @@ import SearchPage from "../pages/SearchPage";
 import ShowPlaylistPage from "../pages/ShowPlaylistPage";
 import PlaylistsPage from "../pages/PlaylistsPage";
 import LibraryPage from "../pages/LibraryPage";
+import request from "../utils/Request";
 
 
 
@@ -34,15 +35,18 @@ export const createRoutes = () => createBrowserRouter([
             },
             {
                 path: "playlist",
-                element: <ShowPlaylistPage />,
                 children: [
                     {
                         index: true,
                         element: <PlaylistsPage  />,
                     },
                     {
-                        path: ":id",
+                        path: ":playlistId",
                         element: <ShowPlaylistPage  />,
+                        loader: async ({ params }) => {
+                            return request(`api/playlists/${params.playlistId}`);
+                          },
+                          
                     },
                 ]
             }
