@@ -8,13 +8,13 @@ const Image = styled('img')(() => ({
     objectFit: "cover",
 }));
 
-const Card = ({ src, title, description, onClick }) => {
+const Card = ({ src, onClick, children }) => {
 
     return (
         <Paper elevation={3} onClick={onClick}
             sx={{
                 width: "100%",
-                maxWidth: 250,
+                maxWidth: 230,
                 minWidth: 150,
                 p: 1, 
                 overflow: "hidden",
@@ -26,8 +26,7 @@ const Card = ({ src, title, description, onClick }) => {
             <Box sx={{ width: "100%", aspectRatio: '1', my: 1, boxShadow: t => t.shadows[1] }}>
                 <Image src={src} />
             </Box>
-            <Typography noWrap >{title}</Typography>
-            <Typography variant="caption" color="gray" fontFamily="serif">{description}</Typography>
+            {children}
         </Paper>
     );
 }
