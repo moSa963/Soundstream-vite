@@ -4,6 +4,7 @@ import Track from "../Track/Track";
 import PlayerController from "./PlayerController";
 import PlayerButtons from "./PlayerButtons";
 import ProgressLine from "./ProgressLine";
+import { APP_URL } from "../../utils/Request";
 
 
 
@@ -12,8 +13,8 @@ const AudioPlayer = ({ track, onForward, onBackward }) => {
     const [options, setOptions] = React.useState({});
 
     React.useEffect(() => {
-        if (audioRef.current) {
-            audioRef.current.src = track?.src;
+        if (audioRef.current && track) {
+            audioRef.current.src = `${APP_URL}api/tracks/${track.id}/stream`;
             audioRef.current.play().catch(() => {});
         }
     }, [audioRef.current, track]);
