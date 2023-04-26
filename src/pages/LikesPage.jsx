@@ -2,7 +2,7 @@ import { Box } from "@mui/material";
 import React from "react";
 import PlaylistBanner from "../components/PlaylistBanner";
 import TracksTable from "../components/TracksTable/TracksTable";
-import request from "../utils/Request";
+import request, { APP_URL } from "../utils/Request";
 
 
 const LikesPage = () => {
@@ -14,7 +14,7 @@ const LikesPage = () => {
 
     return (
         <Box sx={{ width: "100%" }} >
-            <PlaylistBanner type="playlist" title="Liked Songs" />
+            <PlaylistBanner type="playlist" title="Liked Songs" avatar={`${APP_URL}img/likes.png`}/>
             <TracksTable tracks={tracks} setTracks={setTracks}/>
         </Box>
     );

@@ -2,7 +2,7 @@ import { Box } from "@mui/material";
 import React from "react";
 import TracksTable from "../components/TracksTable/TracksTable";
 import PlaylistBanner from "../components/PlaylistBanner";
-import request from "../utils/Request";
+import request, { APP_URL } from "../utils/Request";
 import { useLoaderData } from "react-router-dom";
 
 
@@ -18,7 +18,7 @@ const ShowPlaylistPage = () => {
 
     return (
         <Box sx={{ width: "100%" }}>
-            <PlaylistBanner title={data.title} description={data.description} type={"playlist"}/>
+            <PlaylistBanner title={data.title} description={data.description} type={"playlist"} avatar={`${APP_URL}api/playlists/${data.id}/photo`}/>
             <TracksTable tracks={tracks} setTracks={setTracks}/>
         </Box>
     );
