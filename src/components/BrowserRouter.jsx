@@ -38,14 +38,13 @@ export const createRoutes = () => createBrowserRouter([
                 children: [
                     {
                         index: true,
+                        loader: async () => await request("api/playlists"),
                         element: <PlaylistsPage  />,
                     },
                     {
                         path: ":playlistId",
                         element: <ShowPlaylistPage  />,
-                        loader: async ({ params }) => {
-                            return request(`api/playlists/${params.playlistId}`);
-                          },
+                        loader: async ({ params }) => request(`api/playlists/${params.playlistId}`),
                           
                     },
                 ]
