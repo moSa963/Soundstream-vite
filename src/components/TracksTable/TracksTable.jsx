@@ -8,15 +8,22 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import TracksTableRow from "./TracksTableRow";
 import { Timelapse } from "@mui/icons-material";
+import { usePlayer } from "../../contexts/PlayerContext";
 
 
 
 const TracksTable = ({ tracks, setTracks }) => {
+    const { setIndex, setList } = usePlayer();
 
     const handleSetLiked = (track, liked) => {
         track.liked = liked;
         setTracks(t => [...t]);
     }   
+
+    const handlePlay = (_, index) => {
+        setList(tracks);
+        setIndex(index);
+    }
 
     return (
         <TableContainer component={Paper}>
@@ -32,7 +39,7 @@ const TracksTable = ({ tracks, setTracks }) => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {tracks?.map((track, index) => <TracksTableRow track={track} key={track?.id} index={index} setLiked={(v) => handleSetLiked(track, v)}/>)}
+                    {tracks?.map((track, index) => <TracksTableRow track={track} key={track?.id} onPlay={handlePlay} index={index} setLiked={(v) => handleSetLiked(track, v)}/>)}
                 </TableBody>
             </Table>
         </TableContainer>

@@ -5,7 +5,7 @@ import Track from "../Track/Track";
 import LikeTrackButton from "../Track/LikeTrackButton";
 
 
-const TracksTableRow = ({ track, index, setLiked }) => {
+const TracksTableRow = ({ track, index, setLiked, onPlay }) => {
     const [hover, setHover] = React.useState(false);
 
     return (
@@ -18,7 +18,7 @@ const TracksTableRow = ({ track, index, setLiked }) => {
                 <Box sx={{ width: 40, overflow: "hidden" }}>
                     {
 
-                        hover ? <IconButton ><PlayCircle /></IconButton> : index + 1
+                        hover ? <IconButton onClick={() => onPlay(track, index)}><PlayCircle /></IconButton> : index + 1
                     }
                 </Box>
             </TableCell>
