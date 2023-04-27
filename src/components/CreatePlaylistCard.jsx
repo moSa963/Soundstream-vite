@@ -11,7 +11,7 @@ const CreatePlaylistCard = ({ onPlaylistAdded }) => {
     const [title, setTitle] = React.useState("");
 
     const handleAdd = () => {
-        title && create(title, onPlaylistAdded);
+        create(title, onPlaylistAdded);
         setOpen(false);
     }
 
@@ -35,7 +35,12 @@ const CreatePlaylistCard = ({ onPlaylistAdded }) => {
 }
 
 const create = async (title, onPlaylistAdded) => {
-    const res = await request("api/playlists", "POST", { title });
+    const data = {};
+
+    title && (data[title] = title);
+    
+    const res = await request("api/playlists", "POST", data);
+
 
     if (res.ok)
     {
