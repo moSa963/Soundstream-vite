@@ -9,7 +9,7 @@ const PlaylistCard = ({ data }) => {
     const nav = useNavigate();
 
     return (
-        <Card src={`${APP_URL}api/playlists/${data.id}/photo`} onClick={() => nav(`/playlist/${data.id}`)}>
+        <Card src={`${APP_URL}api/playlists/${data.id}/photo`} to={`/playlist/${data.id}`}>
             <Typography noWrap >{data?.title}</Typography>
             <Typography variant="caption" color="gray" fontFamily="serif">{data?.description}</Typography>
         </Card>
