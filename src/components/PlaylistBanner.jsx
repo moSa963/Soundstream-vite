@@ -16,7 +16,7 @@ const PlaylistBanner = ({ description, title, type, avatar, onChange, playlistId
             width: "100%", p: 5, minHeight: 300, display: "flex", alignItems: "center",
             background: t => `linear-gradient(to top, ${t.palette.background.paper}, ${t.palette.divider} 300px)`
         }} elevation={3}>
-            <AvatarInput src={avatar} sx={{ width: 220, height: 220, boxShadow: t => t.shadows[4] }} onChange={onAvatarChange}/>
+            <AvatarInput src={avatar} disabled={!enableEdit} sx={{ width: 220, height: 220, boxShadow: t => t.shadows[4] }} onChange={onAvatarChange}/>
             <Stack spacing={2} sx={{ pl: 5, width: "100%" }}>
                 <Typography variant="button">{type}</Typography>
                 <Typography variant="h2">{title}</Typography>
