@@ -9,7 +9,7 @@ const AvatarInput = ({ src, sx, disabled, onChange }) => {
 
     return (
         <Box sx={{ position: "relative" }} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
-            <Avatar src={src} sx={{...sx,  opacity: hover ? 0.1 : 1}} variant="square"  />
+            <Avatar src={src} sx={{...sx,  opacity: hover && !disabled ? 0.1 : 1}} variant="square"  />
             {hover && !disabled &&
                 <IconButton sx={{ position: "absolute", inset: "0 0 0 0" }}
                     onClick={(e) => e.currentTarget.children[1].click()}
