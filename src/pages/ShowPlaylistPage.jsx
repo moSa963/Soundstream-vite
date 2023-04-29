@@ -1,10 +1,11 @@
 import { Box } from "@mui/material";
 import React from "react";
-import TracksTable from "../components/TracksTable/TracksTable";
-import PlaylistBanner from "../components/PlaylistBanner";
 import request, { APP_URL } from "../utils/Request";
 import { useLoaderData } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
+import Playlist from "../components/Playlist";
+import { usePlaylists } from "../contexts/PlaylistsContext";
+import AddToPlaylistCard from "../components/AddToPlaylistCard";
 
 
 
@@ -12,41 +13,54 @@ const ShowPlaylistPage = () => {
     const { data } = useLoaderData();
     const [tracks, setTracks] = React.useState([]);
     const { user } = useAuth();
+    const { setPlaylists } = usePlaylists();
+    const [action, setAction] = React.useState({ name: null, payload: null });
 
-    React.useEffect(() => {
-        setTracks([]);
-        loadTracks(data, setTracks);
-    }, [data]);
+    const handleAction = (action, track) => {
+        switch(action)
+        {
+            case "Add to playlist": setAction({ name: action, payload: track });
+            case "Remove from this playlist": remove(data, track, () => setTracks(ts => ts.filter(v => v.id != track.id)));
+        }
+    }
 
     return (
         <Box sx={{ width: "100%" }}>
-            <PlaylistBanner
-                playlistId={data.id}
+            <Playlist
+                tracks={tracks}
+                setTracks={setTracks}
+                type="playlist"
+                playlist={data}
+                dataUrl={`api/playlists/${data.id}/tracks`}
+                avatar={`${APP_URL}api/playlists/${data.id}/photo`}
                 enableEdit={data.user.username == user.username}
-                title={data.title}
-                description={data.description}
-                type={"playlist"}
                 onAvatarChange={(file) => UpdateImage(data, file)}
-                avatar={`${APP_URL}api/playlists/${data.id}/photo`} />
-            <TracksTable tracks={tracks} setTracks={setTracks} />
+                onChange={(newData) => setPlaylists(ps => {
+                    ps[ps.findIndex(v => v.id == data.id)] = newData;
+                    return [...ps];
+                })}
+                actions={["Remove from this playlist", "Add to playlist"]}
+                onAction={handleAction}
+            />
+
+            <AddToPlaylistCard open={action.name == "Add to playlist"}  track={action.payload} onClose={() => setAction({ name: null, payload: null }) } />
         </Box>
     );
 }
 
-const loadTracks = async (playlist, setData) => {
-    const res = await request(`api/playlists/${playlist.id}/tracks`);
-
-    if (res.ok) {
-        const js = await res.json();
-        setData(js.data);
-    }
-}
-
 const UpdateImage = async (playlist, file) => {
-    const res = await request(`api/playlists/${playlist.id}/photo`, "POST", { photo: file});
+    const res = await request(`api/playlists/${playlist.id}/photo`, "POST", { photo: file });
 
     if (res.ok) {
         window.location.reload();
+    }
+}
+
+const remove = async (playlist, track, onRemoved) => {
+    const res = await request(`api/playlists/${playlist.id}/tracks/${track.id}`, "DELETE");
+
+    if (res.ok) {
+        onRemoved();
     }
 }
 
