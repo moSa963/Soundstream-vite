@@ -38,7 +38,6 @@ export const createRoutes = () => createBrowserRouter([
                 children: [
                     {
                         index: true,
-                        loader: async () => await request("api/playlists"),
                         element: <PlaylistsPage  />,
                     },
                     {
