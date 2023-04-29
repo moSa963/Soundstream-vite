@@ -3,15 +3,11 @@ import React from "react";
 import MenuItemLink from "./MenuItemLink";
 import { Favorite, Home, LibraryAdd, Search } from "@mui/icons-material";
 import CreatePlaylistCard from "../CreatePlaylistCard";
-import request from "../../utils/Request";
+import { usePlaylists } from "../../contexts/PlaylistsContext";
 
 
 const AppMenu = () => {
-    const [playlists, SetPlaylists] = React.useState([]);
-
-    React.useEffect(() => {
-        loadData(SetPlaylists);
-    }, []);
+    const {playlists, SetPlaylists} = usePlaylists();
 
     return (
         <Paper elevation={0} sx={{ borderRadius: 0 }}>
@@ -34,15 +30,6 @@ const AppMenu = () => {
         </Paper>
 
     );
-}
-
-const loadData = async (setData) => {
-    const res = await request("api/playlists");
-
-    if (res.ok){
-        const js = await res.json();
-        setData(js.data);
-    }
 }
 
 export default AppMenu;
