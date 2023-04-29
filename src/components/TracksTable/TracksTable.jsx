@@ -12,13 +12,13 @@ import { usePlayer } from "../../contexts/PlayerContext";
 
 
 
-const TracksTable = ({ tracks, setTracks }) => {
+const TracksTable = ({ tracks, setTracks, actions, onAction }) => {
     const { setIndex, setList } = usePlayer();
 
     const handleSetLiked = (track, liked) => {
         track.liked = liked;
         setTracks(t => [...t]);
-    }   
+    }
 
     const handlePlay = (_, index) => {
         setList(tracks);
@@ -36,10 +36,20 @@ const TracksTable = ({ tracks, setTracks }) => {
                         <TableCell align="right">Date added</TableCell>
                         <TableCell align="right"></TableCell>
                         <TableCell align="right"><Timelapse /></TableCell>
+                        <TableCell width={40}></TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {tracks?.map((track, index) => <TracksTableRow track={track} key={track?.id} onPlay={handlePlay} index={index} setLiked={(v) => handleSetLiked(track, v)}/>)}
+                    {tracks?.map((track, index) =>
+                        <TracksTableRow key={track?.id}
+                            track={track}
+                            onPlay={handlePlay}
+                            index={index}
+                            setLiked={(v) => handleSetLiked(track, v)}
+                            actions={actions}
+                            onAction={onAction}
+                        />
+                    )}
                 </TableBody>
             </Table>
         </TableContainer>
