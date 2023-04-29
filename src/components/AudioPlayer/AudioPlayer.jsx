@@ -15,7 +15,7 @@ const AudioPlayer = ({ track, onForward, onBackward }) => {
     React.useEffect(() => {
         if (audioRef.current && track) {
             audioRef.current.src = `${APP_URL}api/tracks/${track.id}/stream`;
-            audioRef.current.play().catch(() => {});
+            audioRef.current.play().catch(() => { });
         }
     }, [audioRef.current, track]);
 
@@ -25,13 +25,13 @@ const AudioPlayer = ({ track, onForward, onBackward }) => {
         }
 
         const onEnded = (e) => {
-            if (options?.repeat == "one"){
+            if (options?.repeat == "one") {
                 e.target.currentTime = 0;
-                e.target.play().catch(() => {});
+                e.target.play().catch(() => { });
                 return;
             }
 
-            if (options?.repeat == "list"){
+            if (options?.repeat == "list") {
                 onForward && onForward(Boolean(options?.shuffle))
                 return;
             }
@@ -46,26 +46,29 @@ const AudioPlayer = ({ track, onForward, onBackward }) => {
 
     return (
         <Paper sx={{ display: "flex", width: "100%", overflow: 'hidden', height: 100, borderRadius: 0, borderTop: "1px solid", borderColor: "divider" }} elevation={2}>
-            <Box sx={{ flex: 1, display: "flex", alignItems: "center" }}>
-                <Track track={track}/>
+            <Box sx={{ flex: 1, display: "flex", overflow: "hidden", justifyContent: "start", alignItems: "center" }}>
+                <Track track={track} />
             </Box>
 
-            <Stack justifyContent="center" alignItems="center" sx={{ flex: 2, width: "100%", maxWidth: 450 }}>
-                <PlayerButtons 
-                    audio={audioRef} 
-                    options={options} 
-                    onOptionChange={setOptions} 
-                    onForward={() => onForward && onForward(options?.shuffle)} 
-                    onBackward={() => onBackward && onBackward()} />
+            <Box sx={{ flex: 2, display: "flex", flexDirection: "column", overflow: "hidden", justifyContent: "center", alignItems: "center" }}>
+                <Box sx={{ width: "100%", maxWidth: 600 }}>
+                    <PlayerButtons
+                        audio={audioRef}
+                        options={options}
+                        onOptionChange={setOptions}
+                        onForward={() => onForward && onForward(options?.shuffle)}
+                        onBackward={() => onBackward && onBackward()} />
 
-                <ProgressLine audio={audioRef} />
-            </Stack>
+                    <ProgressLine audio={audioRef} />
+                </Box>
+            </Box>
 
-            <Box sx={{ flex: 1, display: "flex", justifyContent: "end", alignItems: "center" }}>
+            <Box sx={{ flex: 1, display: "flex", overflow: "hidden", justifyContent: "end", alignItems: "center" }}>
                 <PlayerController audio={audioRef} />
             </Box>
         </Paper>
     );
 }
+
 
 export default AudioPlayer;
