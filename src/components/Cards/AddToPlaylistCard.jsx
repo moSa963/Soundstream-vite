@@ -1,8 +1,8 @@
 import { Backdrop, Divider, InputBase, Paper, Stack } from "@mui/material";
 import React from "react";
-import MenuItemLink from "./AppMenu/MenuItemLink";
-import request from "../utils/Request";
-import { usePlaylists } from "../contexts/PlaylistsContext";
+import MenuItemLink from "../AppMenu/MenuItemLink";
+import request from "../../utils/Request";
+import { usePlaylists } from "../../contexts/PlaylistsContext";
 
 
 

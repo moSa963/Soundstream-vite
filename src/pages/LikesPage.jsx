@@ -2,7 +2,7 @@ import { Box } from "@mui/material";
 import React from "react";
 import { APP_URL } from "../utils/Request";
 import Playlist from "../components/Playlist";
-import AddToPlaylistCard from "../components/AddToPlaylistCard";
+import AddToPlaylistCard from "../components/Cards/AddToPlaylistCard";
 
 
 const LikesPage = () => {

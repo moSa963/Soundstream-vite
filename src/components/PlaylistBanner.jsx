@@ -1,8 +1,7 @@
-import { AddAPhoto } from "@mui/icons-material";
-import { Avatar, Box, IconButton, Paper, Stack, Typography } from "@mui/material";
+import { Paper, Stack, Typography } from "@mui/material";
 import React from "react";
 import AvatarInput from "./AvatarInput";
-import UpdatePlaylistCard from "./UpdatePlaylistCard";
+import UpdatePlaylistCard from "./Cards/UpdatePlaylistCard";
 
 
 

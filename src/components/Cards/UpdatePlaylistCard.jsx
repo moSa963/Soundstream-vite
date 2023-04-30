@@ -1,7 +1,7 @@
 import { Backdrop, Button, Divider, IconButton, Paper, Stack, TextField } from "@mui/material";
 import React from "react";
 import { Edit } from "@mui/icons-material";
-import request from "../utils/Request";
+import request from "../../utils/Request";
 
 
 

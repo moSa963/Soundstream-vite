@@ -1,8 +1,8 @@
 import { Backdrop, Button, Paper, Stack, TextField } from "@mui/material";
 import React from "react";
-import MenuItemLink from "./AppMenu/MenuItemLink";
+import MenuItemLink from "../AppMenu/MenuItemLink";
 import { PlaylistAdd } from "@mui/icons-material";
-import request from "../utils/Request";
+import request from "../../utils/Request";
 
 
 

@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import React from "react";
 import CardsSection from "../components/CardsSection/CardsSection";
-import CreateAlbumCard from "../components/CreateAlbumCard";
+import CreateAlbumCard from "../components/Cards/CreateAlbumCard";
 
 
 const LibraryPage = () => {

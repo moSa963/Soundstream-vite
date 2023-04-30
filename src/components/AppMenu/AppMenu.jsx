@@ -2,7 +2,7 @@ import { Divider, MenuList, Paper } from "@mui/material";
 import React from "react";
 import MenuItemLink from "./MenuItemLink";
 import { Favorite, Home, LibraryAdd, Search } from "@mui/icons-material";
-import CreatePlaylistCard from "../CreatePlaylistCard";
+import CreatePlaylistCard from "../Cards/CreatePlaylistCard";
 import { usePlaylists } from "../../contexts/PlaylistsContext";
 
 
