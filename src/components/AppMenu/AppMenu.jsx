@@ -7,7 +7,7 @@ import { usePlaylists } from "../../contexts/PlaylistsContext";
 
 
 const AppMenu = () => {
-    const {playlists, SetPlaylists} = usePlaylists();
+    const {playlists, setPlaylists} = usePlaylists();
 
     return (
         <Paper elevation={0} sx={{ borderRadius: 0 }}>
@@ -18,7 +18,7 @@ const AppMenu = () => {
                 
                 <MenuItemLink  />
 
-                <CreatePlaylistCard onPlaylistAdded={(playlist) => SetPlaylists(ps => [...ps, playlist])}/>
+                <CreatePlaylistCard onPlaylistAdded={(playlist) => setPlaylists(ps => [...ps, playlist])}/>
 
                 <MenuItemLink Icon={Favorite} title="Likes" to="likes" />
 
