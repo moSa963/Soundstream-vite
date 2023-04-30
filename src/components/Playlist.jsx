@@ -6,13 +6,13 @@ import request from "../utils/Request";
 
 
 
-const Playlist = ({tracks, setTracks, playlist, enableEdit, type, dataUrl, avatar, onAvatarChange, actions, onAction, onChange }) => {
+const Playlist = ({ tracks, setTracks, playlist, enableEdit, type, dataUrl, avatar, onAvatarChange, actions, onAction, onChange }) => {
     const [filter, setFilter] = React.useState("");
 
     React.useEffect(() => {
         setTracks([]);
         loadTracks(dataUrl, setTracks);
-    }, [playlist]);
+    }, [playlist?.id, dataUrl, setTracks]);
 
     return (
         <Box sx={{ width: "100%" }}>
@@ -35,7 +35,11 @@ const Playlist = ({tracks, setTracks, playlist, enableEdit, type, dataUrl, avata
                 />
             </Stack>
 
-            <TracksTable tracks={tracks?.filter((v) => v.title.toLowerCase().startsWith(filter.toLowerCase()))} setTracks={setTracks} actions={actions} onAction={onAction}/>
+            <TracksTable
+                tracks={tracks?.filter((v) => v.title.toLowerCase().startsWith(filter.toLowerCase()))}
+                setTracks={setTracks}
+                actions={actions}
+                onAction={onAction} />
         </Box>
     );
 }

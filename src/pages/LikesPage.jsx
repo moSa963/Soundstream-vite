@@ -9,13 +9,6 @@ const LikesPage = () => {
     const [action, setAction] = React.useState({ name: null, payload: null });
     const [tracks, setTracks] = React.useState([]);
 
-    const handleAction = (action, track) => {
-        switch(action)
-        {
-            case "Add to playlist": setAction({ name: action, payload: track });
-        }
-    }
-
     return (
         <Box sx={{ width: "100%" }} >
             <Playlist 
@@ -26,12 +19,19 @@ const LikesPage = () => {
                 dataUrl="api/likes"
                 avatar={`${APP_URL}img/likes.png`}
                 actions={["Add to playlist"]}
-                onAction={handleAction}
+                onAction={(action, track) => handleAction(action, track, setAction)}
             />
 
             <AddToPlaylistCard open={action.name == "Add to playlist"}  track={action.payload} onClose={() => setAction({ name: null, payload: null }) } />
         </Box>
     );
+}
+
+const handleAction = (action, track, setAction) => {
+    switch(action)
+    {
+        case "Add to playlist": setAction({ name: action, payload: track });
+    }
 }
 
 export default LikesPage;

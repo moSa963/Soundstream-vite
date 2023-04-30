@@ -16,13 +16,7 @@ const ShowPlaylistPage = () => {
     const { setPlaylists } = usePlaylists();
     const [action, setAction] = React.useState({ name: null, payload: null });
 
-    const handleAction = (action, track) => {
-        switch(action)
-        {
-            case "Add to playlist": setAction({ name: action, payload: track }); break;
-            case "Remove from this playlist": remove(data, track, setTracks); break;
-        }
-    }
+
 
     return (
         <Box sx={{ width: "100%" }}>
@@ -40,7 +34,7 @@ const ShowPlaylistPage = () => {
                     return [...ps];
                 })}
                 actions={["Remove from this playlist", "Add to playlist"]}
-                onAction={handleAction}
+                onAction={(action, track) => handleAction(data, action, track, setAction, remove, setTracks)}
             />
 
             <AddToPlaylistCard open={action.name == "Add to playlist"}  track={action.payload} onClose={() => setAction({ name: null, payload: null }) } />
@@ -61,6 +55,14 @@ const remove = async (playlist, track, setTracks) => {
 
     if (res.ok) {
         setTracks(ts => ts.filter(v => v.id != track.id))
+    }
+}
+
+const handleAction = (playlist, action, track, setAction, remove, setTracks) => {
+    switch(action)
+    {
+        case "Add to playlist": setAction({ name: action, payload: track }); break;
+        case "Remove from this playlist": remove(playlist, track, setTracks); break;
     }
 }
 
