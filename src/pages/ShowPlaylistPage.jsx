@@ -19,8 +19,8 @@ const ShowPlaylistPage = () => {
     const handleAction = (action, track) => {
         switch(action)
         {
-            case "Add to playlist": setAction({ name: action, payload: track });
-            case "Remove from this playlist": remove(data, track, () => setTracks(ts => ts.filter(v => v.id != track.id)));
+            case "Add to playlist": setAction({ name: action, payload: track }); break;
+            case "Remove from this playlist": remove(data, track, setTracks); break;
         }
     }
 
@@ -56,11 +56,11 @@ const UpdateImage = async (playlist, file) => {
     }
 }
 
-const remove = async (playlist, track, onRemoved) => {
+const remove = async (playlist, track, setTracks) => {
     const res = await request(`api/playlists/${playlist.id}/tracks/${track.id}`, "DELETE");
 
     if (res.ok) {
-        onRemoved();
+        setTracks(ts => ts.filter(v => v.id != track.id))
     }
 }
 
