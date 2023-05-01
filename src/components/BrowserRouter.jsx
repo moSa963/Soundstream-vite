@@ -1,4 +1,4 @@
-import {  createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
 import ErrorPage from "../pages/ErrorPage";
 import HomePage from "../pages/HomePage";
@@ -27,24 +27,35 @@ export const createRoutes = () => createBrowserRouter([
             },
             {
                 path: "search",
-                element: <SearchPage  />,
+                element: <SearchPage />,
             },
             {
                 path: "library",
-                element: <LibraryPage  />,
+                children: [
+                    {
+                        index: true,
+                        element: <LibraryPage />,
+                    },
+                    {
+                        path: ":albumId",
+                        element: <ShowPlaylistPage album/>,
+                        loader: async ({ params }) => request(`api/playlists/${params.albumId}`),
+
+                    },
+                ]
             },
             {
                 path: "playlist",
                 children: [
                     {
                         index: true,
-                        element: <PlaylistsPage  />,
+                        element: <PlaylistsPage />,
                     },
                     {
                         path: ":playlistId",
-                        element: <ShowPlaylistPage  />,
+                        element: <ShowPlaylistPage />,
                         loader: async ({ params }) => request(`api/playlists/${params.playlistId}`),
-                          
+
                     },
                 ]
             }
