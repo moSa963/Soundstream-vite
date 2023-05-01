@@ -9,13 +9,12 @@ import AddToPlaylistCard from "../components/Cards/AddToPlaylistCard";
 
 
 
-const ShowPlaylistPage = () => {
+const ShowPlaylistPage = ({ album }) => {
     const { data } = useLoaderData();
     const [tracks, setTracks] = React.useState([]);
     const { user } = useAuth();
     const { setPlaylists } = usePlaylists();
     const [action, setAction] = React.useState({ name: null, payload: null });
-
 
 
     return (
@@ -24,6 +23,8 @@ const ShowPlaylistPage = () => {
                 tracks={tracks}
                 setTracks={setTracks}
                 type="playlist"
+                album={album}
+                onAddTrack={() => handleAction(data, "Add track", null)}
                 playlist={data}
                 dataUrl={`api/playlists/${data.id}/tracks`}
                 avatar={`${APP_URL}api/playlists/${data.id}/photo`}
@@ -63,6 +64,7 @@ const handleAction = (playlist, action, track, setAction, remove, setTracks) => 
     {
         case "Add to playlist": setAction({ name: action, payload: track }); break;
         case "Remove from this playlist": remove(playlist, track, setTracks); break;
+        case "Add track": setAction({ name: action, payload: null }); break;
     }
 }
 
