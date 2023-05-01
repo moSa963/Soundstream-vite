@@ -16,10 +16,10 @@ const TracksTableRow = ({ track, index, setLiked, onPlay, actions, onAction }) =
             sx={{ '&:last-child td, &:last-child th': { border: 0 }, cursor: "pointer", ":hover": { bgcolor: t => t.palette.action.hover } }}
         >
             <TableCell component="th" scope="row">
-                <Box sx={{ width: 40, overflow: "hidden" }}>
+                <Box sx={{ width: 5 }}>
                     {
 
-                        hover ? <IconButton onClick={() => onPlay(track, index)}><PlayCircle /></IconButton> : index + 1
+                        hover ? <IconButton onClick={() => onPlay(track, index)} size="small"><PlayCircle /></IconButton> : index + 1
                     }
                 </Box>
             </TableCell>
