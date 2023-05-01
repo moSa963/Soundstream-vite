@@ -3,10 +3,11 @@ import React from "react";
 import TracksTable from "../components/TracksTable/TracksTable";
 import PlaylistBanner from "../components/PlaylistBanner";
 import request from "../utils/Request";
+import UploadTrackCard from "./Cards/UploadTrackCard";
 
 
 
-const Playlist = ({ tracks, setTracks, playlist, enableEdit, type, dataUrl, avatar, onAvatarChange, actions, onAction, onChange }) => {
+const Playlist = ({ tracks, setTracks, playlist, enableEdit, type, dataUrl, avatar, onAvatarChange, actions, onAction, onChange, album, onAddTrack }) => {
     const [filter, setFilter] = React.useState("");
 
     React.useEffect(() => {
@@ -33,6 +34,9 @@ const Playlist = ({ tracks, setTracks, playlist, enableEdit, type, dataUrl, avat
                     placeholder="Search..."
                     sx={{ width: "100%", px: 2, fontSize: 20 }}
                 />
+                {
+                    enableEdit && album && <UploadTrackCard album={playlist} onTrackAdded={(t) => setTracks(ts => [...ts, t])} />
+                }
             </Stack>
 
             <TracksTable
