@@ -6,6 +6,7 @@ import { useAuth } from "../contexts/AuthContext";
 import Playlist from "../components/Playlist";
 import { usePlaylists } from "../contexts/PlaylistsContext";
 import AddToPlaylistCard from "../components/Cards/AddToPlaylistCard";
+import { usePlayer } from "../contexts/PlayerContext";
 
 
 
@@ -15,7 +16,7 @@ const ShowPlaylistPage = ({ album }) => {
     const { user } = useAuth();
     const { setPlaylists } = usePlaylists();
     const [action, setAction] = React.useState({ name: null, payload: null });
-
+    const { setList } = usePlayer();
 
     return (
         <Box sx={{ width: "100%" }}>
@@ -34,8 +35,8 @@ const ShowPlaylistPage = ({ album }) => {
                     ps[ps.findIndex(v => v.id == data.id)] = newData;
                     return [...ps];
                 })}
-                actions={["Remove from this playlist", "Add to playlist"]}
-                onAction={(action, track) => handleAction(data, action, track, setAction, remove, setTracks)}
+                actions={["Remove from this playlist", "Add to playlist", "Add to queue"]}
+                onAction={(action, track) => handleAction(data, action, track, setAction, remove, setTracks, setList)}
             />
 
             <AddToPlaylistCard open={action.name == "Add to playlist"}  track={action.payload} onClose={() => setAction({ name: null, payload: null }) } />
@@ -59,12 +60,13 @@ const remove = async (playlist, track, setTracks) => {
     }
 }
 
-const handleAction = (playlist, action, track, setAction, remove, setTracks) => {
+const handleAction = (playlist, action, track, setAction, remove, setTracks, setList) => {
     switch(action)
     {
         case "Add to playlist": setAction({ name: action, payload: track }); break;
         case "Remove from this playlist": remove(playlist, track, setTracks); break;
         case "Add track": setAction({ name: action, payload: null }); break;
+        case "Add to queue": setList(list => [...list, track]); break;
     }
 }
 
