@@ -4,6 +4,7 @@ import React from "react";
 import Track from "../Track/Track";
 import LikeTrackButton from "../Track/LikeTrackButton";
 import TracksTableRowList from "./TracksTableRowList";
+import { Link } from "react-router-dom";
 
 
 const TracksTableRow = ({ track, index, setLiked, onPlay, actions, onAction }) => {
@@ -24,7 +25,7 @@ const TracksTableRow = ({ track, index, setLiked, onPlay, actions, onAction }) =
                 </Box>
             </TableCell>
             <TableCell align="left" sx={{ maxWidth: 300, overflow: "hidden" }}><Track small track={track} /></TableCell>
-            <TableCell align="right">{track.album?.title || '-'}</TableCell>
+            <TableCell align="right">{<Link to={`/library/${track.album?.id}`}>{track.album?.title}</Link> || '-'}</TableCell>
             <TableCell align="right">{new Date(track.created_at).toLocaleDateString()}</TableCell>
             <TableCell align="right"><LikeTrackButton track={track} setLiked={setLiked} /></TableCell>
             <TableCell align="right">{track.duration}</TableCell>
