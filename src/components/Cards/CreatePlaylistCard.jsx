@@ -34,7 +34,7 @@ const CreatePlaylistCard = ({ onPlaylistAdded }) => {
 const create = async (title, onPlaylistAdded) => {
     const data = {};
 
-    title && (data[title] = title);
+    title && (data["title"] = title);
 
     const res = await request("api/playlists", "POST", data);
 
