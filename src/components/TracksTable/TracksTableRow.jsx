@@ -7,7 +7,7 @@ import TracksTableRowList from "./TracksTableRowList";
 import { Link } from "react-router-dom";
 
 
-const TracksTableRow = ({ track, index, setLiked, onPlay, actions, onAction }) => {
+const TracksTableRow = ({ track, index, setLiked, onPlay, actions, onAction, small }) => {
     const [hover, setHover] = React.useState(false);
 
     return (
@@ -25,10 +25,10 @@ const TracksTableRow = ({ track, index, setLiked, onPlay, actions, onAction }) =
                 </Box>
             </TableCell>
             <TableCell align="left" sx={{ maxWidth: 300, overflow: "hidden" }}><Track small track={track} /></TableCell>
-            <TableCell align="right">{<Link to={`/library/${track.album?.id}`}>{track.album?.title}</Link> || '-'}</TableCell>
-            <TableCell align="right">{new Date(track.created_at).toLocaleDateString()}</TableCell>
-            <TableCell align="right"><LikeTrackButton track={track} setLiked={setLiked} /></TableCell>
-            <TableCell align="right">{track.duration}</TableCell>
+            {!small && <TableCell align="right">{<Link to={`/library/${track.album?.id}`}>{track.album?.title}</Link> || '-'}</TableCell>}
+            {!small && <TableCell align="right">{new Date(track.created_at).toLocaleDateString()}</TableCell>}
+            {!small && <TableCell align="right"><LikeTrackButton track={track} setLiked={setLiked} /></TableCell>}
+            {!small && <TableCell align="right">{track.duration}</TableCell>}
             <TableCell sx={{ minWidth: 70, overflow: "hidden" }}>
                 {hover && <TracksTableRowList actions={actions} onActionClick={(a) => onAction(a, track)} />}
             </TableCell>
