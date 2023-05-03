@@ -21,7 +21,7 @@ const LikesPage = () => {
                 dataUrl="api/likes"
                 avatar={`${APP_URL}img/likes.png`}
                 actions={["Add to playlist", "Add to queue"]}
-                onAction={(action, track) => handleAction(action, track, setAction)}
+                onAction={(action, track) => handleAction(action, track, setAction, setList)}
             />
 
             <AddToPlaylistCard open={action.name == "Add to playlist"}  track={action.payload} onClose={() => setAction({ name: null, payload: null }) } />
@@ -29,7 +29,7 @@ const LikesPage = () => {
     );
 }
 
-const handleAction = (action, track, setAction) => {
+const handleAction = (action, track, setAction, setList) => {
     switch(action)
     {
         case "Add to playlist": setAction({ name: action, payload: track }); break;
