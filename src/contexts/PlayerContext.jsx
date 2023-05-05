@@ -5,20 +5,20 @@ const Context = React.createContext();
 
 const PlayerProvider = ({ children }) => {
     const [list, setList] = React.useState([]);
-    const [index, setIndex] = React.useState(0);
+    const [indices, setIndices] = React.useState([0]);
 
     const handleForward = (shuffle) => {
-        setIndex(i => (shuffle ? (Math.floor(Math.random() * 10)) : ++i) % list.length);
+        setIndices(i => [...i, (shuffle ? (Math.floor(Math.random() * 10)) : indices[indices.length - 1] + 1) % list.length]);
     }
 
     const handleBackward = () => {
-        
+        indices.length < 2 && setIndices(i => i.slice(0, i.length - 1));
     }
 
     return (
-        <Context.Provider value={{ index, setIndex, list, setList }}>
+        <Context.Provider value={{ indices, setIndices, list, setList }}>
             {children}
-            {list && list.length > 0 && <AudioPlayer track={list[index]} onForward={handleForward} onBackward={handleBackward}/>}
+            {list.length > 0 && <AudioPlayer track={list[indices[indices.length - 1]]} onForward={handleForward} onBackward={handleBackward}/>}
         </Context.Provider>
     );
 }
