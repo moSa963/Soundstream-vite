@@ -13,7 +13,7 @@ import { usePlayer } from "../../contexts/PlayerContext";
 
 
 const TracksTable = ({ tracks, setTracks, actions, onAction }) => {
-    const { setIndex, setList } = usePlayer();
+    const { setIndices, setList } = usePlayer();
 
     const handleSetLiked = (track, liked) => {
         track.liked = liked;
@@ -22,7 +22,7 @@ const TracksTable = ({ tracks, setTracks, actions, onAction }) => {
 
     const handlePlay = (_, index) => {
         setList(tracks);
-        setIndex(index);
+        setIndices([index]);
     }
 
     return (
