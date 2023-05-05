@@ -53,7 +53,7 @@ const TracksTableRow = ({ track, index, setLiked, onPlay, actions, onAction, sim
 
             <TableCell sx={{ width: 5, overflow: "hidden" }} align="center">
                 <Box sx={{ width: 35 }}>
-                    {hover && <TracksTableRowList actions={actions} onActionClick={(a) => onAction(a, track)} />}
+                    {hover && <TracksTableRowList actions={actions} onActionClick={(a) => onAction(a, track, index)} />}
                 </Box>
             </TableCell>
         </TableRow>
