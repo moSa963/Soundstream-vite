@@ -10,7 +10,7 @@ const Track = ({ small, children, track }) => {
         <Stack spacing={small ? .5 : 2} direction="row"  sx={{ width: "100%", height: "100%", minWidth: 100, p: small ? 0 : 1, }} alignItems="center">
             <Avatar variant="square" sx={{ width: small ? 35 : 65, height: small ? 35 : 65 }} src={`${APP_URL}api/tracks/${track.id}/photo`}/>
             <Stack sx={{ overflow: "hidden", px: 1, "&>*:hover": { transform: "scale(1.05)" } }} title={track.title}>
-                <Link><Typography noWrap>{track.title}</Typography></Link>
+                <Link><Typography noWrap sx={{ fontSize: { xs: 14, sm: 16 } }}>{track.title}</Typography></Link>
                 <Link><Typography variant="caption" color="GrayText">{track.user.username}</Typography></Link>
             </Stack>
             {children}

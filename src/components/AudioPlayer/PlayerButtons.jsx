@@ -8,15 +8,15 @@ import PlayButton from "./PlayButton";
 
 
 
-const PlayerButtons = ({ audio, onOptionChange, options, onBackward, onForward }) => {
+const PlayerButtons = ({ audio, onOptionChange, options, onBackward, onForward, simple }) => {
 
     const handleRewind = () => {
         audio.current.currentTime = 0;
     }
 
     return (
-        <Stack spacing={1} justifyContent="center" alignItems="center" direction="row" sx={{ width: "100%" }}>
-            <ShuffleButton setOptions={onOptionChange} shuffle={options?.shuffle} />
+        <Stack spacing={simple ? .5 : 1} justifyContent="center" alignItems="center" direction="row" sx={{ width: "100%" }}>
+            {!simple && <ShuffleButton setOptions={onOptionChange} shuffle={options?.shuffle} />}
 
             <IconButton size="small"
                 sx={{ border: "1px solid", borderColor: "divider" }}
@@ -33,7 +33,7 @@ const PlayerButtons = ({ audio, onOptionChange, options, onBackward, onForward }
                 <FastForwardRounded />
             </IconButton>
 
-            <RepeatButton repeat={options?.repeat} setOptions={onOptionChange} />
+            {!simple && <RepeatButton repeat={options?.repeat} setOptions={onOptionChange} />}
         </Stack>
     );
 }
