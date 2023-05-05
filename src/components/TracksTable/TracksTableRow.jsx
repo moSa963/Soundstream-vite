@@ -25,7 +25,7 @@ const TracksTableRow = ({ track, index, setLiked, onPlay, actions, onAction, sma
                 </Box>
             </TableCell>
             <TableCell align="left" sx={{ maxWidth: 300, overflow: "hidden" }}><Track small track={track} /></TableCell>
-            {!small && <TableCell align="right">{<Link to={`/library/${track.album?.id}`}>{track.album?.title}</Link> || '-'}</TableCell>}
+            {!small && <TableCell align="right">{track.album ? <Link to={`/library/${track.album?.id}`}>{track.album?.title}</Link> : '-'}</TableCell>}
             {!small && <TableCell align="right">{new Date(track.created_at).toLocaleDateString()}</TableCell>}
             {!small && <TableCell align="right"><LikeTrackButton track={track} setLiked={setLiked} /></TableCell>}
             {!small && <TableCell align="right">{track.duration}</TableCell>}
