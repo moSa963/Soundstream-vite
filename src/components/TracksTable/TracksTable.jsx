@@ -11,8 +11,7 @@ import { Timelapse } from "@mui/icons-material";
 import { usePlayer } from "../../contexts/PlayerContext";
 
 
-
-const TracksTable = ({ tracks, setTracks, actions, onAction }) => {
+const TracksTable = ({ tracks, setTracks, actions, onAction, simple }) => {
     const { setIndices, setList } = usePlayer();
 
     const handleSetLiked = (track, liked) => {
@@ -26,22 +25,23 @@ const TracksTable = ({ tracks, setTracks, actions, onAction }) => {
     }
 
     return (
-        <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 650 }} size="small" aria-label="simple table">
+        <TableContainer component={Paper} sx={{ width: "100%" }}>
+            <Table sx={{ width: "100%", "& td": { padding: .5 } }} size="small" >
                 <TableHead>
                     <TableRow>
-                        <TableCell width={40} >#</TableCell>
-                        <TableCell >Title</TableCell>
-                        <TableCell align="right">Album</TableCell>
-                        <TableCell align="right">Date added</TableCell>
-                        <TableCell align="right"></TableCell>
-                        <TableCell align="right"><Timelapse /></TableCell>
-                        <TableCell width={40}></TableCell>
+                        <TableCell >#</TableCell>
+                        <TableCell width="100%">Title</TableCell>
+                        {!simple && <TableCell align="center">Album</TableCell>}
+                        {!simple && <TableCell align="center">Date added</TableCell>}
+                        {!simple && <TableCell align="center"></TableCell>}
+                        {!simple && <TableCell align="center"><Timelapse /></TableCell>}
+                        <TableCell></TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
                     {tracks?.map((track, index) =>
-                        <TracksTableRow key={track?.id}
+                        <TracksTableRow key={track?.id} 
+                            simple={simple}
                             track={track}
                             onPlay={handlePlay}
                             index={index}

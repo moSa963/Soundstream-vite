@@ -1,4 +1,4 @@
-import { Box, InputBase, Stack } from "@mui/material";
+import { Box, InputBase, Stack, useMediaQuery } from "@mui/material";
 import React from "react";
 import TracksTable from "../components/TracksTable/TracksTable";
 import PlaylistBanner from "../components/PlaylistBanner";
@@ -9,6 +9,8 @@ import UploadTrackCard from "./Cards/UploadTrackCard";
 
 const Playlist = ({ tracks, setTracks, playlist, enableEdit, type, dataUrl, avatar, onAvatarChange, actions, onAction, onChange, album, onAddTrack }) => {
     const [filter, setFilter] = React.useState("");
+    const isSmall = useMediaQuery('(max-width:600px)');
+
 
     React.useEffect(() => {
         setTracks([]);
@@ -39,7 +41,8 @@ const Playlist = ({ tracks, setTracks, playlist, enableEdit, type, dataUrl, avat
                 }
             </Stack>
 
-            <TracksTable
+            <TracksTable    
+                simple={isSmall}
                 tracks={tracks?.filter((v) => v.title.toLowerCase().startsWith(filter.toLowerCase()))}
                 setTracks={setTracks}
                 actions={actions}
