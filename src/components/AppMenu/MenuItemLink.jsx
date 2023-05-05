@@ -3,13 +3,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 
-
 const MenuItemLink = ({ to, Icon, title, onClick, small}) => {
 
     return to ? <Link to={to}>{itemBody(Icon, title, onClick, small)}</Link> : itemBody(Icon, title, onClick, small);
 
 }
-
 
 export const itemBody = (Icon, title, onClick, small) => {
 
@@ -17,8 +15,8 @@ export const itemBody = (Icon, title, onClick, small) => {
         <Box onClick={onClick} sx={{ width: "100%", cursor: "pointer", py: small ? 1 : 1.5, px: 1, display: "flex", alignItems: "center", color: t => t.palette.text.secondary, ":hover": { color: t => t.palette.text.primary }, }} title={title}> 
             {
                 Icon &&
-                <ListItemIcon >
-                    <Icon fontSize="large" />
+                <ListItemIcon sx={{ color: "inherit", transition: "500ms all" }}>
+                    <Icon fontSize="large"  />
                 </ListItemIcon>
             }
 
