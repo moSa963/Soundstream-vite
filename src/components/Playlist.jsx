@@ -4,18 +4,24 @@ import TracksTable from "../components/TracksTable/TracksTable";
 import PlaylistBanner from "../components/PlaylistBanner";
 import request from "../utils/Request";
 import UploadTrackCard from "./Cards/UploadTrackCard";
+import { usePlayer } from "../contexts/PlayerContext";
 
 
 
 const Playlist = ({ tracks, setTracks, playlist, enableEdit, type, dataUrl, avatar, onAvatarChange, actions, onAction, onChange, album, onAddTrack }) => {
     const [filter, setFilter] = React.useState("");
+    const { setIndices, setList } = usePlayer();
     const isSmall = useMediaQuery('(max-width:600px)');
-
 
     React.useEffect(() => {
         setTracks([]);
         loadTracks(dataUrl, setTracks);
     }, [playlist?.id, dataUrl, setTracks]);
+
+    const handlePlay = (_, index) => {
+        setList(tracks);
+        setIndices([index]);
+    }
 
     return (
         <Box sx={{ width: "100%" }}>
@@ -43,6 +49,7 @@ const Playlist = ({ tracks, setTracks, playlist, enableEdit, type, dataUrl, avat
 
             <TracksTable    
                 simple={isSmall}
+                onPlay={handlePlay}
                 tracks={tracks?.filter((v) => v.title.toLowerCase().startsWith(filter.toLowerCase()))}
                 setTracks={setTracks}
                 actions={actions}
