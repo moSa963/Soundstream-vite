@@ -37,7 +37,7 @@ const TracksTableRow = ({ track, index, setLiked, onPlay, actions, onAction, sim
 
             {
                 !simple && <TableCell align="center">
-                    {new Date(track.created_at).toLocaleDateString()}
+                    {new Date(track.added_at).toLocaleDateString()}
                 </TableCell>}
             {
                 !simple && <TableCell align="center">
