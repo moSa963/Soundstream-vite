@@ -12,7 +12,7 @@ const PlayerProvider = ({ children }) => {
     }
 
     const handleBackward = () => {
-        indices.length < 2 && setIndices(i => i.slice(0, i.length - 1));
+        indices.length > 1 && setIndices(i => i.slice(0, i.length - 1));
     }
 
     return (
