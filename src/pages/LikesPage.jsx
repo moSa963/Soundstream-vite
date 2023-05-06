@@ -9,7 +9,7 @@ import { usePlayer } from "../contexts/PlayerContext";
 const LikesPage = () => {
     const [action, setAction] = React.useState({ name: null, payload: null });
     const [tracks, setTracks] = React.useState([]);
-    const { setList } = usePlayer();
+    const { addTrack } = usePlayer();
 
     return (
         <Box sx={{ width: "100%" }} >
@@ -21,7 +21,7 @@ const LikesPage = () => {
                 dataUrl="api/likes"
                 avatar={`${APP_URL}img/likes.png`}
                 actions={["Add to playlist", "Add to queue"]}
-                onAction={(action, track) => handleAction(action, track, setAction, setList)}
+                onAction={(action, track) => handleAction(action, track, setAction, addTrack)}
             />
 
             <AddToPlaylistCard open={action.name == "Add to playlist"}  track={action.payload} onClose={() => setAction({ name: null, payload: null }) } />
@@ -29,11 +29,11 @@ const LikesPage = () => {
     );
 }
 
-const handleAction = (action, track, setAction, setList) => {
+const handleAction = (action, track, setAction, addTrack) => {
     switch(action)
     {
         case "Add to playlist": setAction({ name: action, payload: track }); break;
-        case "Add to queue": setList(list => [...list, track]); break;
+        case "Add to queue": addTrack(track); break;
     }
 }
 
