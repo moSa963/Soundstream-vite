@@ -18,15 +18,15 @@ const QueueListCard = ({ open, setOpen }) => {
                 onPlay={(_, i) => setIndices([i])}
                 simple
                 actions={["Remove from queue", ]}
-                onAction={(a, t, i) => handleAction(a, t, setList, i)}
+                onAction={(a, t) => handleAction(a, t, setList)}
             />
         </CardBase>
     );
 }
 
-const handleAction = (action, track, setList, index) => {
+const handleAction = (action, track, setList) => {
     switch (action) {
-        case "Remove from queue": setList(l => l.filter((_, i) => i != index)); break;
+        case "Remove from queue": setList(l => l.filter(v => v.id != track.id)); break;
     }
 }
 
