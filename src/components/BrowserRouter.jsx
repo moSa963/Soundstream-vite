@@ -8,6 +8,8 @@ import ShowPlaylistPage from "../pages/ShowPlaylistPage";
 import PlaylistsPage from "../pages/PlaylistsPage";
 import LibraryPage from "../pages/LibraryPage";
 import request from "../utils/Request";
+import ProfilePage from "../pages/AccountPage/ProfilePage";
+import AccountPage from "../pages/AccountPage/AccountPage";
 
 
 
@@ -28,6 +30,16 @@ export const createRoutes = () => createBrowserRouter([
             {
                 path: "search",
                 element: <SearchPage />,
+            },
+            {
+                path: "account",
+                element: <AccountPage />,
+                children: [
+                    {
+                        index: true,
+                        element: <ProfilePage />,
+                    },
+                ]
             },
             {
                 path: "library",
