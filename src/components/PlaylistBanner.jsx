@@ -6,7 +6,7 @@ import Edit from "@mui/icons-material/Edit";
 
 
 
-const PlaylistBanner = ({ description, title, type, avatar, onChange, playlistId, enableEdit, onAvatarChange }) => {
+const PlaylistBanner = ({ description, title, type, avatar, onChange, playlistId, onAvatarChange }) => {
     const [open, setOpen] = React.useState(false);
 
 
@@ -21,9 +21,9 @@ const PlaylistBanner = ({ description, title, type, avatar, onChange, playlistId
             alignItems: "center",
             background: t => `linear-gradient(to top, ${t.palette.background.paper}, ${t.palette.divider} 300px)`
         }} elevation={3}>
-            
+
             <AvatarInput src={avatar}
-                disabled={!enableEdit}
+                disabled={!onAvatarChange}
                 sx={{ width: { xs: 150, sm: 220 }, height: { xs: 150, sm: 200 }, boxShadow: t => t.shadows[4] }}
                 onChange={onAvatarChange} />
 
@@ -33,11 +33,13 @@ const PlaylistBanner = ({ description, title, type, avatar, onChange, playlistId
                 <Typography sx={{ fontSize: { xs: 10, sm: 15, md: 20 }, color: "gray" }}>{description}</Typography>
             </Stack>
 
-            <IconButton onClick={() => setOpen(true)} sx={{ position: "absolute", top: 20, right: 0 }}>
-                <Edit />
-            </IconButton>
+            {
+                onChange && <IconButton onClick={() => setOpen(true)} sx={{ position: "absolute", top: 20, right: 0 }}>
+                    <Edit />
+                </IconButton>
+            }
 
-            {enableEdit && <UpdatePlaylistCard playlistId={playlistId} title={title} description={description} onChange={onChange} open={open} setOpen={setOpen}/>}
+            {onChange && <UpdatePlaylistCard playlistId={playlistId} title={title} description={description} onChange={onChange} open={open} setOpen={setOpen} />}
         </Paper>
     );
 }
