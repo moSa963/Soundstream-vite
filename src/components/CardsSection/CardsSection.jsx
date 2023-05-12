@@ -2,15 +2,23 @@ import { Box, Stack, Typography } from "@mui/material";
 import React from "react";
 
 
-const CardsSection = ({ title, onShowAll, data, Card }) => {
+const CardsSection = ({ title, onShowAll, data, Card, noWrap }) => {
 
+    const handleScroll = (e) => {
+        e.currentTarget.scrollBy({ left: e.deltaY / 3 });
+    }
 
     return (
         <Stack spacing={2} sx={{ width: "100%", p: 2 }}>
             <Typography variant="h4" fontFamily="cursive">{title}</Typography>
 
-            <Stack flexWrap="wrap" direction="row" justifyContent="center">
-                {data?.map(v => <Card key={v.id} data={v} />) }
+            <Stack onWheel={handleScroll}
+            flexWrap={noWrap ? "nowrap" : "wrap"}
+                direction="row"
+                justifyContent={noWrap ? "start" : "center"}
+                sx={{ overflowX: noWrap ? "auto" : "hidden" }}
+            >
+                {data?.map(v => <Card key={v.id} data={v} />)}
             </Stack>
 
             {onShowAll &&
