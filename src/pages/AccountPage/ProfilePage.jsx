@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, Button, Divider, Paper, Stack, TextField } from "@mui/material";
 import React from "react";
 import PlaylistBanner from "../../components/PlaylistBanner";
 import { useAuth } from "../../contexts/AuthContext";
@@ -18,6 +18,20 @@ const ProfilePage = () => {
                 description={`@${user.username}`}
                 onAvatarChange={(file) => UpdateImage(file)}
                 type="profile" />
+
+            <Box sx={{ p: 3 }}>
+                <Stack spacing={2} sx={{ width: "100%", alignItems: "end" }}>
+                    <TextField fullWidth size="small" placeholder="Name..." value={user.name} onChange={(e) => {}} label="Name" />
+
+                    <TextField fullWidth size="small" placeholder="Username..." value={user.username} onChange={(e) => {}} label="Username" />
+
+                    <Button onClick={() => {}}>Update</Button>
+
+                    <Divider flexItem />
+                <Button color="error">LOGOUT</Button>
+                </Stack>
+
+            </Box>
         </Box>
     );
 }
