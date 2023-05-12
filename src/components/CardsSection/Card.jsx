@@ -1,8 +1,8 @@
-import { Box, Paper, styled } from "@mui/material";
+import { Avatar, Box, Paper, styled } from "@mui/material";
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Image = styled('img')(() => ({
+const Image = styled(Avatar)(() => ({
     width: "100%",
     height: "100%",
     overflow: "hidden",
@@ -27,7 +27,7 @@ const Card = ({ src, onClick, children, to }) => {
                     ":hover": { boxShadow: t => t.shadows[6], filter: "contrast(90%)" }
                 }}>
                 <Box sx={{ width: "100%", aspectRatio: '1', my: { xs: .5, md: 1 }, boxShadow: t => t.shadows[1] }}>
-                    <Image src={src} />
+                    <Image src={src} variant="square"/>
                 </Box>
                 {children}
             </Paper>
