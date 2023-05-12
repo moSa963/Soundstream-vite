@@ -6,7 +6,7 @@ import Edit from "@mui/icons-material/Edit";
 
 
 
-const PlaylistBanner = ({ description, title, type, avatar, onChange, playlistId, onAvatarChange }) => {
+const PlaylistBanner = ({ description, title, type, avatar, onChange, playlistId, onAvatarChange, color }) => {
     const [open, setOpen] = React.useState(false);
 
 
@@ -19,8 +19,8 @@ const PlaylistBanner = ({ description, title, type, avatar, onChange, playlistId
             display: "flex",
             flexDirection: { xs: "column", md: "row" },
             alignItems: "center",
-            background: t => `linear-gradient(to top, ${t.palette.background.paper}, ${t.palette.divider} 300px)`
-        }} elevation={3}>
+            background: t => `linear-gradient(to top, ${t.palette.background.paper}, ${color || t.palette.primary.light} 1000px)`
+        }} elevation={0}>
 
             <AvatarInput src={avatar}
                 disabled={!onAvatarChange}
