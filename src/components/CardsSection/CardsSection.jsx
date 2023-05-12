@@ -7,7 +7,7 @@ const CardsSection = ({ title, onShowAll, data, Card, noWrap }) => {
 
     React.useEffect(() => {
         const handleScroll = (e) => {
-            if (e.deltaX != 0)
+            if (!ref.current || e.deltaX != 0)
             {
                 return;
             }
@@ -24,8 +24,7 @@ const CardsSection = ({ title, onShowAll, data, Card, noWrap }) => {
 
         ref.current.addEventListener("wheel", handleScroll);
 
-        return () => ref.current.removeEventListener("wheel", handleScroll);
-
+        return () => ref.current?.removeEventListener("wheel", handleScroll);
     }, [ref.current]);
 
     return (
