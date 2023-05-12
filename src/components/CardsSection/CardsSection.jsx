@@ -3,16 +3,36 @@ import React from "react";
 
 
 const CardsSection = ({ title, onShowAll, data, Card, noWrap }) => {
+    const ref = React.useRef();
 
-    const handleScroll = (e) => {
-        e.currentTarget.scrollBy({ left: e.deltaY / 3 });
-    }
+    React.useEffect(() => {
+        const handleScroll = (e) => {
+            if (e.deltaX != 0)
+            {
+                return;
+            }
+
+            const { scrollLeft, scrollWidth, offsetWidth } = e.currentTarget;
+            
+            if ((scrollLeft < scrollWidth - offsetWidth && e.deltaY > 0) || (scrollLeft != 0 && e.deltaY < 0) )
+            {
+                e.preventDefault();
+            }
+            
+            e.currentTarget.scrollBy({ left: e.deltaY < 0 ? -40 : 40 });
+        }
+
+        ref.current.addEventListener("wheel", handleScroll);
+
+        return () => ref.current.removeEventListener("wheel", handleScroll);
+
+    }, [ref.current]);
 
     return (
         <Stack spacing={2} sx={{ width: "100%", p: 2 }}>
             <Typography variant="h4" fontFamily="cursive">{title}</Typography>
 
-            <Stack onWheel={handleScroll}
+            <Stack ref={ref}
             flexWrap={noWrap ? "nowrap" : "wrap"}
                 direction="row"
                 justifyContent={noWrap ? "start" : "center"}
