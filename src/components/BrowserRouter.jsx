@@ -10,6 +10,7 @@ import LibraryPage from "../pages/LibraryPage";
 import request from "../utils/Request";
 import ProfilePage from "../pages/AccountPage/ProfilePage";
 import AccountPage from "../pages/AccountPage/AccountPage";
+import ShowUserPage from "../pages/ShowUserPage";
 
 
 
@@ -40,6 +41,11 @@ export const createRoutes = () => createBrowserRouter([
                         element: <ProfilePage />,
                     },
                 ]
+            },
+            {
+                path: "user/:username",
+                element: <ShowUserPage />,
+                loader: async ({ params }) => request(`api/users/${params.username}`)
             },
             {
                 path: "library",
