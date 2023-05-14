@@ -27,7 +27,7 @@ const PlaylistBanner = ({ description, title, type, avatar, onChange, playlistId
                 sx={{ width: { xs: 150, sm: 220 }, height: { xs: 150, sm: 200 }, boxShadow: t => t.shadows[4] }}
                 onChange={onAvatarChange} />
 
-            <Stack spacing={2} sx={{ pl: 5, pt: 2, width: "100%" }}>
+            <Stack spacing={2} sx={{ px: { xs: 1, sm: 5 }, pt: 2, width: "100%" }}>
                 <Typography variant="caption" color="gray">{type}</Typography>
                 <Typography variant="h2" sx={{ fontSize: { xs: 20, sm: 30, md: 50 } }}>{title}</Typography>
                 <Typography sx={{ fontSize: { xs: 10, sm: 15, md: 20 }, color: "gray" }}>{description}</Typography>
