@@ -19,6 +19,10 @@ const AudioPlayer = ({ track, onForward, onBackward }) => {
             audioRef.current.src = `${APP_URL}api/tracks/${track.id}/stream`;
             audioRef.current.play().catch(() => { });
         }
+
+        return () => {
+            audioRef.current && (audioRef.current.src = "");
+        };
     }, [audioRef.current, track]);
 
     React.useEffect(() => {
