@@ -11,6 +11,7 @@ import request from "../utils/Request";
 import ProfilePage from "../pages/AccountPage/ProfilePage";
 import AccountPage from "../pages/AccountPage/AccountPage";
 import ShowUserPage from "../pages/ShowUserPage";
+import ShowTrackPage from "../pages/ShowTrackPage";
 
 
 
@@ -46,6 +47,11 @@ export const createRoutes = () => createBrowserRouter([
                 path: "user/:username",
                 element: <ShowUserPage />,
                 loader: async ({ params }) => request(`api/users/${params.username}`)
+            },
+            {
+                path: "track/:id",
+                element: <ShowTrackPage />,
+                loader: async ({ params }) => request(`api/tracks/${params.id}`)
             },
             {
                 path: "library",
