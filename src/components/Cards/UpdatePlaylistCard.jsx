@@ -1,59 +1,53 @@
-import { Backdrop, Button, Divider, Paper, Stack, TextField } from "@mui/material";
+import { Button, Divider, Stack, TextField } from "@mui/material";
 import React from "react";
 import request from "../../utils/Request";
 import DeleteConfirmationCard from "./DeleteConfirmationCard";
 import { usePlaylists } from "../../contexts/PlaylistsContext";
 import { useNavigate } from "react-router-dom";
+import CardBase from "./CardBase";
 
 
-
-const UpdatePlaylistCard = ({ playlistId, title, description, onChange, open, setOpen }) => {
+const UpdatePlaylistCard = ({ playlist, onChange, open, setOpen }) => {
     const [deleteCardOpen, setDeleteCardOpen] = React.useState(false);
-    const [newTitle, setNewTitle] = React.useState("");
-    const [newDescription, setNewDescription] = React.useState("");
+    const [inputs, setInputs] = React.useState({});
     const { setPlaylists } = usePlaylists();
     const nav = useNavigate();
 
     React.useEffect(() => {
-        setNewTitle(title);
-        setNewDescription(description);
-    }, [title, description]);
+        setInputs({ title: playlist.title, description: playlist.description });
+    }, [playlist]);
 
     const handleSave = () => {
-        save(playlistId, newTitle, newDescription, onChange);
+        save(playlist, inputs, onChange);
         setOpen(false);
     }
 
     return (
-        <Backdrop open={open} onClick={(e) => e.currentTarget == e.target && setOpen(false)} sx={{ zIndex: 10000 }}>
-            <Paper sx={{ width: "100%", p: 3, maxWidth: 550, height: "100%", maxHeight: 300, overflow: "auto" }}>
-                <Stack spacing={2} sx={{ width: "100%", alignItems: "end" }}>
-                    <TextField fullWidth placeholder="Title..." value={newTitle} onChange={(e) => setNewTitle(e.target.value)} label="Title" />
+        <CardBase open={open} setOpen={setOpen}>
+            <TextField fullWidth placeholder="Title..." value={inputs?.title || ""} onChange={(e) => setInputs({ ...inputs, title: e.target.value })} label="Title" />
 
-                    <TextField fullWidth placeholder="Description..." value={newDescription} onChange={(e) => setNewDescription(e.target.value)} label="Description" />
+            <TextField fullWidth placeholder="Description..." value={inputs?.description || ""} onChange={(e) => setInputs({ ...inputs, description: e.target.value })} label="Description" />
 
-                    <Stack direction="row" spacing={2}>
-                        <Button onClick={handleSave}>Save</Button>
-                        <Button color="error" onClick={(e) => setOpen(false)}>Cancel</Button>
-                    </Stack>
+            <Stack direction="row" spacing={2}>
+                <Button onClick={handleSave}>Save</Button>
+                <Button color="error" onClick={(e) => setOpen(false)}>Cancel</Button>
+            </Stack>
 
-                    <Divider flexItem />
+            <Divider flexItem />
 
-                    <Button color="error" fullWidth onClick={() => setDeleteCardOpen(true)}>Delete</Button>
+            <Button color="error" fullWidth onClick={() => setDeleteCardOpen(true)}>Delete</Button>
 
-                    <DeleteConfirmationCard
-                        onClose={() => setDeleteCardOpen(false)}
-                        onConfirmed={() => remove(playlistId, setPlaylists, nav)}
-                        open={deleteCardOpen}
-                        title="playlist" />
-                </Stack>
-            </Paper>
-        </Backdrop>
+            <DeleteConfirmationCard
+                onClose={() => setDeleteCardOpen(false)}
+                onConfirmed={() => remove(playlist, setPlaylists, nav)}
+                open={deleteCardOpen}
+                title="playlist" />
+        </CardBase>
     );
 }
 
-const save = async (id, title, description, onChange) => {
-    const res = await request(`api/playlists/${id}`, "POST", { title, description });
+const save = async (playlist, data, onChange) => {
+    const res = await request(`api/playlists/${playlist.id}`, "POST", data);
 
     if (res.ok) {
         const js = await res.json();
@@ -61,11 +55,11 @@ const save = async (id, title, description, onChange) => {
     }
 }
 
-const remove = async (playlistId, setPlaylists, nav) => {
-    const res = await request(`api/playlists/${playlistId}`, "DELETE");
+const remove = async (playlist, setPlaylists, nav) => {
+    const res = await request(`api/playlists/${playlist.id}`, "DELETE");
 
     if (res.ok) {
-        setPlaylists(ps => ps.filter(v => v.id != playlistId));
+        setPlaylists(ps => ps.filter(v => v.id != playlist.id));
         nav("/playlist");
     }
 }
