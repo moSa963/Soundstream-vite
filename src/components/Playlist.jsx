@@ -5,14 +5,16 @@ import Banner from "../components/Banner";
 import request from "../utils/Request";
 import UploadTrackCard from "./Cards/UploadTrackCard";
 import { usePlayer } from "../contexts/PlayerContext";
+import UpdatePlaylistCard from "./Cards/UpdatePlaylistCard";
 
 
 
 const Playlist = ({ tracks, setTracks, playlist, enableEdit, type, dataUrl, avatar, onAvatarChange, actions, onAction, onChange, album, onAddTrack }) => {
     const [filter, setFilter] = React.useState("");
+    const [editOpen, setEditOpen] = React.useState(false);
     const { setIndices, setList } = usePlayer();
     const isSmall = useMediaQuery('(max-width:600px)');
-
+    
     React.useEffect(() => {
         setTracks([]);
         loadTracks(dataUrl, setTracks);
@@ -26,14 +28,21 @@ const Playlist = ({ tracks, setTracks, playlist, enableEdit, type, dataUrl, avat
     return (
         <Box sx={{ width: "100%" }}>
             <Banner
-                playlistId={playlist?.id}
                 enableEdit={enableEdit}
                 title={playlist.title}
                 description={playlist.description}
                 type={type}
-                onChange={onChange}
+                onEdit={() => setEditOpen(true)}
                 onAvatarChange={onAvatarChange}
-                avatar={avatar} />
+                avatar={avatar} 
+            />
+
+            <UpdatePlaylistCard
+                playlist={playlist}
+                onChange={onChange}
+                open={editOpen}
+                setOpen={setEditOpen}
+            />
 
             <Stack direction="row" sx={{ width: "100%", p: 2 }}>
                 <InputBase
@@ -47,7 +56,7 @@ const Playlist = ({ tracks, setTracks, playlist, enableEdit, type, dataUrl, avat
                 }
             </Stack>
 
-            <TracksTable    
+            <TracksTable
                 simple={isSmall}
                 onPlay={handlePlay}
                 tracks={tracks?.filter((v) => v.title.toLowerCase().startsWith(filter.toLowerCase()))}
