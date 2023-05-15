@@ -4,19 +4,31 @@ import { useLoaderData } from "react-router-dom";
 import Banner from "../components/Banner";
 import { APP_URL } from "../utils/Request";
 import { PlayArrowRounded } from "@mui/icons-material";
+import UpdateTrackCard from "../components/Cards/UpdateTrackCard";
 
 
 
 const ShowTrackPage = () => {
     const { data } = useLoaderData();
+    const [editOpen, setEditOpen] = React.useState(false);
+
 
     return (
         <Box sx={{ width: "100%" }}>
             <Banner
                 avatar={`${APP_URL}api/tracks/${data.id}/photo`}
                 title={data.title}
+                onEdit={() => setEditOpen(true)}
                 description={`@${data.user.username}`}
                 type="track"
+            />
+
+            <UpdateTrackCard
+                track={data}
+                onChange={() => {}}
+                setTracks={() => {}}
+                open={editOpen}
+                setOpen={setEditOpen}
             />
 
             <Box sx={{ width: "100%", p: 2 }}>
