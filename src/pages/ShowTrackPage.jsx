@@ -1,9 +1,9 @@
 import { Box, IconButton, Stack, Typography } from "@mui/material";
 import React from "react";
 import { useLoaderData } from "react-router-dom";
-import PlaylistBanner from "../components/PlaylistBanner";
+import Banner from "../components/Banner";
 import { APP_URL } from "../utils/Request";
-import { PlayArrow, PlayArrowOutlined, PlayArrowRounded } from "@mui/icons-material";
+import { PlayArrowRounded } from "@mui/icons-material";
 
 
 
@@ -12,7 +12,7 @@ const ShowTrackPage = () => {
 
     return (
         <Box sx={{ width: "100%" }}>
-            <PlaylistBanner
+            <Banner
                 avatar={`${APP_URL}api/tracks/${data.id}/photo`}
                 title={data.title}
                 description={`@${data.user.username}`}

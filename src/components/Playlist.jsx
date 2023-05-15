@@ -1,7 +1,7 @@
 import { Box, InputBase, Stack, useMediaQuery } from "@mui/material";
 import React from "react";
 import TracksTable from "../components/TracksTable/TracksTable";
-import PlaylistBanner from "../components/PlaylistBanner";
+import Banner from "../components/Banner";
 import request from "../utils/Request";
 import UploadTrackCard from "./Cards/UploadTrackCard";
 import { usePlayer } from "../contexts/PlayerContext";
@@ -25,7 +25,7 @@ const Playlist = ({ tracks, setTracks, playlist, enableEdit, type, dataUrl, avat
 
     return (
         <Box sx={{ width: "100%" }}>
-            <PlaylistBanner
+            <Banner
                 playlistId={playlist?.id}
                 enableEdit={enableEdit}
                 title={playlist.title}

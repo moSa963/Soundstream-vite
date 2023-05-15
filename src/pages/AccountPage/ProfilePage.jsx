@@ -1,6 +1,6 @@
 import { Box, Button, Divider, Paper, Stack, TextField } from "@mui/material";
 import React from "react";
-import PlaylistBanner from "../../components/PlaylistBanner";
+import Banner from "../../components/Banner";
 import { useAuth } from "../../contexts/AuthContext";
 import request, { APP_URL } from "../../utils/Request";
 
@@ -12,7 +12,7 @@ const ProfilePage = () => {
 
     return (
         <Box sx={{ width: "100%" }}>
-            <PlaylistBanner
+            <Banner
                 avatar={`${APP_URL}api/account/${user.username}/profile/photo`}
                 title={user.name}
                 description={`@${user.username}`}

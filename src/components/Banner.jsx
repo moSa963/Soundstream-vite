@@ -6,7 +6,7 @@ import Edit from "@mui/icons-material/Edit";
 
 
 
-const PlaylistBanner = ({ description, title, type, avatar, onChange, playlistId, onAvatarChange, color }) => {
+const Banner = ({ description, title, type, avatar, onChange, playlistId, onAvatarChange, color }) => {
     const [open, setOpen] = React.useState(false);
 
 
@@ -45,4 +45,4 @@ const PlaylistBanner = ({ description, title, type, avatar, onChange, playlistId
 }
 
 
-export default PlaylistBanner;
+export default Banner;

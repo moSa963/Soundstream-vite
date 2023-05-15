@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 import React from "react";
-import PlaylistBanner from "../components/PlaylistBanner";
+import Banner from "../components/Banner";
 import { APP_URL } from "../utils/Request";
 import { useLoaderData } from "react-router-dom";
 
@@ -11,7 +11,7 @@ const ShowUserPage = () => {
 
     return (
         <Box sx={{ width: "100%" }}>
-            <PlaylistBanner
+            <Banner
                 avatar={`${APP_URL}api/account/${data.username}/profile/photo`}
                 title={data.name}
                 description={`@${data.username}`}
