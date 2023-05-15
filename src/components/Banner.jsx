@@ -1,14 +1,11 @@
 import { IconButton, Paper, Stack, Typography } from "@mui/material";
 import React from "react";
 import AvatarInput from "./AvatarInput";
-import UpdatePlaylistCard from "./Cards/UpdatePlaylistCard";
 import Edit from "@mui/icons-material/Edit";
 
 
 
-const Banner = ({ description, title, type, avatar, onChange, playlistId, onAvatarChange, color }) => {
-    const [open, setOpen] = React.useState(false);
-
+const Banner = ({ description, title, type, avatar, onEdit, onAvatarChange, color }) => {
 
     return (
         <Paper sx={{
@@ -25,7 +22,8 @@ const Banner = ({ description, title, type, avatar, onChange, playlistId, onAvat
             <AvatarInput src={avatar}
                 disabled={!onAvatarChange}
                 sx={{ width: { xs: 150, sm: 220 }, height: { xs: 150, sm: 200 }, boxShadow: t => t.shadows[4] }}
-                onChange={onAvatarChange} />
+                onChange={onAvatarChange}
+            />
 
             <Stack spacing={2} sx={{ px: { xs: 1, sm: 5 }, pt: 2, width: "100%" }}>
                 <Typography variant="caption" color="gray">{type}</Typography>
@@ -34,12 +32,11 @@ const Banner = ({ description, title, type, avatar, onChange, playlistId, onAvat
             </Stack>
 
             {
-                onChange && <IconButton onClick={() => setOpen(true)} sx={{ position: "absolute", top: 20, right: 0 }}>
+                onEdit && 
+                <IconButton onClick={onEdit} sx={{ position: "absolute", top: 20, right: 0 }}>
                     <Edit />
                 </IconButton>
             }
-
-            {onChange && <UpdatePlaylistCard playlistId={playlistId} title={title} description={description} onChange={onChange} open={open} setOpen={setOpen} />}
         </Paper>
     );
 }
