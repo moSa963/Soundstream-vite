@@ -1,18 +1,23 @@
 import { Box } from "@mui/system";
 import React from "react";
 import { Button, Icon, Stack, Typography } from "@mui/material";
-import { Link } from "react-router-dom";
+import { useNavigate, useRouteError } from "react-router-dom";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 
-const ErrorPage = ({ status, errorText, to, toText }) => {
+const ErrorPage = () => {
+    const nav = useNavigate();
+    const error = useRouteError();
+
+    
     return (
         <Box
             sx={{
-                width: 1,
-                height: 1,
+                width: "100vw",
+                height: "100vh",
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
+                bgcolor: "background.default",
                 color: "secondary.dark",
             }}
         >
@@ -29,13 +34,9 @@ const ErrorPage = ({ status, errorText, to, toText }) => {
                     <ErrorOutlineIcon sx={{ width: 150, height: 150 }} />
                 </Icon>
                 <Stack spacing={1} >
-                    <Typography>{status}</Typography>
-                    <Typography variant="h5">{errorText}</Typography>
-                    {to && (
-                        <Link to={to}>
-                            <Button variant="text">{toText}</Button>
-                        </Link>
-                    )}
+                    <Typography>{error.status}</Typography>
+                    <Typography variant="h5">{error.statusText}</Typography>
+                    <Button variant="text" onClick={() => nav(-1)}>GO BACK</Button>
                 </Stack>
             </Box>
         </Box>
