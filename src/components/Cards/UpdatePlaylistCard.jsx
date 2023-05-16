@@ -1,7 +1,7 @@
 import { Button, Divider, Stack, TextField } from "@mui/material";
 import React from "react";
 import request from "../../utils/Request";
-import DeleteConfirmationCard from "./DeleteConfirmationCard";
+import ConfirmationCard from "./ConfirmationCard";
 import { usePlaylists } from "../../contexts/PlaylistsContext";
 import { useNavigate } from "react-router-dom";
 import CardBase from "./CardBase";
@@ -37,11 +37,11 @@ const UpdatePlaylistCard = ({ playlist, onChange, open, setOpen }) => {
 
             <Button color="error" fullWidth onClick={() => setDeleteCardOpen(true)}>Delete</Button>
 
-            <DeleteConfirmationCard
+            <ConfirmationCard
                 onClose={() => setDeleteCardOpen(false)}
                 onConfirmed={() => remove(playlist, setPlaylists, nav)}
                 open={deleteCardOpen}
-                title="playlist" />
+                message="Are you sure you want to delete this playlist?" />
         </CardBase>
     );
 }

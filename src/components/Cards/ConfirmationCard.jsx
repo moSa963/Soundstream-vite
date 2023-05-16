@@ -4,11 +4,11 @@ import CardBase from "./CardBase";
 
 
 
-const DeleteConfirmationCard = ({ title, open, onClose, onConfirmed }) => {
+const ConfirmationCard = ({ message, open, onClose, onConfirmed }) => {
 
     return (
         <CardBase open={open} setOpen={onClose} >
-            <Typography>Are you sure you want to delete this {title}</Typography>
+            <Typography sx={{ width: "100%" }}>{message}</Typography>
 
             <Stack spacing={2} sx={{ width: "100%", maxHeight: 300, overflow: "auto", alignItems: "end" }}>
                 <Stack direction="row" spacing={2}>
@@ -20,4 +20,4 @@ const DeleteConfirmationCard = ({ title, open, onClose, onConfirmed }) => {
     );
 }
 
-export default DeleteConfirmationCard;
+export default ConfirmationCard;
