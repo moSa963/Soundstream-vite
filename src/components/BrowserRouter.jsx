@@ -19,7 +19,7 @@ export const createRoutes = () => createBrowserRouter([
     {
         path: "/",
         element: <App />,
-        errorElement: <ErrorPage status={404} errorText="NotFound" />,
+        errorElement: <ErrorPage />,
         children: [
             {
                 index: true,
