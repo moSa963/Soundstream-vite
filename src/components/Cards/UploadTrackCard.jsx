@@ -24,10 +24,7 @@ const UploadTrackCard = ({ album, onTrackAdded }) => {
                 <Audiotrack />
             </IconButton>
 
-            <CardBase open={open} setOpen={setOpen} >
-
-                {progress && <LinearProgress sx={{ width: "100%", position: "absolute", left: 0, right: 0, top: 0 }} />}
-
+            <CardBase open={open} setOpen={setOpen} progress={progress}>
                 <TextField fullWidth placeholder="Title..." value={title} onChange={(e) => setTitle(e.target.value)} label="Title"/>
 
                 <Stack direction="row" spacing={2} sx={{ width: "100%" }}>
