@@ -5,7 +5,7 @@ import Edit from "@mui/icons-material/Edit";
 
 
 
-const Banner = ({ description, title, type, avatar, onEdit, onAvatarChange, color }) => {
+const Banner = ({ description, title, type, avatar, onEdit, onAvatarChange, color, AdditionalInfo }) => {
 
     return (
         <Paper sx={{
@@ -29,6 +29,7 @@ const Banner = ({ description, title, type, avatar, onEdit, onAvatarChange, colo
                 <Typography variant="caption" color="gray">{type}</Typography>
                 <Typography variant="h2" sx={{ fontSize: { xs: 20, sm: 30, md: 50 } }}>{title}</Typography>
                 <Typography sx={{ fontSize: { xs: 10, sm: 15, md: 20 }, color: "gray" }}>{description}</Typography>
+                { AdditionalInfo }
             </Stack>
 
             {
