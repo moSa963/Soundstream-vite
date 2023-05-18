@@ -18,7 +18,7 @@ const Card = ({ src, onClick, children, to }) => {
                     width: "100%",
                     maxWidth: { xs: 130, sm: 160, md: 180 },
                     minWidth: { xs: 130, sm: 160, md: 180 },
-                    height: { xs: 200, sm: 250, md: 300 },
+                    height: { xs: 200, sm: 255, md: 255 },
                     p: { xs: .5, md: 1 },
                     overflow: "hidden",
                     cursor: "pointer",
