@@ -1,11 +1,11 @@
 import { Box, InputBase, Stack, useMediaQuery } from "@mui/material";
 import React from "react";
-import TracksTable from "../components/TracksTable/TracksTable";
-import Banner from "../components/Banner";
-import request from "../utils/Request";
-import UploadTrackCard from "./Cards/UploadTrackCard";
-import { usePlayer } from "../contexts/PlayerContext";
-import UpdatePlaylistCard from "./Cards/UpdatePlaylistCard";
+import TracksTable from "../../components/TracksTable/TracksTable";
+import Banner from "../../components/Banner";
+import request from "../../utils/Request";
+import UploadTrackCard from "../Cards/UploadTrackCard";
+import { usePlayer } from "../../contexts/PlayerContext";
+import UpdatePlaylistCard from "../Cards/UpdatePlaylistCard";
 
 
 

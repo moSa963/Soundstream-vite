@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import React from "react";
 import { APP_URL } from "../utils/Request";
-import Playlist from "../components/Playlist";
+import Playlist from "../components/Playlist/Playlist";
 import AddToPlaylistCard from "../components/Cards/AddToPlaylistCard";
 import { usePlayer } from "../contexts/PlayerContext";
 
