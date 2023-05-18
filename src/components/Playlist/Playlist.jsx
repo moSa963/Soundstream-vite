@@ -6,6 +6,7 @@ import request from "../../utils/Request";
 import { usePlayer } from "../../contexts/PlayerContext";
 import UpdatePlaylistCard from "../Cards/UpdatePlaylistCard";
 import PlaylistToolsBar from "./PlaylistToolsBar";
+import PlaylistInfo from "./PlaylistInfo";
 
 
 
@@ -34,6 +35,7 @@ const Playlist = ({ tracks, setTracks, playlist, enableEdit, type, dataUrl, avat
                 onEdit={enableEdit && (() => setEditOpen(true))}
                 onAvatarChange={onAvatarChange}
                 avatar={avatar}
+                AdditionalInfo={<PlaylistInfo user={playlist?.user} trackCount={tracks.length}/>}
             />
 
             <UpdatePlaylistCard
