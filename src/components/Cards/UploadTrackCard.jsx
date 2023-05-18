@@ -1,4 +1,4 @@
-import { Backdrop, Button, IconButton, LinearProgress, Paper, Stack, TextField, Typography } from "@mui/material";
+import { Button, IconButton, LinearProgress, Stack, TextField, Typography } from "@mui/material";
 import React from "react";
 import request from "../../utils/Request";
 import { Audiotrack } from "@mui/icons-material";
@@ -12,6 +12,11 @@ const UploadTrackCard = ({ album, onTrackAdded }) => {
     const [title, setTitle] = React.useState("");
     const [progress, seProgress] = React.useState(false);
 
+    const handleChange = (e) => {
+        const file = e.currentTarget.files[0];
+        setTitle(file.name);
+        setFile(file);
+    }
 
     return (
         <React.Fragment>
@@ -23,17 +28,12 @@ const UploadTrackCard = ({ album, onTrackAdded }) => {
 
                 {progress && <LinearProgress sx={{ width: "100%", position: "absolute", left: 0, right: 0, top: 0 }} />}
 
-                <TextField fullWidth placeholder="Title..." value={title} onChange={(e) => setTitle(e.target.value)} />
+                <TextField fullWidth placeholder="Title..." value={title} onChange={(e) => setTitle(e.target.value)} label="Title"/>
 
                 <Stack direction="row" spacing={2} sx={{ width: "100%" }}>
                     <Typography disabled={progress} sx={{ flex: 1 }}>{file?.name || "..."}</Typography>
                     <Button onClick={(e) => e.currentTarget.children[0].click()} disabled={progress}>
-                        <input
-                            type="file"
-                            accept="Audio/*"
-                            style={{ display: "none" }}
-                            onChange={(e) => setFile(e.currentTarget.files[0])}
-                        ></input>
+                        <input type="file" accept="Audio/*" style={{ display: "none" }} onChange={handleChange} ></input>
                         Chose
                     </Button>
                 </Stack>
