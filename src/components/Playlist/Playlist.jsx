@@ -1,20 +1,20 @@
-import { Box, InputBase, Stack, useMediaQuery } from "@mui/material";
+import { Box, useMediaQuery } from "@mui/material";
 import React from "react";
 import TracksTable from "../../components/TracksTable/TracksTable";
 import Banner from "../../components/Banner";
 import request from "../../utils/Request";
-import UploadTrackCard from "../Cards/UploadTrackCard";
 import { usePlayer } from "../../contexts/PlayerContext";
 import UpdatePlaylistCard from "../Cards/UpdatePlaylistCard";
+import PlaylistToolsBar from "./PlaylistToolsBar";
 
 
 
-const Playlist = ({ tracks, setTracks, playlist, enableEdit, type, dataUrl, avatar, onAvatarChange, actions, onAction, onChange, album, onAddTrack }) => {
+const Playlist = ({ tracks, setTracks, playlist, enableEdit, type, dataUrl, avatar, onAvatarChange, actions, onAction, onChange, album }) => {
     const [filter, setFilter] = React.useState("");
     const [editOpen, setEditOpen] = React.useState(false);
     const { setIndices, setList } = usePlayer();
     const isSmall = useMediaQuery('(max-width:600px)');
-    
+
     React.useEffect(() => {
         setTracks([]);
         loadTracks(dataUrl, setTracks);
@@ -34,7 +34,7 @@ const Playlist = ({ tracks, setTracks, playlist, enableEdit, type, dataUrl, avat
                 type={type}
                 onEdit={() => setEditOpen(true)}
                 onAvatarChange={onAvatarChange}
-                avatar={avatar} 
+                avatar={avatar}
             />
 
             <UpdatePlaylistCard
@@ -44,17 +44,13 @@ const Playlist = ({ tracks, setTracks, playlist, enableEdit, type, dataUrl, avat
                 setOpen={setEditOpen}
             />
 
-            <Stack direction="row" sx={{ width: "100%", p: 2 }}>
-                <InputBase
-                    value={filter}
-                    onChange={(e) => setFilter(e.currentTarget.value)}
-                    placeholder="Search..."
-                    sx={{ width: "100%", px: 2, fontSize: 20 }}
-                />
-                {
-                    enableEdit && album && <UploadTrackCard album={playlist} onTrackAdded={(t) => setTracks(ts => [...ts, t])} />
-                }
-            </Stack>
+            <PlaylistToolsBar
+                playlist={playlist}
+                onTrackAdded={(t) => setTracks(ts => [...ts, t])}
+                filter={filter}
+                setFilter={setFilter}
+                enableUpload={enableEdit && album}
+            />
 
             <TracksTable
                 simple={isSmall}
