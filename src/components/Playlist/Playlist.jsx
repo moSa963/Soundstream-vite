@@ -28,11 +28,10 @@ const Playlist = ({ tracks, setTracks, playlist, enableEdit, type, dataUrl, avat
     return (
         <Box sx={{ width: "100%" }}>
             <Banner
-                enableEdit={enableEdit}
                 title={playlist.title}
                 description={playlist.description}
                 type={type}
-                onEdit={() => setEditOpen(true)}
+                onEdit={enableEdit && (() => setEditOpen(true))}
                 onAvatarChange={onAvatarChange}
                 avatar={avatar}
             />
