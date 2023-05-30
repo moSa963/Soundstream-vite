@@ -2,12 +2,11 @@ import { Box } from "@mui/material";
 import React from "react";
 import CardsSection from "../components/CardsSection/CardsSection";
 import PlaylistCard from "../components/CardsSection/PlaylistCard";
-import { useLoaderData } from "react-router-dom";
 import { usePlaylists } from "../contexts/PlaylistsContext";
 
 
 const PlaylistsPage = () => {
-    const { playlists, setPlaylists } = usePlaylists();
+    const { playlists } = usePlaylists();
 
     return (
         <Box sx={{ width: "100%" }}>
