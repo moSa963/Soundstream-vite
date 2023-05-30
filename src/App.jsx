@@ -7,6 +7,7 @@ import PlayerProvider from "./contexts/PlayerContext";
 import AuthProvider from "./contexts/AuthContext";
 import PlaylistsProvider from "./contexts/PlaylistsContext";
 import MessageProvider from "./contexts/MessageContext";
+import ScrollProvider from "./contexts/ScrollContext";
 
 
 
@@ -21,10 +22,10 @@ const App = () => {
                         <PlayerProvider>
                             <Box sx={{ height: "100%", width: "100%", overflow: "hidden", display: "flex" }} >
                                 <AppMenu />
-                                <Paper sx={{ height: "100%", width: "100%", position: "relative", overflow: "auto", overflowX: "hidden", borderRadius: 0 }} >
+                                <ScrollProvider>
                                     <AppBar />
                                     <Outlet />
-                                </Paper>
+                                </ScrollProvider>
                             </Box>
                         </PlayerProvider>
                     </PlaylistsProvider>
