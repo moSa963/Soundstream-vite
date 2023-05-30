@@ -15,7 +15,7 @@ const App = () => {
 
 
     return (
-        <Box sx={{ height: "100vh", bgcolor: "background.default", width: "100wh", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }} >
+        <Box sx={{ height: "100vh", bgcolor: "background.default", width: "100vw", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }} >
             <MessageProvider>
                 <AuthProvider>
                     <PlaylistsProvider>
