@@ -1,8 +1,9 @@
-import { Button, IconButton, LinearProgress, Stack, TextField, Typography } from "@mui/material";
+import { Button, IconButton, Stack, TextField, Typography } from "@mui/material";
 import React from "react";
 import request from "../../utils/Request";
 import { Audiotrack } from "@mui/icons-material";
 import CardBase from "./CardBase";
+import { useMessage } from "../../contexts/MessageContext";
 
 
 
@@ -11,6 +12,7 @@ const UploadTrackCard = ({ album, onTrackAdded }) => {
     const [file, setFile] = React.useState(null);
     const [title, setTitle] = React.useState("");
     const [progress, seProgress] = React.useState(false);
+    const { setMessage } = useMessage();
 
     const handleChange = (e) => {
         const file = e.currentTarget.files[0];
@@ -25,7 +27,7 @@ const UploadTrackCard = ({ album, onTrackAdded }) => {
             </IconButton>
 
             <CardBase open={open} setOpen={setOpen} progress={progress}>
-                <TextField fullWidth placeholder="Title..." value={title} onChange={(e) => setTitle(e.target.value)} label="Title"/>
+                <TextField fullWidth placeholder="Title..." value={title} onChange={(e) => setTitle(e.target.value)} label="Title" />
 
                 <Stack direction="row" spacing={2} sx={{ width: "100%" }}>
                     <Typography disabled={progress} sx={{ flex: 1 }}>{file?.name || "..."}</Typography>
@@ -36,7 +38,7 @@ const UploadTrackCard = ({ album, onTrackAdded }) => {
                 </Stack>
 
                 <Stack direction="row" spacing={2}>
-                    <Button disabled={!file || !title || progress} onClick={() => save(album.id, title, file, onTrackAdded, setOpen, seProgress)}>Create</Button>
+                    <Button disabled={!file || !title || progress} onClick={() => save(album.id, title, file, onTrackAdded, setOpen, seProgress, setMessage)}>Create</Button>
                     <Button disabled={progress} color="error" onClick={(e) => setOpen(false)}>Cancel</Button>
                 </Stack>
             </CardBase>
@@ -44,16 +46,19 @@ const UploadTrackCard = ({ album, onTrackAdded }) => {
     );
 }
 
-const save = async (albumId, title, track, onAdded, setOpen, seProgress) => {
+const save = async (albumId, title, track, onAdded, setOpen, seProgress, setMessage) => {
     seProgress(true);
-    const res = await request(`api/tracks/albums/${albumId}`, "POST", { title, track });
 
-    if (res.ok) {
+    try {
+        const res = await request(`api/tracks/albums/${albumId}`, "POST", { title, track });
         const js = await res.json();
         onAdded(js.data);
         setOpen(false);
-        seProgress(false);
-
     }
+    catch (error) {
+        setMessage({ type: "error", title: error });
+    }
+
+    seProgress(false);
 }
 export default UploadTrackCard;
