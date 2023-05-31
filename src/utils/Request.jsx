@@ -31,7 +31,7 @@ const getHeader = () => {
     return headers;
 }
 
-const request = (url = APP_URL, method = "GET", data = null) => {
+const request = async (url = APP_URL, method = "GET", data = null) => {
     var body = {};
 
     body["headers"] = getHeader();
@@ -61,7 +61,21 @@ const request = (url = APP_URL, method = "GET", data = null) => {
         url = APP_URL + url;
     }
 
-    return fetch(url, body);
+    var res;
+
+    try{
+        res = await fetch(url, body);
+    }catch{
+        onError && onError(res.statusText);
+    }
+
+    if (! res.ok)
+    {
+        const json = await res.json();
+        throw json.message;
+    }
+
+    return res;
 }
 
 
