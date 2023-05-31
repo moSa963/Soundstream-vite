@@ -1,14 +1,15 @@
+import { Alert, Snackbar } from "@mui/material";
 import React from "react";
 
 const Context = React.createContext();
 
 const MessageProvider = ({ children }) => {
-    const [message, setMessage] = React.useState({title: "", type: ""});
-    
+    const [message, setMessage] = React.useState({ title: "", type: "info" });
+
     React.useEffect(() => {
         const id = setTimeout(() => {
-            setMessage({title: "", type: ""});
-        }, 4000);
+            setMessage({ title: "", type: "info" });
+        }, 5000);
 
         return () => {
             clearTimeout(id);
@@ -17,6 +18,11 @@ const MessageProvider = ({ children }) => {
 
     return (
         <Context.Provider value={{ message, setMessage }}>
+            <Snackbar anchorOrigin={{ vertical: "top", horizontal: "center" }} open={Boolean(message.title)} sx={{ zIndex: 999999 }} >
+                <Alert severity={message.type} sx={{ width: '100%' }}>
+                    {message.title}
+                </Alert>
+            </Snackbar>
             {children}
         </Context.Provider>
     );
