@@ -5,6 +5,7 @@ import ConfirmationCard from "./ConfirmationCard";
 import { usePlaylists } from "../../contexts/PlaylistsContext";
 import { useNavigate } from "react-router-dom";
 import CardBase from "./CardBase";
+import { useMessage } from "../../contexts/MessageContext";
 
 
 const UpdatePlaylistCard = ({ playlist, onChange, open, setOpen }) => {
@@ -12,13 +13,15 @@ const UpdatePlaylistCard = ({ playlist, onChange, open, setOpen }) => {
     const [inputs, setInputs] = React.useState({});
     const { setPlaylists } = usePlaylists();
     const nav = useNavigate();
+    const { setMessage } = useMessage();
+
 
     React.useEffect(() => {
         setInputs({ title: playlist.title, description: playlist.description });
     }, [playlist]);
 
     const handleSave = () => {
-        save(playlist, inputs, onChange);
+        save(playlist, inputs, onChange, setMessage);
         setOpen(false);
     }
 
@@ -39,28 +42,32 @@ const UpdatePlaylistCard = ({ playlist, onChange, open, setOpen }) => {
 
             <ConfirmationCard
                 onClose={() => setDeleteCardOpen(false)}
-                onConfirmed={() => remove(playlist, setPlaylists, nav)}
+                onConfirmed={() => remove(playlist, setPlaylists, nav, setMessage)}
                 open={deleteCardOpen}
                 message="Are you sure you want to delete this playlist?" />
         </CardBase>
     );
 }
 
-const save = async (playlist, data, onChange) => {
-    const res = await request(`api/playlists/${playlist.id}`, "POST", data);
-
-    if (res.ok) {
+const save = async (playlist, data, onChange, setMessage) => {
+    try {
+        const res = await request(`api/playlists/${playlist.id}`, "POST", data);
         const js = await res.json();
         onChange && onChange(js.data);
     }
+    catch (message) {
+        setMessage({ type: "error", title: message })
+    }
 }
 
-const remove = async (playlist, setPlaylists, nav) => {
-    const res = await request(`api/playlists/${playlist.id}`, "DELETE");
-
-    if (res.ok) {
+const remove = async (playlist, setPlaylists, nav, setMessage) => {
+    try {
+        await request(`api/playlists/${playlist.id}`, "DELETE");
         setPlaylists(ps => ps.filter(v => v.id != playlist.id));
         nav("/playlist");
+    }
+    catch (message) {
+        setMessage({ type: "error", title: message })
     }
 }
 
