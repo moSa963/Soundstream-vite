@@ -35,7 +35,7 @@ const Banner = ({ description, title, type, avatar, onEdit, onAvatarChange, colo
                 <Stack spacing={2} sx={{ px: { xs: 1, sm: 5 }, pt: 2, width: "100%" }}>
                     <Typography variant="caption" color="gray">{type}</Typography>
                     <Typography variant="h2" sx={{ fontSize: { xs: 20, sm: 30, md: 50 } }}>{title}</Typography>
-                    <Typography sx={{ fontSize: { xs: 10, sm: 15, md: 20 }, color: "gray" }}>{description}</Typography>
+                    <Typography sx={{ fontSize: { xs: 10, sm: 15, md: 20 }, color: "gray", wordBreak: "break-word" }} >{description}</Typography>
                     {AdditionalInfo}
                 </Stack>
 
