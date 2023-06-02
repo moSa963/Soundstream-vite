@@ -1,7 +1,7 @@
 import { Box, useMediaQuery } from "@mui/material";
 import React from "react";
 import TracksTable from "../../components/TracksTable/TracksTable";
-import Banner from "../../components/Banner";
+import Banner from "../../components/Banner/Banner";
 import request from "../../utils/Request";
 import { usePlayer } from "../../contexts/PlayerContext";
 import UpdatePlaylistCard from "../Cards/UpdatePlaylistCard";

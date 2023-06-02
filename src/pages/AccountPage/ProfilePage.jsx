@@ -1,6 +1,6 @@
 import { Box, Button, Divider, Paper, Stack, TextField } from "@mui/material";
 import React from "react";
-import Banner from "../../components/Banner";
+import Banner from "../../components/Banner/Banner";
 import { useAuth } from "../../contexts/AuthContext";
 import request, { APP_URL } from "../../utils/Request";
 

@@ -1,7 +1,7 @@
 import { Box, IconButton, Stack, Typography } from "@mui/material";
 import React from "react";
 import { useLoaderData } from "react-router-dom";
-import Banner from "../components/Banner";
+import Banner from "../components/Banner/Banner";
 import { APP_URL } from "../utils/Request";
 import { PlayArrowRounded } from "@mui/icons-material";
 import UpdateTrackCard from "../components/Cards/UpdateTrackCard";
