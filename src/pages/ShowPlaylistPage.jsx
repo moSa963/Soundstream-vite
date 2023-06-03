@@ -7,6 +7,7 @@ import Playlist from "../components/Playlist/Playlist";
 import { usePlaylists } from "../contexts/PlaylistsContext";
 import AddToPlaylistCard from "../components/Cards/AddToPlaylistCard";
 import { usePlayer } from "../contexts/PlayerContext";
+import PlaylistBanner from "../components/Playlist/PlaylistBanner";
 
 
 
@@ -20,14 +21,7 @@ const ShowPlaylistPage = ({ album }) => {
 
     return (
         <Box sx={{ width: "100%" }}>
-            <Playlist
-                tracks={tracks}
-                setTracks={setTracks}
-                type="playlist"
-                album={album}
-                onAddTrack={() => handleAction(data, "Add track", null)}
-                playlist={data}
-                dataUrl={`api/playlists/${data.id}/tracks`}
+            <PlaylistBanner 
                 avatar={`${APP_URL}api/playlists/${data.id}/photo`}
                 enableEdit={data.user.username == user.username}
                 onAvatarChange={(file) => UpdateImage(data, file)}
@@ -35,6 +29,19 @@ const ShowPlaylistPage = ({ album }) => {
                     ps[ps.findIndex(v => v.id == data.id)] = newData;
                     return [...ps];
                 })}
+                playlist={data}
+                tracks={tracks}
+                type="playlist"
+            />
+
+            <Playlist
+                tracks={tracks}
+                setTracks={setTracks}
+                album={album}
+                onAddTrack={() => handleAction(data, "Add track", null)}
+                playlist={data}
+                dataUrl={`api/playlists/${data.id}/tracks`}
+                enableEdit={data.user.username == user.username}
                 actions={["Remove from this playlist", "Add to playlist", "Add to queue"]}
                 onAction={(action, track) => handleAction(data, action, track, setAction, remove, setTracks, addTrack)}
             />
