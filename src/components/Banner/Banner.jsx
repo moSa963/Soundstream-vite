@@ -6,7 +6,7 @@ import BannerBase from "./BannerBase";
 
 
 
-const Banner = ({ description, title, type, avatar, onEdit, onAvatarChange, color, AdditionalInfo }) => {
+const Banner = ({ description, title, type, avatar, onEdit, onAvatarChange, color, children }) => {
 
     return (
         <BannerBase color={color} >
@@ -21,7 +21,7 @@ const Banner = ({ description, title, type, avatar, onEdit, onAvatarChange, colo
                 <Typography variant="caption" color="gray">{type}</Typography>
                 <Typography variant="h2" sx={{ fontSize: { xs: 20, sm: 30, md: 50 } }}>{title}</Typography>
                 <Typography sx={{ fontSize: { xs: 10, sm: 15, md: 20 }, color: "gray", wordBreak: "break-word" }} >{description}</Typography>
-                {AdditionalInfo}
+                {children}
             </Stack>
 
             {
