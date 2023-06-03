@@ -31,7 +31,7 @@ const TracksTableRow = ({ track, index, setLiked, onPlay, actions, onAction, sim
 
             {
                 !simple && <TableCell align="center">
-                    {track.album ? <Link to={`/library/${track.album?.id}`}>{track.album?.title}</Link> : '-'}
+                    {track.album ? <Link to={`/library/albums/${track.album?.id}`}>{track.album?.title}</Link> : '-'}
                 </TableCell>
             }
 

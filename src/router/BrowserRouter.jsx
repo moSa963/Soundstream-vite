@@ -26,10 +26,6 @@ export const createRoutes = () => createBrowserRouter([
                 element: <HomePage />,
             },
             {
-                path: "likes",
-                element: <LikesPage />,
-            },
-            {
                 path: "search",
                 element: <SearchPage />,
             },
@@ -44,14 +40,14 @@ export const createRoutes = () => createBrowserRouter([
                 ]
             },
             {
-                path: "user/:username",
-                element: <ShowUserPage />,
-                loader: async ({ params }) => request(`api/users/${params.username}`)
-            },
-            {
                 path: "track/:id",
                 element: <ShowTrackPage />,
                 loader: async ({ params }) => request(`api/tracks/${params.id}`)
+            },
+            {
+                path: "user/:username",
+                element: <ShowUserPage />,
+                loader: async ({ params }) => request(`api/users/${params.username}`)
             },
             {
                 path: "library",
@@ -61,28 +57,39 @@ export const createRoutes = () => createBrowserRouter([
                         element: <LibraryPage />,
                     },
                     {
-                        path: ":albumId",
-                        element: <ShowPlaylistPage album/>,
-                        loader: async ({ params }) => request(`api/playlists/${params.albumId}`),
-
+                        path: "albums",
+                        children: [
+                            {
+                                index: true,
+                                element: <PlaylistsPage albums/>,
+                            },
+                            {
+                                path: ":id",
+                                element: <ShowPlaylistPage album/>,
+                                loader: async ({ params }) => request(`api/playlists/${params.id}`),
+                            },
+                        ],
+                    },
+                    {
+                        path: "playlists",
+                        children: [
+                            {
+                                index: true,
+                                element: <PlaylistsPage />,
+                            },
+                            {
+                                path: ":id",
+                                element: <ShowPlaylistPage />,
+                                loader: async ({ params }) => request(`api/playlists/${params.id}`),
+                            },
+                        ]
                     },
                 ]
             },
             {
-                path: "playlist",
-                children: [
-                    {
-                        index: true,
-                        element: <PlaylistsPage />,
-                    },
-                    {
-                        path: ":playlistId",
-                        element: <ShowPlaylistPage />,
-                        loader: async ({ params }) => request(`api/playlists/${params.playlistId}`),
-
-                    },
-                ]
-            }
+                path: "likes",
+                element: <LikesPage />,
+            },
         ]
     }
 ]);

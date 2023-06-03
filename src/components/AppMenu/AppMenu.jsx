@@ -25,13 +25,13 @@ const AppMenu = () => {
 
                 <Divider sx={{ my: 2, mx: .5 }} />
 
-                <Link to="/playlist">
+                <Link to="/library/playlists">
                     <Box sx={{ width: "100%", display: "flex", p: .3 }}>
                         <Typography variant="caption" color="primary" sx={{ cursor: "pointer", ":hover": { transform: "scale(1.1)" } }}>Playlists</Typography>
                     </Box>
                 </Link>
 
-                {playlists?.map((e) => <MenuItemLink key={e.id} title={e?.title} small to={`/playlist/${e.id}`} />)}
+                {playlists?.map((e) => <MenuItemLink key={e.id} title={e?.title} small to={`/library/playlists/${e.id}`} />)}
             </MenuList>
         </Paper>
 

@@ -7,7 +7,7 @@ import { APP_URL } from "../../utils/Request";
 const AlbumCard = ({ data }) => {
 
     return (
-        <Card src={`${APP_URL}api/playlists/${data.id}/photo`} to={`/library/${data.id}`}>
+        <Card src={`${APP_URL}api/playlists/${data.id}/photo`} to={`/library/albums/${data.id}`}>
             <Typography noWrap >{data?.title}</Typography>
             <Typography variant="caption" color="gray" fontFamily="serif">{data?.description}</Typography>
         </Card>
