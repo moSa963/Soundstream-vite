@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import React from "react";
 import CardsSection from "../components/CardsSection/CardsSection";
-import CreateAlbumCard from "../components/Cards/CreateAlbumCard";
+import CreateAlbumCard from "../components/Dialogs/CreateAlbumCard";
 import request from "../utils/Request";
 import AlbumCard from "../components/CardsSection/AlbumCard";
 

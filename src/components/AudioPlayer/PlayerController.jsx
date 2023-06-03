@@ -3,7 +3,7 @@ import { IconButton, Slider, Stack } from "@mui/material";
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 import VolumeMute from "@mui/icons-material/VolumeMute";
 import { QueueMusic } from "@mui/icons-material";
-import QueueListCard from "../Cards/QueueListCard";
+import QueueListCard from "../Dialogs/QueueListCard";
 
 const PlayerController = ({ audio }) => {
     const [volume, setVolume] = React.useState(1);

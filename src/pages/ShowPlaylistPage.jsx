@@ -5,7 +5,7 @@ import { useLoaderData } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import Playlist from "../components/Playlist/Playlist";
 import { usePlaylists } from "../contexts/PlaylistsContext";
-import AddToPlaylistCard from "../components/Cards/AddToPlaylistCard";
+import AddToPlaylistCard from "../components/Dialogs/AddToPlaylistCard";
 import { usePlayer } from "../contexts/PlayerContext";
 import PlaylistBanner from "../components/Playlist/PlaylistBanner";
 

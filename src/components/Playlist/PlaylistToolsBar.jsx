@@ -1,6 +1,6 @@
 import { InputBase, Stack } from "@mui/material";
 import React from "react";
-import UploadTrackCard from "../Cards/UploadTrackCard";
+import UploadTrackCard from "../Dialogs/UploadTrackCard";
 import LikePlaylistButton from "./LikePlaylistButton";
 
 

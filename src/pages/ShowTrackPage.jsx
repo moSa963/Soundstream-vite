@@ -4,7 +4,7 @@ import { useLoaderData } from "react-router-dom";
 import Banner from "../components/Banner/Banner";
 import { APP_URL } from "../utils/Request";
 import { PlayArrowRounded } from "@mui/icons-material";
-import UpdateTrackCard from "../components/Cards/UpdateTrackCard";
+import UpdateTrackCard from "../components/Dialogs/UpdateTrackCard";
 
 
 

@@ -2,7 +2,7 @@ import { Box } from "@mui/material";
 import React from "react";
 import { APP_URL } from "../utils/Request";
 import Playlist from "../components/Playlist/Playlist";
-import AddToPlaylistCard from "../components/Cards/AddToPlaylistCard";
+import AddToPlaylistCard from "../components/Dialogs/AddToPlaylistCard";
 import { usePlayer } from "../contexts/PlayerContext";
 import PlaylistBanner from "../components/Playlist/PlaylistBanner";
 
