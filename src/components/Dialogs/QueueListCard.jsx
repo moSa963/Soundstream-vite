@@ -1,6 +1,6 @@
 import React from "react";
 import { usePlayer } from "../../contexts/PlayerContext"
-import CardBase from "./CardBase";
+import Dialog from "./Dialog";
 import { IconButton, Typography } from "@mui/material";
 import TracksTable from "../TracksTable/TracksTable";
 import { ClearAll } from "@mui/icons-material";
@@ -12,7 +12,7 @@ const QueueListCard = ({ open, setOpen }) => {
 
 
     return (
-        <CardBase open={open} setOpen={setOpen} maxHeight={500} >
+        <Dialog open={open} setOpen={setOpen} maxHeight={500} >
             <Typography sx={{ width: "100%" }} variant="h4">Queue</Typography>
 
             <IconButton title="clear" sx={{ position: "absolute", top: 10, right: 10 }} color="error" onClick={() => setList([])}>
@@ -27,7 +27,7 @@ const QueueListCard = ({ open, setOpen }) => {
                 actions={["Remove from queue", ]}
                 onAction={(a, t) => handleAction(a, t, setList)}
             />
-        </CardBase>
+        </Dialog >
     );
 }
 

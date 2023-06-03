@@ -3,7 +3,7 @@ import React from "react";
 import MenuItemLink from "../AppMenu/MenuItemLink";
 import request from "../../utils/Request";
 import { usePlaylists } from "../../contexts/PlaylistsContext";
-import CardBase from "./CardBase";
+import Dialog from "./Dialog";
 
 
 
@@ -17,7 +17,7 @@ const AddToPlaylistCard = ({ track, open, onClose }) => {
     }
 
     return (
-        <CardBase open={open} setOpen={onClose} >
+        <Dialog open={open} setOpen={onClose} >
             <InputBase
                 value={filter}
                 onChange={(e) => setFilter(e.currentTarget.value)}
@@ -29,7 +29,7 @@ const AddToPlaylistCard = ({ track, open, onClose }) => {
 
             {playlists?.filter((v) => v.title.toLowerCase().startsWith(filter.toLowerCase()))
                 .map((e) => <MenuItemLink key={e.id} title={e?.title} small onClick={() => handleAdd(e)} />)}
-        </CardBase>
+        </Dialog >
     );
 }
 

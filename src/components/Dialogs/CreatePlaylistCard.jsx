@@ -3,7 +3,7 @@ import React from "react";
 import MenuItemLink from "../AppMenu/MenuItemLink";
 import { PlaylistAdd } from "@mui/icons-material";
 import request from "../../utils/Request";
-import CardBase from "./CardBase";
+import Dialog from "./Dialog";
 
 
 
@@ -20,13 +20,13 @@ const CreatePlaylistCard = ({ onPlaylistAdded }) => {
         <React.Fragment>
             <MenuItemLink Icon={PlaylistAdd} title="Creat Playlist" onClick={() => setOpen(true)} />
 
-            <CardBase open={open} setOpen={setOpen}>
+            <Dialog open={open} setOpen={setOpen}>
                 <TextField fullWidth placeholder="Title..." value={title} onChange={(e) => setTitle(e.target.value)} />
                 <Stack direction="row" spacing={2}>
                     <Button onClick={handleAdd}>Add</Button>
                     <Button color="error" onClick={(e) => setOpen(false)}>Cancel</Button>
                 </Stack>
-            </CardBase>
+            </Dialog >
         </React.Fragment>
     );
 }

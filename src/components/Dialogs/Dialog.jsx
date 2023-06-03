@@ -3,7 +3,7 @@ import React from "react";
 
 
 
-const CardBase = ({ open, setOpen, children, maxWidth=550, maxHeight=300, progress }) => {
+const Dialog = ({ open, setOpen, children, maxWidth=550, maxHeight=300, progress }) => {
 
     return (
         <Backdrop open={open} onClick={(e) => e.currentTarget == e.target && setOpen(false)} sx={{ zIndex: 10000, margin: "0px !important" }}>
@@ -17,4 +17,4 @@ const CardBase = ({ open, setOpen, children, maxWidth=550, maxHeight=300, progre
     );
 }
 
-export default CardBase;
+export default Dialog;

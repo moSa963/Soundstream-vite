@@ -4,7 +4,7 @@ import request from "../../utils/Request";
 import ConfirmationCard from "./ConfirmationCard";
 import { usePlaylists } from "../../contexts/PlaylistsContext";
 import { useNavigate } from "react-router-dom";
-import CardBase from "./CardBase";
+import Dialog from "./Dialog";
 import { useMessage } from "../../contexts/MessageContext";
 
 
@@ -26,7 +26,7 @@ const UpdatePlaylistCard = ({ playlist, onChange, open, setOpen }) => {
     }
 
     return (
-        <CardBase open={open} setOpen={setOpen}>
+        <Dialog open={open} setOpen={setOpen}>
             <TextField fullWidth placeholder="Title..." value={inputs?.title || ""} onChange={(e) => setInputs({ ...inputs, title: e.target.value })} label="Title" />
 
             <TextField fullWidth placeholder="Description..." value={inputs?.description || ""} onChange={(e) => setInputs({ ...inputs, description: e.target.value })} label="Description" />
@@ -45,7 +45,7 @@ const UpdatePlaylistCard = ({ playlist, onChange, open, setOpen }) => {
                 onConfirmed={() => remove(playlist, setPlaylists, nav, setMessage)}
                 open={deleteCardOpen}
                 message="Are you sure you want to delete this playlist?" />
-        </CardBase>
+        </Dialog >
     );
 }
 

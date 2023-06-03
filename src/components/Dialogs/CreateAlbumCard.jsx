@@ -1,7 +1,7 @@
 import { Button, Stack, TextField } from "@mui/material";
 import React from "react";
 import request from "../../utils/Request";
-import CardBase from "./CardBase";
+import Dialog from "./Dialog";
 
 
 
@@ -13,7 +13,7 @@ const CreateAlbumCard = ({ onAlbumAdded }) => {
         <React.Fragment>
             <Button fullWidth onClick={() => setOpen(true)} variant="text">Create New Album</Button>
 
-            <CardBase open={open} setOpen={setOpen}>
+            <Dialog open={open} setOpen={setOpen}>
                 <TextField fullWidth placeholder="Name..." value={title} onChange={(e) => setTitle(e.target.value)} />
 
                 <Stack direction="row" spacing={2}>
@@ -24,7 +24,7 @@ const CreateAlbumCard = ({ onAlbumAdded }) => {
                     }}>Create</Button>
                     <Button color="error" onClick={(e) => setOpen(false)}>Cancel</Button>
                 </Stack>
-            </CardBase>
+            </Dialog >
         </React.Fragment>
     );
 }

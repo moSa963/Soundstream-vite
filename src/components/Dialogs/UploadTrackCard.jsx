@@ -2,7 +2,7 @@ import { Button, IconButton, Stack, TextField, Typography } from "@mui/material"
 import React from "react";
 import request from "../../utils/Request";
 import { Audiotrack } from "@mui/icons-material";
-import CardBase from "./CardBase";
+import Dialog from "./Dialog";
 import { useMessage } from "../../contexts/MessageContext";
 
 
@@ -26,7 +26,7 @@ const UploadTrackCard = ({ album, onTrackAdded }) => {
                 <Audiotrack />
             </IconButton>
 
-            <CardBase open={open} setOpen={setOpen} progress={progress}>
+            <Dialog open={open} setOpen={setOpen} progress={progress}>
                 <TextField fullWidth placeholder="Title..." value={title} onChange={(e) => setTitle(e.target.value)} label="Title" />
 
                 <Stack direction="row" spacing={2} sx={{ width: "100%" }}>
@@ -41,7 +41,7 @@ const UploadTrackCard = ({ album, onTrackAdded }) => {
                     <Button disabled={!file || !title || progress} onClick={() => save(album.id, title, file, onTrackAdded, setOpen, seProgress, setMessage)}>Create</Button>
                     <Button disabled={progress} color="error" onClick={(e) => setOpen(false)}>Cancel</Button>
                 </Stack>
-            </CardBase>
+            </Dialog >
         </React.Fragment>
     );
 }
