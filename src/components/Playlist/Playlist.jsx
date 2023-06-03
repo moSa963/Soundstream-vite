@@ -6,7 +6,7 @@ import { usePlayer } from "../../contexts/PlayerContext";
 import PlaylistToolsBar from "./PlaylistToolsBar";
 
 
-const Playlist = ({ tracks, setTracks, playlist, enableEdit, dataUrl, actions, onAction, album }) => {
+const Playlist = ({ tracks, setTracks, playlist, dataUrl, actions, onAction }) => {
     const [filter, setFilter] = React.useState("");
     const { setIndices, setList } = usePlayer();
     const isSmall = useMediaQuery('(max-width:600px)');
@@ -28,7 +28,6 @@ const Playlist = ({ tracks, setTracks, playlist, enableEdit, dataUrl, actions, o
                 onTrackAdded={(t) => setTracks(ts => [...ts, t])}
                 filter={filter}
                 setFilter={setFilter}
-                enableUpload={enableEdit && album}
             />
 
             <TracksTable

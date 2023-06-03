@@ -11,7 +11,7 @@ import PlaylistBanner from "../components/Playlist/PlaylistBanner";
 
 
 
-const ShowPlaylistPage = ({ album }) => {
+const ShowPlaylistPage = () => {
     const { data } = useLoaderData();
     const [tracks, setTracks] = React.useState([]);
     const { user } = useAuth();
@@ -37,11 +37,9 @@ const ShowPlaylistPage = ({ album }) => {
             <Playlist
                 tracks={tracks}
                 setTracks={setTracks}
-                album={album}
                 onAddTrack={() => handleAction(data, "Add track", null)}
                 playlist={data}
                 dataUrl={`api/playlists/${data.id}/tracks`}
-                enableEdit={data.user.username == user.username}
                 actions={["Remove from this playlist", "Add to playlist", "Add to queue"]}
                 onAction={(action, track) => handleAction(data, action, track, setAction, remove, setTracks, addTrack)}
             />
