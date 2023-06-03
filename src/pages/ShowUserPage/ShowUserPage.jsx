@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import React from "react";
-import Banner from "../components/Banner/Banner";
-import { APP_URL } from "../utils/Request";
+import Banner from "../../components/Banner/Banner";
+import { APP_URL } from "../../utils/Request";
 import { useLoaderData } from "react-router-dom";
 
 
