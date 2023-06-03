@@ -1,7 +1,6 @@
-import { Favorite, FavoriteBorder, FavoriteOutlined } from "@mui/icons-material";
-import { IconButton } from "@mui/material";
 import React from "react";
 import request from "../../utils/Request";
+import LikeButton from "../LikeButton";
 
 
 
@@ -9,9 +8,7 @@ const LikeTrackButton = ({ track, setLiked }) => {
 
 
     return (
-        <IconButton title="like" onClick={() => like(track, setLiked)}>
-            {track?.liked ? <Favorite /> : <FavoriteBorder /> }
-        </IconButton>
+        <LikeButton liked={track?.liked} setLiked={() => like(track, setLiked)}/>
     );
 }
 
