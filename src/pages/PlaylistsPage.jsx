@@ -5,12 +5,16 @@ import PlaylistCard from "../components/CardsSection/PlaylistCard";
 import { usePlaylists } from "../contexts/PlaylistsContext";
 
 
-const PlaylistsPage = () => {
+const PlaylistsPage = ({ albums }) => {
     const { playlists } = usePlaylists();
 
     return (
         <Box sx={{ width: "100%" }}>
-            <CardsSection title="Your Playlists" Card={PlaylistCard} data={playlists} />
+            <CardsSection
+                title="Your Playlists"
+                Card={PlaylistCard}
+                data={playlists?.filter(v => v?.album || !albums)}
+            />
         </Box>
     );
 }
