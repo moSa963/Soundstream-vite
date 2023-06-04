@@ -3,11 +3,11 @@ import request from "../../utils/Request";
 import LikeButton from "../LikeButton";
 
 
-const LikePlaylistButton = ({ playlist, setLiked }) => {
+const LikePlaylistButton = ({ playlist, setLiked, large }) => {
 
 
     return (
-        <LikeButton liked={playlist?.liked} setLiked={() => like(playlist, setLiked)}/>
+        <LikeButton liked={playlist?.liked} setLiked={() => like(playlist, setLiked)} large/>
     );
 }
 

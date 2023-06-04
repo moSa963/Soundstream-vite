@@ -13,7 +13,7 @@ const PlaylistToolsBar = ({ filter, setFilter, onTrackAdded, playlist, setPlayli
         <Stack direction="row" sx={{ width: "100%", p: 2 }}>
             {
                 playlist?.id &&
-                <LikePlaylistButton
+                <LikePlaylistButton large
                     playlist={playlist}
                     setLiked={(v) => setPlaylist(p => ({ ...p, liked: v }))}
                 />
