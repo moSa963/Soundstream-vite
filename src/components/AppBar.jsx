@@ -10,7 +10,7 @@ const AppBar = () => {
     const { user } = useAuth();
 
     return (
-        <MuiAppBar elevation={0} position="sticky" color="transparent" sx={{ backdropFilter: "blur(10px)", mb: "-15px" }}>
+        <MuiAppBar elevation={0} position="sticky" color="transparent" sx={{ backdropFilter: "blur(10px)" }}>
             <Toolbar variant="dense">
 
                 <Box sx={{ flexGrow: 1 }} />
