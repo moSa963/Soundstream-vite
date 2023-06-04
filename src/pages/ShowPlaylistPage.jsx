@@ -37,6 +37,7 @@ const ShowPlaylistPage = () => {
             <Playlist
                 tracks={tracks}
                 setTracks={setTracks}
+                setPlaylist={() => {}}
                 onAddTrack={() => handleAction(data, "Add track", null)}
                 playlist={data}
                 dataUrl={`api/playlists/${data.id}/tracks`}
