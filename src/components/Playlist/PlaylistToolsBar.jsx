@@ -6,15 +6,18 @@ import { useAuth } from "../../contexts/AuthContext";
 
 
 const PlaylistToolsBar = ({ filter, setFilter, onTrackAdded, playlist, setPlaylist }) => {
-    const {user} = useAuth();
+    const { user } = useAuth();
 
 
     return (
         <Stack direction="row" sx={{ width: "100%", p: 2 }}>
-            <LikePlaylistButton
-                playlist={playlist}
-                setLiked={(v) => setPlaylist(p => ({...p, liked: v}))}
-            />
+            {
+                playlist?.id &&
+                <LikePlaylistButton
+                    playlist={playlist}
+                    setLiked={(v) => setPlaylist(p => ({ ...p, liked: v }))}
+                />
+            }
 
             <InputBase
                 value={filter}
@@ -23,7 +26,7 @@ const PlaylistToolsBar = ({ filter, setFilter, onTrackAdded, playlist, setPlayli
                 sx={{ width: "100%", px: 2, fontSize: 20 }}
             />
             {
-                playlist?.album == true && 
+                playlist?.album == true &&
                 user?.username === playlist?.user.username &&
                 <UploadTrackCard album={playlist} onTrackAdded={onTrackAdded} />
             }
