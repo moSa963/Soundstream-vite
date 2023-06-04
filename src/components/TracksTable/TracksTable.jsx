@@ -10,7 +10,7 @@ import TracksTableRow from "./TracksTableRow";
 import { Timelapse } from "@mui/icons-material";
 
 
-const TracksTable = ({ tracks, setTracks, actions, onAction, simple, onPlay }) => {
+const TracksTable = ({ tracks, setTracks, actions, onAction, simple, onPlay, stickyHeader }) => {
 
     const handleSetLiked = (track, liked) => {
         track.liked = liked;
@@ -18,10 +18,9 @@ const TracksTable = ({ tracks, setTracks, actions, onAction, simple, onPlay }) =
     }
 
     return (
-        <TableContainer component={Paper} sx={{ width: "100%" }}>
-            <Table sx={{ width: "100%", "& td": { padding: .5 } }} size="small" >
-                <TableHead>
-                    <TableRow>
+            <Table sx={{ width: "100%", "& td": { padding: .5 } }} size="small" stickyHeader={stickyHeader}>
+                <TableHead sx={{ position: stickyHeader ? "sticky" : "static", top: 45, zIndex: 2 }}>
+                    <TableRow  > 
                         <TableCell >#</TableCell>
                         <TableCell width="100%">Title</TableCell>
                         {!simple && <TableCell align="center">Album</TableCell>}
@@ -45,7 +44,6 @@ const TracksTable = ({ tracks, setTracks, actions, onAction, simple, onPlay }) =
                     )}
                 </TableBody>
             </Table>
-        </TableContainer>
     );
 }
 

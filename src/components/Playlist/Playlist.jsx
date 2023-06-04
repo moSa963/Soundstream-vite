@@ -31,13 +31,14 @@ const Playlist = ({ tracks, setTracks, playlist, setPlaylist, dataUrl, actions, 
                 setFilter={setFilter}
             />
 
-            <TracksTable
+            <TracksTable 
                 simple={isSmall}
                 onPlay={handlePlay}
                 tracks={tracks?.filter((v) => v.title.toLowerCase().startsWith(filter.toLowerCase()))}
                 setTracks={setTracks}
                 actions={actions}
-                onAction={onAction} />
+                onAction={onAction} 
+                stickyHeader />
         </Box>
     );
 }
