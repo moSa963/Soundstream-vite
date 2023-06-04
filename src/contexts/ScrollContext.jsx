@@ -13,7 +13,7 @@ const ScrollProvider = ({ children }) => {
 
     return (
         <Context.Provider value={{ scroll, scrollTo }}>
-            <Paper 
+            <Paper elevation={0}
             sx={{ height: "100%", width: "100%", position: "relative", overflow: "auto", overflowX: "hidden", borderRadius: 0 }} 
             onScroll={handleScroll}>
                 {children}
