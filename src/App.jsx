@@ -1,7 +1,7 @@
 import { Box, Paper } from "@mui/material";
 import React from "react";
 import { Outlet } from "react-router-dom";
-import AppBar from "./components/AppBar";
+import AppBar from "./components/AppBar/AppBar";
 import AppMenu from "./components/AppMenu/AppMenu";
 import PlayerProvider from "./contexts/PlayerContext";
 import AuthProvider from "./contexts/AuthContext";

@@ -2,8 +2,8 @@ import React from "react";
 import MuiAppBar from "@mui/material/AppBar";
 import { Avatar, Box, Toolbar } from "@mui/material";
 import { Link } from "react-router-dom";
-import { useAuth } from "../contexts/AuthContext";
-import { APP_URL } from "../utils/Request";
+import { useAuth } from "../../contexts/AuthContext";
+import { APP_URL } from "../../utils/Request";
 
 
 const AppBar = () => {
