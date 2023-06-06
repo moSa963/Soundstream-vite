@@ -11,7 +11,7 @@ const HomePage = () => {
     return (
         <Box sx={{ width: "100%" }}>
             
-            <CardsSection title="Your Playlists" onShowAll={() => nav("/playlist")}/>
+            <CardsSection title="Your Playlists" onAction={() => nav("/playlist")} actionTitle="ShowAll" />
             <CardsSection title="Recently Played"/>
             <CardsSection title="Liked Tracks"/>
             <CardsSection title="Recent searches"/>
