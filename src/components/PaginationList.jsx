@@ -14,7 +14,7 @@ const PaginationList = ({ url, loader }) => {
         !progress && loadData(url, setList, setNext, setProgress, setMessage);
     }, [url, setMessage]);
 
-    return loader(list, setList, () => loadData(next, setList, setNext, setProgress, setMessage, true));
+    return loader(list, next, setList, () => loadData(next, setList, setNext, setProgress, setMessage, true));
 }
 
 const loadData = async (url, setList, setNext, setProgress, setMessage, append) => {
