@@ -11,11 +11,13 @@ const UserPlaylistsPage = () => {
 
     return (
         <Box sx={{ width: "100%" }}>
-            <PaginationList
+            <PaginationList 
                 url={`api/users/${user?.username}/playlists?count=2`}
                 loader={
-                    (list, setList, loadNext) => (
-                        <CardsSection onShowAll={loadNext}
+                    (list, next, setList, loadNext) => (
+                        <CardsSection 
+                            onAction={next && loadNext} 
+                            actionTitle="more"
                             Card={PlaylistCard}
                             data={list}
                         />
