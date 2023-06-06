@@ -13,11 +13,16 @@ import PlaylistBanner from "../components/Playlist/PlaylistBanner";
 
 const ShowPlaylistPage = () => {
     const { data } = useLoaderData();
+    const [playlist, setPlaylist] = React.useState({});
     const [tracks, setTracks] = React.useState([]);
     const { user } = useAuth();
     const { setPlaylists } = usePlaylists();
     const [action, setAction] = React.useState({ name: null, payload: null });
     const { addTrack } = usePlayer();
+
+    React.useEffect(() => {
+        setPlaylist(data);
+    }, [data]);
 
     return (
         <Box sx={{ width: "100%" }}>
@@ -27,9 +32,10 @@ const ShowPlaylistPage = () => {
                 onAvatarChange={(file) => UpdateImage(data, file)}
                 onChange={(newData) => setPlaylists(ps => {
                     ps[ps.findIndex(v => v.id == data.id)] = newData;
+                    setPlaylist(newData);
                     return [...ps];
                 })}
-                playlist={data}
+                playlist={playlist}
                 tracks={tracks}
                 type="playlist"
             />
@@ -37,9 +43,9 @@ const ShowPlaylistPage = () => {
             <Playlist
                 tracks={tracks}
                 setTracks={setTracks}
-                setPlaylist={() => {}}
+                setPlaylist={setPlaylist}
                 onAddTrack={() => handleAction(data, "Add track", null)}
-                playlist={data}
+                playlist={playlist}
                 dataUrl={`api/playlists/${data.id}/tracks`}
                 actions={["Remove from this playlist", "Add to playlist", "Add to queue"]}
                 onAction={(action, track) => handleAction(data, action, track, setAction, remove, setTracks, addTrack)}
