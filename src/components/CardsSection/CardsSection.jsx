@@ -1,10 +1,10 @@
 import { Box, Stack, Typography } from "@mui/material";
 import React from "react";
-import ShowAllButton from "./ShowAllButton";
 import HorizontalList from "../HorizontalList";
+import TextButton from "../TextButton";
 
 
-const CardsSection = ({ title, onShowAll, data, Card, noWrap }) => {
+const CardsSection = ({ title, onAction, actionTitle, data, Card, noWrap }) => {
 
     return (
         <Stack spacing={2} sx={{ width: "100%", p: 2 }}>
@@ -14,7 +14,7 @@ const CardsSection = ({ title, onShowAll, data, Card, noWrap }) => {
                 { data?.map(v => <Card key={v.id} data={v} />) }
             </HorizontalList>
 
-            { onShowAll && <ShowAllButton onClick={onShowAll}/> }
+            {onAction && <TextButton onClick={onAction} title={actionTitle} justifyEnd/> }
         </Stack>
     );
 }
