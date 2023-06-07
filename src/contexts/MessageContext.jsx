@@ -6,7 +6,15 @@ const Context = React.createContext();
 const MessageProvider = ({ children }) => {
     const [message, setMessage] = React.useState({ title: "", type: "info" });
 
+    const setError = React.useCallback((v) => setMessage({ type: "error", title: v}), [setMessage]);
+    const setInfo = React.useCallback((v) => setMessage({ type: "info", title: v}), [setMessage]);
+
     React.useEffect(() => {
+        if (! message?.title)
+        {
+            return;
+        }
+        
         const id = setTimeout(() => {
             setMessage({ title: "", type: "info" });
         }, 5000);
@@ -14,14 +22,10 @@ const MessageProvider = ({ children }) => {
         return () => {
             clearTimeout(id);
         }
-    }, [message]);
+    }, [message?.title]);
 
     return (
-        <Context.Provider value={{ 
-            message, 
-            setError: (v) => setMessage({ type: "error", title: v}),
-            setInfo: (v) => setMessage({ type: "info", title: v}),
-        }}>
+        <Context.Provider value={{  setError, setInfo }}>
             <Snackbar anchorOrigin={{ vertical: "top", horizontal: "center" }} open={Boolean(message.title)} sx={{ zIndex: 999999 }} >
                 <Alert severity={message.type} sx={{ width: '100%', wordBreak: "break-word" }} >
                     {message.title}
