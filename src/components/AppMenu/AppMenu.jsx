@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 
 
 const AppMenu = () => {
-    const { playlists, setPlaylists } = usePlaylists();
+    const { playlists } = usePlaylists();
 
     return (
         <Paper elevation={0} sx={{ borderRadius: 0 }}>
@@ -19,7 +19,7 @@ const AppMenu = () => {
 
                 <MenuItemLink />
 
-                <CreatePlaylistCard onPlaylistAdded={(playlist) => setPlaylists(ps => [...ps, playlist])} />
+                <CreatePlaylistCard />
 
                 <MenuItemLink Icon={Favorite} title="Likes" to="likes" />
 

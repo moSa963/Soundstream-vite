@@ -4,15 +4,17 @@ import MenuItemLink from "../AppMenu/MenuItemLink";
 import { PlaylistAdd } from "@mui/icons-material";
 import request from "../../utils/Request";
 import Dialog from "./Dialog";
+import { usePlaylists } from "../../contexts/PlaylistsContext";
 
 
 
-const CreatePlaylistCard = ({ onPlaylistAdded }) => {
+const CreatePlaylistCard = () => {
     const [open, setOpen] = React.useState(false);
     const [title, setTitle] = React.useState("");
+    const { setPlaylists } = usePlaylists();
 
     const handleAdd = () => {
-        create(title, onPlaylistAdded);
+        create(title, (p) => setPlaylists(ps => [...ps, p]));
         setOpen(false);
     }
 
