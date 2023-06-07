@@ -3,12 +3,13 @@ import React from "react";
 import Banner from "../../components/Banner/Banner";
 import { useAuth } from "../../contexts/AuthContext";
 import request, { APP_URL } from "../../utils/Request";
+import { useMessage } from "../../contexts/MessageContext";
 
 
 
 const ProfilePage = () => {
     const { user } = useAuth();
-
+    const {setError} = useMessage();
 
     return (
         <Box sx={{ width: "100%" }}>
@@ -16,7 +17,7 @@ const ProfilePage = () => {
                 avatar={`${APP_URL}api/account/${user.username}/profile/photo`}
                 title={user.name}
                 description={`@${user.username}`}
-                onAvatarChange={(file) => UpdateImage(file)}
+                onAvatarChange={(file) => UpdateImage(file, setError)}
                 type="profile" />
 
             <Box sx={{ p: 3 }}>
@@ -37,11 +38,13 @@ const ProfilePage = () => {
 }
 
 
-const UpdateImage = async (file) => {
-    const res = await request(`api/account/profile/photo`, "POST", { photo: file });
-
-    if (res.ok) {
+const UpdateImage = async (file, setError) => {
+    try {
+        await request(`api/account/profile/photo`, "POST", { photo: file });
         window.location.reload();
+    }
+    catch (error) {
+        setError(error);
     }
 }
 

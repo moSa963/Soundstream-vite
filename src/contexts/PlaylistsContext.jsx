@@ -1,13 +1,16 @@
 import React from "react";
 import request from "../utils/Request";
+import { useMessage } from "./MessageContext";
 
 const Context = React.createContext();
 
 const PlaylistsProvider = ({ children }) => {
     const [playlists, setPlaylists] = React.useState([]);
+    const {setError} = useMessage();
 
+    
     React.useEffect(() => {
-        loadData(setPlaylists);
+        loadData(setPlaylists, setError);
     }, []);
     
     return (
@@ -17,13 +20,14 @@ const PlaylistsProvider = ({ children }) => {
     );
 }
 
-const loadData = async (setPlaylists) => {
-    const res = await request("api/playlists");
-
-    if (res.ok)
-    {
+const loadData = async (setPlaylists, setError) => {
+    try {
+        const res = await request("api/playlists");
         const js = await res.json();
         setPlaylists(js.data);
+    }
+    catch (error) {
+        setError(error);
     }
 
 }

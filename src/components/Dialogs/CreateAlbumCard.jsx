@@ -2,13 +2,15 @@ import { Button, Stack, TextField } from "@mui/material";
 import React from "react";
 import request from "../../utils/Request";
 import Dialog from "./Dialog";
+import { useMessage } from "../../contexts/MessageContext";
 
 
 
 const CreateAlbumCard = ({ onAlbumAdded }) => {
     const [open, setOpen] = React.useState(false);
     const [title, setTitle] = React.useState("");
-
+    const {setError, setInfo} = useMessage();
+    
     return (
         <React.Fragment>
             <Button fullWidth onClick={() => setOpen(true)} variant="text">Create New Album</Button>
@@ -18,7 +20,7 @@ const CreateAlbumCard = ({ onAlbumAdded }) => {
 
                 <Stack direction="row" spacing={2}>
                     <Button onClick={() => {
-                        create(title, onAlbumAdded)
+                        create(title, onAlbumAdded, setError, setInfo)
                         setOpen(false);
 
                     }}>Create</Button>
@@ -29,12 +31,14 @@ const CreateAlbumCard = ({ onAlbumAdded }) => {
     );
 }
 
-const create = async (title, onAlbumAdded) => {
-    const res = await request("api/albums", "POST", { title });
-
-    if (res.ok) {
-        const js = await res.json();
+const create = async (title, onAlbumAdded, setError, setInfo) => {
+    try {
+        const js = await (await request("api/albums", "POST", { title })).json();
         onAlbumAdded(js.data);
+        setInfo(`A new album has been created.`);
+    }
+    catch (error) {
+        setError(error);
     }
 }
 export default CreateAlbumCard;

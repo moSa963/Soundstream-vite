@@ -8,16 +8,16 @@ const PaginationList = ({ url, loader }) => {
     const [list, setList] = React.useState([]);
     const [next, setNext] = React.useState(null);
     const [progress, setProgress] = React.useState(false);
-    const { setMessage } = useMessage();
+    const { setError } = useMessage();
 
     React.useEffect(() => {
-        !progress && loadData(url, setList, setNext, setProgress, setMessage);
-    }, [url, setMessage]);
+        !progress && loadData(url, setList, setNext, setProgress, setError);
+    }, [url, setError]);
 
-    return loader(list, next, setList, () => loadData(next, setList, setNext, setProgress, setMessage, true));
+    return loader(list, next, setList, () => loadData(next, setList, setNext, setProgress, setError, true));
 }
 
-const loadData = async (url, setList, setNext, setProgress, setMessage, append) => {
+const loadData = async (url, setList, setNext, setProgress, setError, append) => {
     if (url == null)
     {
         return;
@@ -31,7 +31,7 @@ const loadData = async (url, setList, setNext, setProgress, setMessage, append) 
         setNext(js.links.next);
         setList(data => append ? [...data, ...js.data] : js.data);
     } catch (error) {
-        setMessage({ type: "error", title: error });
+        setError(error);
     }
 
     setProgress(false);

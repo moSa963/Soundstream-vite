@@ -4,17 +4,19 @@ import TracksTable from "../../components/TracksTable/TracksTable";
 import request from "../../utils/Request";
 import { usePlayer } from "../../contexts/PlayerContext";
 import PlaylistToolsBar from "./PlaylistToolsBar";
+import { useMessage } from "../../contexts/MessageContext";
 
 
 const Playlist = ({ tracks, setTracks, playlist, setPlaylist, dataUrl, actions, onAction }) => {
     const [filter, setFilter] = React.useState("");
     const { setIndices, setList } = usePlayer();
     const isSmall = useMediaQuery('(max-width:600px)');
-
+    const {setError} = useMessage();
+    
     React.useEffect(() => {
         setTracks([]);
-        loadTracks(dataUrl, setTracks);
-    }, [playlist?.id, dataUrl, setTracks]);
+        loadTracks(dataUrl, setTracks, setError);
+    }, [playlist?.id, dataUrl, setTracks, setError]);
 
     const handlePlay = (_, index) => {
         setList(tracks);
@@ -43,12 +45,14 @@ const Playlist = ({ tracks, setTracks, playlist, setPlaylist, dataUrl, actions, 
     );
 }
 
-const loadTracks = async (dataUrl, setData) => {
-    const res = await request(dataUrl);
-
-    if (res.ok) {
+const loadTracks = async (dataUrl, setData, setError) => {
+    try {
+        const res = await request(dataUrl);
         const js = await res.json();
         setData(js.data);
+    }
+    catch (error) {
+        setError(error);
     }
 }
 

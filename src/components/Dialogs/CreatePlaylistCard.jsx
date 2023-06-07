@@ -5,6 +5,7 @@ import { PlaylistAdd } from "@mui/icons-material";
 import request from "../../utils/Request";
 import Dialog from "./Dialog";
 import { usePlaylists } from "../../contexts/PlaylistsContext";
+import { useMessage } from "../../contexts/MessageContext";
 
 
 
@@ -12,9 +13,10 @@ const CreatePlaylistCard = () => {
     const [open, setOpen] = React.useState(false);
     const [title, setTitle] = React.useState("");
     const { setPlaylists } = usePlaylists();
+    const { setInfo, setError } = useMessage();
 
     const handleAdd = () => {
-        create(title, (p) => setPlaylists(ps => [...ps, p]));
+        create(title, (p) => setPlaylists(ps => [...ps, p]), setInfo, setError);
         setOpen(false);
     }
 
@@ -33,17 +35,20 @@ const CreatePlaylistCard = () => {
     );
 }
 
-const create = async (title, onPlaylistAdded) => {
-    const data = {};
+const create = async (title, onPlaylistAdded, setInfo, setError) => {
+    try {
+        const data = {};
 
-    title && (data["title"] = title);
-
-    const res = await request("api/playlists", "POST", data);
-
-
-    if (res.ok) {
+        title && (data["title"] = title);
+    
+        const res = await request("api/playlists", "POST", data);
         const js = await res.json();
+
         onPlaylistAdded(js.data);
+        setInfo(`${js.data.title} has been created successfully.`);
+    }
+    catch (error) {
+        setError(error);
     }
 }
 

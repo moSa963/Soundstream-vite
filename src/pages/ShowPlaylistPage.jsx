@@ -8,6 +8,7 @@ import { usePlaylists } from "../contexts/PlaylistsContext";
 import AddToPlaylistCard from "../components/Dialogs/AddToPlaylistCard";
 import { usePlayer } from "../contexts/PlayerContext";
 import PlaylistBanner from "../components/Playlist/PlaylistBanner";
+import { useMessage } from "../contexts/MessageContext";
 
 
 
@@ -19,6 +20,8 @@ const ShowPlaylistPage = () => {
     const { setPlaylists } = usePlaylists();
     const [action, setAction] = React.useState({ name: null, payload: null });
     const { addTrack } = usePlayer();
+    const {setInfo, setError} = useMessage();
+
 
     React.useEffect(() => {
         setPlaylist(data);
@@ -29,7 +32,7 @@ const ShowPlaylistPage = () => {
             <PlaylistBanner 
                 avatar={`${APP_URL}api/playlists/${data.id}/photo`}
                 enableEdit={data.user.username == user.username}
-                onAvatarChange={(file) => UpdateImage(data, file)}
+                onAvatarChange={(file) => UpdateImage(data, file, setError)}
                 onChange={(newData) => setPlaylists(ps => {
                     ps[ps.findIndex(v => v.id == data.id)] = newData;
                     setPlaylist(newData);
@@ -44,11 +47,11 @@ const ShowPlaylistPage = () => {
                 tracks={tracks}
                 setTracks={setTracks}
                 setPlaylist={setPlaylist}
-                onAddTrack={() => handleAction(data, "Add track", null)}
+                onAddTrack={() => handleAction(data, "Add track", null, setError, setInfo)}
                 playlist={playlist}
                 dataUrl={`api/playlists/${data.id}/tracks`}
                 actions={["Remove from this playlist", "Add to playlist", "Add to queue"]}
-                onAction={(action, track) => handleAction(data, action, track, setAction, remove, setTracks, addTrack)}
+                onAction={(action, track) => handleAction(data, action, track, setError, setInfo, setAction, remove, setTracks, addTrack)}
             />
 
             <AddToPlaylistCard open={action.name == "Add to playlist"}  track={action.payload} onClose={() => setAction({ name: null, payload: null }) } />
@@ -56,27 +59,32 @@ const ShowPlaylistPage = () => {
     );
 }
 
-const UpdateImage = async (playlist, file) => {
-    const res = await request(`api/playlists/${playlist.id}/photo`, "POST", { photo: file });
-
-    if (res.ok) {
+const UpdateImage = async (playlist, file, setError) => {
+    try {
+        await request(`api/playlists/${playlist.id}/photo`, "POST", { photo: file });
         window.location.reload();
     }
-}
-
-const remove = async (playlist, track, setTracks) => {
-    const res = await request(`api/playlists/${playlist.id}/tracks/${track.id}`, "DELETE");
-
-    if (res.ok) {
-        setTracks(ts => ts.filter(v => v.id != track.id))
+    catch (error) {
+        setError(error);
     }
 }
 
-const handleAction = (playlist, action, track, setAction, remove, setTracks, addTrack) => {
+const remove = async (playlist, track, setTracks, setInfo, setError) => {
+    try {
+        await request(`api/playlists/${playlist.id}/tracks/${track.id}`, "DELETE");
+        setTracks(ts => ts.filter(v => v.id != track.id));
+        setInfo("a track has been removed successfully");
+    }
+    catch (error) {
+        setError(error);
+    }
+}
+
+const handleAction = (playlist, action, track, setError, setInfo, setAction, remove, setTracks, addTrack) => {
     switch(action)
     {
         case "Add to playlist": setAction({ name: action, payload: track }); break;
-        case "Remove from this playlist": remove(playlist, track, setTracks); break;
+        case "Remove from this playlist": remove(playlist, track, setTracks, setInfo, setError); break;
         case "Add track": setAction({ name: action, payload: null }); break;
         case "Add to queue": addTrack(track); break;
     }

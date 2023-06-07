@@ -12,7 +12,7 @@ const UploadTrackCard = ({ album, onTrackAdded }) => {
     const [file, setFile] = React.useState(null);
     const [title, setTitle] = React.useState("");
     const [progress, seProgress] = React.useState(false);
-    const { setMessage } = useMessage();
+    const { setError, setInfo } = useMessage();
 
     const handleChange = (e) => {
         const file = e.currentTarget.files[0];
@@ -38,7 +38,7 @@ const UploadTrackCard = ({ album, onTrackAdded }) => {
                 </Stack>
 
                 <Stack direction="row" spacing={2}>
-                    <Button disabled={!file || !title || progress} onClick={() => save(album.id, title, file, onTrackAdded, setOpen, seProgress, setMessage)}>Create</Button>
+                    <Button disabled={!file || !title || progress} onClick={() => save(album.id, title, file, onTrackAdded, setOpen, seProgress, setError, setInfo)}>Create</Button>
                     <Button disabled={progress} color="error" onClick={(e) => setOpen(false)}>Cancel</Button>
                 </Stack>
             </Dialog >
@@ -46,7 +46,7 @@ const UploadTrackCard = ({ album, onTrackAdded }) => {
     );
 }
 
-const save = async (albumId, title, track, onAdded, setOpen, seProgress, setMessage) => {
+const save = async (albumId, title, track, onAdded, setOpen, seProgress, setError, setInfo) => {
     seProgress(true);
 
     try {
@@ -54,9 +54,10 @@ const save = async (albumId, title, track, onAdded, setOpen, seProgress, setMess
         const js = await res.json();
         onAdded(js.data);
         setOpen(false);
+        setInfo("The track has been uplodaed successfully.");
     }
     catch (error) {
-        setMessage({ type: "error", title: error });
+        setError(error);
     }
 
     seProgress(false);

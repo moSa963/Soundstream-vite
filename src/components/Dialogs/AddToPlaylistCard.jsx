@@ -5,6 +5,7 @@ import request from "../../utils/Request";
 import { usePlaylists } from "../../contexts/PlaylistsContext";
 import Dialog from "./Dialog";
 import { useAuth } from "../../contexts/AuthContext";
+import { useMessage } from "../../contexts/MessageContext";
 
 
 
@@ -12,9 +13,10 @@ const AddToPlaylistCard = ({ track, open, onClose }) => {
     const { playlists } = usePlaylists();
     const [searchKey, setSearchKey] = React.useState("");
     const { user } = useAuth();
+    const { setError, setInfo } = useMessage();
 
     const handleAdd = (playlist) => {
-        create(playlist, track);
+        create(playlist, track, setError, setInfo);
         onClose();
     }
 
@@ -39,8 +41,14 @@ const AddToPlaylistCard = ({ track, open, onClose }) => {
     );
 }
 
-const create = async (playlist, track) => {
-    await request(`api/playlists/${playlist.id}/tracks/${track.id}`, "POST");
+const create = async (playlist, track, setError, setInfo) => {
+    try {
+        await request(`api/playlists/${playlist.id}/tracks/${track.id}`, "POST");
+        setInfo(`The track has been added to ${playlist.title} successfully.`);
+    }
+    catch (error) {
+        setError(error);
+    }
 }
 
 const filterPlaylists = (playlist, searchKey, user) => {

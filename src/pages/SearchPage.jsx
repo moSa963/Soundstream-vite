@@ -6,13 +6,16 @@ import request from "../utils/Request";
 import PlaylistCard from "../components/CardsSection/PlaylistCard";
 import TrackCard from "../components/CardsSection/TrackCard";
 import UserCard from "../components/CardsSection/UserCard";
+import { useMessage } from "../contexts/MessageContext";
 
 
 const SearchPage = () => {
     const [data, setData] = React.useState({});
+    const {setError} = useMessage();
 
+    
     const handleLoad = (key) => {
-        loadData(key, setData);
+        loadData(key, setData, setError);
     }
 
     return (
@@ -30,13 +33,14 @@ const SearchPage = () => {
 }
 
 
-const loadData = async (key, setData) => {
-    const res = await request(`api/search/${key}`)
-
-    if (res.ok)
-    {
+const loadData = async (key, setData, setError) => {
+    try {
+        const res = await request(`api/search/${key}`)
         const js = await res.json();
         setData(js.data);
+    }
+    catch (error) {
+        setError(error);
     }
 }
 

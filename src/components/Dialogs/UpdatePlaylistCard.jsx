@@ -13,7 +13,7 @@ const UpdatePlaylistCard = ({ playlist, onChange, open, setOpen }) => {
     const [inputs, setInputs] = React.useState({});
     const { setPlaylists } = usePlaylists();
     const nav = useNavigate();
-    const { setMessage } = useMessage();
+    const { setError, setInfo } = useMessage();
 
 
     React.useEffect(() => {
@@ -21,7 +21,7 @@ const UpdatePlaylistCard = ({ playlist, onChange, open, setOpen }) => {
     }, [playlist]);
 
     const handleSave = () => {
-        save(playlist, inputs, onChange, setMessage);
+        save(playlist, inputs, onChange, setError, setInfo);
         setOpen(false);
     }
 
@@ -42,37 +42,39 @@ const UpdatePlaylistCard = ({ playlist, onChange, open, setOpen }) => {
 
             <ConfirmationCard
                 onClose={() => setDeleteCardOpen(false)}
-                onConfirmed={() => remove(playlist, setPlaylists, nav, setMessage)}
+                onConfirmed={() => remove(playlist, setPlaylists, nav, setError)}
                 open={deleteCardOpen}
                 message="Are you sure you want to delete this playlist?" />
         </Dialog >
     );
 }
 
-const save = async (playlist, inputs, onChange, setMessage) => {
+const save = async (playlist, inputs, onChange, setError, setInfo) => {
     try {
         const data = {};
 
         inputs?.title && (data["title"] = inputs?.title);
         inputs?.description && (data["description"] = inputs?.description);
-        
+
         const res = await request(`api/playlists/${playlist.id}`, "POST", data);
         const js = await res.json();
         onChange && onChange(js.data);
+        setInfo("The playlist has been updated successfully");
     }
     catch (message) {
-        setMessage({ type: "error", title: message })
+        setError(message);
     }
+
 }
 
-const remove = async (playlist, setPlaylists, nav, setMessage) => {
+const remove = async (playlist, setPlaylists, nav, setError) => {
     try {
         await request(`api/playlists/${playlist.id}`, "DELETE");
         setPlaylists(ps => ps.filter(v => v.id != playlist.id));
         nav("/playlist");
     }
     catch (message) {
-        setMessage({ type: "error", title: message })
+        setError(message);
     }
 }
 

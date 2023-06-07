@@ -4,6 +4,7 @@ import request from "../../utils/Request";
 import ConfirmationCard from "./ConfirmationCard";
 import { useNavigate } from "react-router-dom";
 import Dialog from "./Dialog";
+import { useMessage } from "../../contexts/MessageContext";
 
 
 
@@ -11,13 +12,14 @@ const UpdateTrackCard = ({ track, setTracks, onChange, open, setOpen }) => {
     const [inputs, setInputs] = React.useState();
     const [deleteCardOpen, setDeleteCardOpen] = React.useState(false);
     const nav = useNavigate();
+    const { setError, setInfo } = useMessage();
 
     React.useEffect(() => {
         setInputs({ title: track.title, explicit: track.explicit });
     }, [track]);
 
     const handleSave = () => {
-        save(track.id, inputs, onChange);
+        save(track.id, inputs, onChange, setError, setInfo);
         setOpen(false);
     }
 
@@ -41,28 +43,34 @@ const UpdateTrackCard = ({ track, setTracks, onChange, open, setOpen }) => {
 
             <ConfirmationCard
                 onClose={() => setDeleteCardOpen(false)}
-                onConfirmed={() => remove(playlist, setPlaylists, nav)}
+                onConfirmed={() => remove(track?.id, setTracks, nav, setError, setInfo)}
                 open={deleteCardOpen}
                 message="Are you sure you want to delete this track?" />
         </Dialog >
     );
 }
 
-const save = async (id, data, onChange) => {
-    const res = await request(`api/tracks/${id}`, "POST", data);
-
-    if (res.ok) {
+const save = async (id, data, onChange, setError, setInfo) => {
+    try {
+        const res = await request(`api/tracks/${id}`, "POST", data);
         const js = await res.json();
         onChange && onChange(js.data);
+        setInfo("The track has been updated successfully.");
+    }
+    catch (error) {
+        setError(error);
     }
 }
 
-const remove = async (id, setTracks, nav) => {
-    const res = await request(`api/tracks/${id}`, "DELETE");
-
-    if (res.ok) {
+const remove = async (id, setTracks, nav, setError, setInfo) => {
+    try {
+        await request(`api/tracks/${id}`, "DELETE");
         setTracks(ps => ps.filter(v => v.id != id));
         nav("/");
+        setInfo("The track has been deleted successfully.");
+    }
+    catch (error) {
+        setError(error);
     }
 }
 

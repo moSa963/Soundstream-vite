@@ -11,12 +11,13 @@ const LikePlaylistButton = ({ playlist, setLiked, large }) => {
     );
 }
 
-const like = async (playlist, setLiked) => {
-    const res = await request(`api/likes/playlists/${playlist?.id}`, playlist?.liked ? "DELETE" : "POST");
-
-    if (res.ok)
-    {
+const like = async (playlist, setLiked, setError) => {
+    try {
+        await request(`api/likes/playlists/${playlist?.id}`, playlist?.liked ? "DELETE" : "POST");
         setLiked(!playlist?.liked);
+    }
+    catch (error) {
+        setError(error);
     }
 }
 
