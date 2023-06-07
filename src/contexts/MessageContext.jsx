@@ -17,7 +17,11 @@ const MessageProvider = ({ children }) => {
     }, [message]);
 
     return (
-        <Context.Provider value={{ message, setMessage }}>
+        <Context.Provider value={{ 
+            message, 
+            setError: (v) => setMessage({ type: "error", title: v}),
+            setInfo: (v) => setMessage({ type: "info", title: v}),
+        }}>
             <Snackbar anchorOrigin={{ vertical: "top", horizontal: "center" }} open={Boolean(message.title)} sx={{ zIndex: 999999 }} >
                 <Alert severity={message.type} sx={{ width: '100%', wordBreak: "break-word" }} >
                     {message.title}
