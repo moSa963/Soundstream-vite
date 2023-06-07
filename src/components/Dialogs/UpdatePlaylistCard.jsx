@@ -49,8 +49,13 @@ const UpdatePlaylistCard = ({ playlist, onChange, open, setOpen }) => {
     );
 }
 
-const save = async (playlist, data, onChange, setMessage) => {
+const save = async (playlist, inputs, onChange, setMessage) => {
     try {
+        const data = {};
+
+        inputs?.title && (data["title"] = inputs?.title);
+        inputs?.description && (data["description"] = inputs?.description);
+        
         const res = await request(`api/playlists/${playlist.id}`, "POST", data);
         const js = await res.json();
         onChange && onChange(js.data);
