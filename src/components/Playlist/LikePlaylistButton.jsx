@@ -7,7 +7,7 @@ const LikePlaylistButton = ({ playlist, setLiked, large }) => {
 
 
     return (
-        <LikeButton liked={playlist?.liked} setLiked={() => like(playlist, setLiked)} large/>
+        <LikeButton liked={playlist?.liked} setLiked={() => like(playlist, setLiked)} large={large}/>
     );
 }
 
