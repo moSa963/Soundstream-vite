@@ -3,17 +3,19 @@ import React from "react"
 
 
 
-const TextButton = ({ title, onClick, color, justifyEnd }) => {
+const TextButton = ({ title, onClick, color, justifyEnd, noWrap }) => {
 
-
+    const handleClick = (e) => {
+        e.stopPropagation();
+        onClick && onClick();
+    }
 
     return (
         <Box sx={{ display: "flex", justifyContent: justifyEnd && "end" }}>
-            <Typography
-                variant="caption"
+            <Typography noWrap={noWrap}
                 color={color || "primary"}
-                onClick={onClick}
-                sx={{ cursor: "pointer", ":hover": { transform: "scale(1.1)" } }}
+                onClick={handleClick}
+                sx={{ cursor: "pointer", color: t => t.palette.text.secondary, ":hover": { color: t => t.palette.text.primary } }}
             >
                 {title}
             </Typography>
