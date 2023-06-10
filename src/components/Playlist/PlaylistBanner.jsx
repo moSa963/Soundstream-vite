@@ -6,7 +6,7 @@ import PlaylistInfo from "./PlaylistInfo";
 
 
 
-const PlaylistBanner = ({ tracks, playlist, enableEdit, type, avatar, onAvatarChange, onChange }) => {
+const PlaylistBanner = ({ playlist, enableEdit, type, avatar, onAvatarChange, onChange }) => {
     const [editOpen, setEditOpen] = React.useState(false);
 
     return (
@@ -19,7 +19,7 @@ const PlaylistBanner = ({ tracks, playlist, enableEdit, type, avatar, onAvatarCh
                 onAvatarChange={onAvatarChange}
                 avatar={avatar}
             >
-                <PlaylistInfo user={playlist?.user} trackCount={tracks.length}/>
+                <PlaylistInfo user={playlist?.user} trackCount={playlist?.tracks_count}/>
             </Banner>
 
             <UpdatePlaylistCard
