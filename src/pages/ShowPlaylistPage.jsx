@@ -15,7 +15,6 @@ import { useMessage } from "../contexts/MessageContext";
 const ShowPlaylistPage = () => {
     const { data } = useLoaderData();
     const [playlist, setPlaylist] = React.useState({});
-    const [tracks, setTracks] = React.useState([]);
     const { user } = useAuth();
     const { setPlaylists } = usePlaylists();
     const [action, setAction] = React.useState({ name: null, payload: null });
@@ -30,6 +29,8 @@ const ShowPlaylistPage = () => {
     return (
         <Box sx={{ width: "100%" }}>
             <PlaylistBanner 
+                type="playlist"
+                playlist={playlist}
                 avatar={`${APP_URL}api/playlists/${data.id}/photo`}
                 enableEdit={data.user.username == user.username}
                 onAvatarChange={(file) => UpdateImage(data, file, setError)}
@@ -38,20 +39,14 @@ const ShowPlaylistPage = () => {
                     setPlaylist(newData);
                     return [...ps];
                 })}
-                playlist={playlist}
-                tracks={tracks}
-                type="playlist"
             />
 
             <Playlist
-                tracks={tracks}
-                setTracks={setTracks}
-                setPlaylist={setPlaylist}
-                onAddTrack={() => handleAction(data, "Add track", null, setError, setInfo)}
+                url={`api/playlists/${data.id}/tracks`}
                 playlist={playlist}
-                dataUrl={`api/playlists/${data.id}/tracks`}
+                setPlaylist={setPlaylist}
                 actions={["Remove from this playlist", "Add to playlist", "Add to queue"]}
-                onAction={(action, track) => handleAction(data, action, track, setError, setInfo, setAction, remove, setTracks, addTrack)}
+                onAction={(action, track, setTracks) => handleAction(data, action, track, setError, setInfo, setAction, remove, setTracks, addTrack)}
             />
 
             <AddToPlaylistCard open={action.name == "Add to playlist"}  track={action.payload} onClose={() => setAction({ name: null, payload: null }) } />
@@ -85,7 +80,6 @@ const handleAction = (playlist, action, track, setError, setInfo, setAction, rem
     {
         case "Add to playlist": setAction({ name: action, payload: track }); break;
         case "Remove from this playlist": remove(playlist, track, setTracks, setInfo, setError); break;
-        case "Add track": setAction({ name: action, payload: null }); break;
         case "Add to queue": addTrack(track); break;
     }
 }

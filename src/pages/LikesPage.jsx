@@ -9,7 +9,6 @@ import PlaylistBanner from "../components/Playlist/PlaylistBanner";
 
 const LikesPage = () => {
     const [action, setAction] = React.useState({ name: null, payload: null });
-    const [tracks, setTracks] = React.useState([]);
     const { addTrack } = usePlayer();
 
     return (
@@ -18,15 +17,12 @@ const LikesPage = () => {
             <PlaylistBanner
                 avatar={`${APP_URL}img/likes.png`}
                 playlist={{ title: "Liked Songs", }}
-                tracks={tracks}
                 type="playlist"
             />
 
             <Playlist 
-                tracks={tracks}
-                setTracks={setTracks}
                 playlist={{ title: "Liked Songs", }}
-                dataUrl="api/likes"
+                url="api/likes"
                 actions={["Add to playlist", "Add to queue"]}
                 onAction={(action, track) => handleAction(action, track, setAction, addTrack)}
             />
