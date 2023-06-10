@@ -14,7 +14,7 @@ const TracksTableRow = ({ track, index, setLiked, onPlay, actions, onAction, sim
         <TableRow
             onMouseEnter={() => setHover(true)}
             onMouseLeave={() => setHover(false)}
-            sx={{ '&:last-child td, &:last-child th': { border: 0 }, cursor: "pointer", ":hover": { bgcolor: t => t.palette.action.hover }, padding: 0 }}
+            sx={{ '& td, & th': { borderColor: "#55555533" }, '&:last-child td, &:last-child th': { border: 0 }, cursor: "pointer", ":hover": { bgcolor: t => t.palette.action.hover }, padding: 0 }}
         >
             <TableCell component="th">
                 <Box sx={{ width: 20 }}>
@@ -51,11 +51,13 @@ const TracksTableRow = ({ track, index, setLiked, onPlay, actions, onAction, sim
                 </TableCell>
             }
 
-            <TableCell sx={{ width: 5, overflow: "hidden" }} align="center">
-                <Box sx={{ width: 35 }}>
-                    {hover && <TracksTableRowList actions={actions} onActionClick={(a) => onAction(a, track)} />}
-                </Box>
-            </TableCell>
+            {actions &&
+                <TableCell sx={{ width: 5, overflow: "hidden" }} align="center">
+                    <Box sx={{ width: 35 }}>
+                        {hover && <TracksTableRowList actions={actions} onActionClick={(a) => onAction(a, track)} />}
+                    </Box>
+                </TableCell>
+            }
         </TableRow>
     );
 }
