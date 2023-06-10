@@ -3,7 +3,6 @@ import { useMessage } from "../contexts/MessageContext";
 import request from "../utils/Request";
 
 
-
 const PaginationList = ({ url, loader }) => {
     const [list, setList] = React.useState([]);
     const [next, setNext] = React.useState(null);
@@ -28,7 +27,7 @@ const loadData = async (url, setList, setNext, setProgress, setError, append) =>
     try {
         const res = await request(url);
         const js = await res.json();
-        setNext(js.links.next);
+        setNext(js?.links?.next);
         setList(data => append ? [...data, ...js.data] : js.data);
     } catch (error) {
         setError(error);
