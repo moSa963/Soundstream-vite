@@ -4,6 +4,7 @@ import TracksTable from "../../components/TracksTable/TracksTable";
 import { usePlayer } from "../../contexts/PlayerContext";
 import PlaylistToolsBar from "./PlaylistToolsBar";
 import PaginationList from "../PaginationList";
+import TracksTableSkeleton from "../TracksTable/TracksTableSkeleton";
 
 
 const Playlist = ({ url, playlist, setPlaylist, actions, onAction, stickyHeader }) => {
@@ -11,15 +12,15 @@ const Playlist = ({ url, playlist, setPlaylist, actions, onAction, stickyHeader 
     const { setIndices, setList } = usePlayer();
     const small = useMediaQuery('(max-width:600px)');
 
-
     const handlePlay = (tracks, index, setList) => {
-        setList(tracks); 
+        setList(tracks);
         setIndices([index]);
     }
 
     return (
         <PaginationList
             url={url}
+            Skeleton={TracksTableSkeleton}
             loader={(list, next, setTracks) => (
                 <Box sx={{ width: "100%" }}>
                     <PlaylistToolsBar
