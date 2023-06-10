@@ -1,10 +1,11 @@
-import { Box, Divider, MenuList, Paper, Typography } from "@mui/material";
+import { Box, Divider, MenuList, Paper, Stack, Typography } from "@mui/material";
 import React from "react";
 import MenuItemLink from "./MenuItemLink";
-import { Add, AllInbox, Favorite, Home, LibraryAdd, PlaylistAdd, PlaylistPlay, PlusOne, Search, ShowChart } from "@mui/icons-material";
+import { Favorite, Home, LibraryAdd, Search } from "@mui/icons-material";
 import CreatePlaylistCard from "../Dialogs/CreatePlaylistCard";
 import { usePlaylists } from "../../contexts/PlaylistsContext";
 import { Link } from "react-router-dom";
+import PlaylistItem from "../Playlist/PlaylistItem";
 
 
 const AppMenu = () => {
@@ -31,7 +32,9 @@ const AppMenu = () => {
                     </Box>
                 </Link>
 
-                {playlists?.map((e) => <MenuItemLink key={e.id} title={e?.title} small to={`/library/playlists/${e.id}`} />)}
+                <Stack spacing={.5}>
+                    {playlists?.map((e) => <PlaylistItem key={e.id} playlist={e} small />)}
+                </Stack>
             </MenuList>
         </Paper>
 
