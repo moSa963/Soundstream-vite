@@ -12,7 +12,7 @@ const Playlist = ({ url, playlist, setPlaylist, actions, onAction, stickyHeader 
     const small = useMediaQuery('(max-width:600px)');
 
 
-    const handlePlay = (_, index, setList) => {
+    const handlePlay = (tracks, index, setList) => {
         setList(tracks); 
         setIndices([index]);
     }
@@ -32,7 +32,7 @@ const Playlist = ({ url, playlist, setPlaylist, actions, onAction, stickyHeader 
 
                     <TracksTable
                         simple={small}
-                        onPlay={(_, index) => handlePlay(_, index, setList)}
+                        onPlay={(_, index) => handlePlay(list, index, setList)}
                         tracks={list?.filter((v) => v.title.toLowerCase().startsWith(filter.toLowerCase()))}
                         setTracks={setTracks}
                         actions={actions}
