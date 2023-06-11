@@ -1,9 +1,9 @@
-import { Box, IconButton, Paper, Typography } from "@mui/material";
+import { Box, Fab, Typography } from "@mui/material";
 import React from "react";
 import Card from "./Card";
 import { APP_URL } from "../../utils/Request";
 import { usePlayer } from "../../contexts/PlayerContext";
-import PlayCircleIcon from '@mui/icons-material/PlayCircleFilled';
+import PlayCircleIcon from '@mui/icons-material/PlayArrowOutlined';
 import { useNavigate } from "react-router-dom";
 
 const TrackCard = ({ data }) => {
@@ -28,18 +28,16 @@ const TrackCard = ({ data }) => {
                 justifyContent: "end",
                 alignItems: "end",
                 opacity: 0,
-                p: 1,
+                p: 3,
                 transition: "500ms",
                 background: t => `linear-gradient(174deg, rgba(0,0,0,0) 10%, ${t.palette.background.paper} 100%)`,
                 ":hover": {
                     opacity: 1,
                 }
             }}>
-                <IconButton onClick={handlePlay} size="small">
-                    <Paper sx={{ backgroundColor: t=>t.palette.background.paper, borderRadius: 99999999999, display: "flex", justifyContent: "center", alignItems: "center" }}>
-                        <PlayCircleIcon sx={{ width: 75, height: 75 }}/>
-                    </Paper>
-                </IconButton>
+                <Fab color="primary"  size="large"  onClick={handlePlay}>
+                    <PlayCircleIcon sx={{ width: "100%", height: "100%" }}/>
+                </Fab>
             </Box>
         </Card>
     );
