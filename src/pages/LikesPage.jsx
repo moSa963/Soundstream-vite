@@ -20,7 +20,7 @@ const LikesPage = () => {
                 type="playlist"
             />
 
-            <Playlist 
+            <Playlist stickyHeader
                 playlist={{ title: "Liked Songs", }}
                 url="api/likes"
                 actions={["Add to playlist", "Add to queue"]}

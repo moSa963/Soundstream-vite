@@ -41,7 +41,7 @@ const ShowPlaylistPage = () => {
                 })}
             />
 
-            <Playlist
+            <Playlist stickyHeader
                 url={`api/playlists/${data.id}/tracks`}
                 playlist={playlist}
                 setPlaylist={setPlaylist}
