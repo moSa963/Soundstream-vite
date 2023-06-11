@@ -38,7 +38,7 @@ const Playlist = ({ url, playlist, setPlaylist, actions, onAction, stickyHeader,
                         setTracks={setTracks}
                         actions={actions}
                         onAction={(action, track) => onAction(action, track, setTracks)}
-                        stickyHeade={stickyHeader}
+                        stickyHeader={stickyHeader}
                     />
                 </Box>
             )}
