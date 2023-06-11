@@ -4,6 +4,7 @@ import CardsSection from "../../components/CardsSection/CardsSection";
 import { useOutletContext } from "react-router-dom";
 import PlaylistCard from "../../components/CardsSection/PlaylistCard";
 import PaginationList from "../../components/PaginationList";
+import PlaylistsList from "../../components/Playlist/PlaylistsList";
 
 
 const UserPlaylistsPage = () => {
@@ -15,11 +16,9 @@ const UserPlaylistsPage = () => {
                 url={`api/users/${user?.username}/playlists?count=2`}
                 loader={
                     (list, next, setList, loadNext) => (
-                        <CardsSection 
-                            onAction={next && loadNext} 
-                            actionTitle="more"
-                            Card={PlaylistCard}
-                            data={list}
+                        <PlaylistsList
+                            playlists={list}
+                            setPlaylists={setList}
                         />
                     )
                 }

@@ -1,19 +1,19 @@
 import { Box } from "@mui/material";
 import React from "react";
-import CardsSection from "../components/CardsSection/CardsSection";
-import PlaylistCard from "../components/CardsSection/PlaylistCard";
 import { usePlaylists } from "../contexts/PlaylistsContext";
+import PlaylistsList from "../components/Playlist/PlaylistsList";
 
 
 const PlaylistsPage = ({ albums }) => {
-    const { playlists } = usePlaylists();
+    const { playlists, setPlaylists } = usePlaylists();
+
 
     return (
         <Box sx={{ width: "100%" }}>
-            <CardsSection
-                title="Your Playlists"
-                Card={PlaylistCard}
-                data={playlists?.filter(v => v?.album || !albums)}
+
+            <PlaylistsList 
+                playlists={playlists?.filter(v => Boolean(v?.album) === Boolean(albums))}
+                setPlaylists={setPlaylists}
             />
         </Box>
     );

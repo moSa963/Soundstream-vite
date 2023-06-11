@@ -4,6 +4,7 @@ import { Box } from "@mui/material";
 import { useOutletContext } from "react-router-dom";
 import PlaylistCard from "../../components/CardsSection/PlaylistCard";
 import PaginationList from "../../components/PaginationList";
+import PlaylistsList from "../../components/Playlist/PlaylistsList";
 
 
 
@@ -16,9 +17,9 @@ const UserAlbumsPage = () => {
                 url={`api/users/${user?.username}/albums`}
                 loader={
                     (list, setList, loadNext) => (
-                        <CardsSection
-                            Card={PlaylistCard}
-                            data={list}
+                        <PlaylistsList
+                            playlists={list}
+                            setPlaylists={setList}
                         />
                     )
                 }
