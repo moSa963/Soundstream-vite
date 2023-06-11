@@ -7,7 +7,7 @@ import PaginationList from "../PaginationList";
 import TracksTableSkeleton from "../TracksTable/TracksTableSkeleton";
 
 
-const Playlist = ({ url, playlist, setPlaylist, actions, onAction, stickyHeader }) => {
+const Playlist = ({ url, playlist, setPlaylist, actions, onAction, stickyHeader, sx }) => {
     const [filter, setFilter] = React.useState("");
     const { setIndices, setList } = usePlayer();
     const small = useMediaQuery('(max-width:600px)');
@@ -22,7 +22,7 @@ const Playlist = ({ url, playlist, setPlaylist, actions, onAction, stickyHeader 
             url={url}
             Skeleton={TracksTableSkeleton}
             loader={(list, next, setTracks) => (
-                <Box sx={{ width: "100%" }}>
+                <Box sx={{ width: "100%", ...sx }}>
                     <PlaylistToolsBar
                         playlist={playlist}
                         onTrackAdded={(t) => setTracks(ts => [...ts, t])}
