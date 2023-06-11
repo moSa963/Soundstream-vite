@@ -15,6 +15,7 @@ const Card = ({ src, onClick, children, to }) => {
         <Link to={to}>
             <Paper elevation={3} onClick={onClick}
                 sx={{
+                    position: "relative",
                     width: "100%",
                     maxWidth: { xs: 130, sm: 160, md: 180 },
                     minWidth: { xs: 130, sm: 160, md: 180 },
