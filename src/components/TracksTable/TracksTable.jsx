@@ -23,8 +23,8 @@ const TracksTable = ({ tracks, setTracks, actions, onAction, simple, onPlay, sti
                     {!simple && <TableCell align="center">Album</TableCell>}
                     {!simple && <TableCell align="center">Date added</TableCell>}
                     {!simple && <TableCell align="center"></TableCell>}
-                    {!simple && actions && <TableCell align="center"><Timelapse /></TableCell>}
-                    <TableCell></TableCell>
+                    {!simple && <TableCell align="center"><Timelapse /></TableCell>}
+                    {actions && <TableCell></TableCell>}
                 </TableRow>
             </TableHead>
             <TableBody>
