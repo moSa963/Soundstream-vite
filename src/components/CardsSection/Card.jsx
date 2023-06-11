@@ -11,30 +11,46 @@ const Image = styled(Avatar)(() => ({
 
 const Card = ({ src, onClick, children, to }) => {
 
+    if (to) {
+        return (
+            <Link to={to}>
+                <CardBody onClick={onClick} src={src}>
+                    {children}
+                </CardBody>
+            </Link>
+        );
+    }
+
     return (
-        <Link to={to}>
-            <Paper elevation={3} onClick={onClick}
-                sx={{
-                    position: "relative",
-                    width: "100%",
-                    maxWidth: { xs: 130, sm: 160, md: 180 },
-                    minWidth: { xs: 130, sm: 160, md: 180 },
-                    height: { xs: 200, sm: 255, md: 255 },
-                    p: { xs: .5, md: 1 },
-                    overflow: "hidden",
-                    cursor: "pointer",
-                    m: .5,
-                    boxShadow: t => t.shadows[2],
-                    ":hover": { boxShadow: t => t.shadows[6], filter: "contrast(90%)" }
-                }}>
-                <Box sx={{ width: "100%", aspectRatio: '1', my: { xs: .5, md: 1 }, boxShadow: t => t.shadows[1] }}>
-                    <Image src={src} variant="square"/>
-                </Box>
-                {children}
-            </Paper>
-        </Link>
+        <CardBody onClick={onClick} src={src}>
+            {children}
+        </CardBody>
     );
 }
 
+const CardBody = ({ src, onClick, children }) => {
+
+    return (
+        <Paper elevation={3} onClick={onClick}
+            sx={{
+                position: "relative",
+                width: "100%",
+                maxWidth: { xs: 130, sm: 160, md: 180 },
+                minWidth: { xs: 130, sm: 160, md: 180 },
+                height: { xs: 200, sm: 255, md: 255 },
+                p: { xs: .5, md: 1 },
+                overflow: "hidden",
+                cursor: "pointer",
+                m: .5,
+                boxShadow: t => t.shadows[2],
+                ":hover": { boxShadow: t => t.shadows[6], filter: "contrast(90%)" }
+            }}>
+            <Box sx={{ width: "100%", aspectRatio: '1', my: { xs: .5, md: 1 }, boxShadow: t => t.shadows[1] }}>
+                <Image src={src} variant="square" />
+            </Box>
+            {children}
+        </Paper>
+    )
+}
 
 export default Card;
