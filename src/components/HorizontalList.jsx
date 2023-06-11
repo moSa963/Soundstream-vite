@@ -2,7 +2,7 @@ import { Stack } from "@mui/material";
 import React from "react";
 
 
-const HorizontalList = ({ children, noWrap, spacing }) => {
+const HorizontalList = ({ children, noWrap, spacing, end }) => {
     const ref = React.useRef();
 
     React.useEffect(() => {
@@ -30,7 +30,7 @@ const HorizontalList = ({ children, noWrap, spacing }) => {
             flexWrap={noWrap ? "nowrap" : "wrap"}
             direction="row"
             spacing={spacing}
-            justifyContent={noWrap ? "start" : "center"}
+            justifyContent={noWrap ? (end ? "end" : "start") : "center"}
             sx={{ overflowX: noWrap ? "auto" : "hidden" }}
         >
             {children}
