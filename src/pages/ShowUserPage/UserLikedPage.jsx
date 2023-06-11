@@ -4,6 +4,7 @@ import CardsSection from "../../components/CardsSection/CardsSection";
 import { Box } from "@mui/material";
 import { useOutletContext } from "react-router-dom";
 import PaginationList from "../../components/PaginationList";
+import CardsSectionSkeleton from "../../components/CardsSection/CardsSectionSkeleton";
 
 
 
@@ -14,6 +15,7 @@ const UserLikedPage = () => {
         <Box sx={{ width: "100%" }}>
             <PaginationList
                 url={`api/likes?username=${user?.username}`}
+                Skeleton={CardsSectionSkeleton}
                 loader={
                     (list, setList, loadNext) => (
                         <CardsSection

@@ -6,6 +6,7 @@ import { usePlaylists } from "../contexts/PlaylistsContext";
 import PlaylistCard from "../components/CardsSection/PlaylistCard";
 import PaginationList from "../components/PaginationList";
 import TrackCard from "../components/CardsSection/TrackCard";
+import CardsSectionSkeleton from "../components/CardsSection/CardsSectionSkeleton";
 
 
 
@@ -34,6 +35,7 @@ const HomePage = () => {
 
             <PaginationList
                 url="api/likes?count=4"
+                Skeleton={CardsSectionSkeleton}
                 loader={(data) => (
                     <CardsSection
                         title="Liked Tracks"
@@ -46,7 +48,8 @@ const HomePage = () => {
             />
 
             <PaginationList
-                url="api/history/tracks?count=4"
+                url="api/history/tracks"
+                Skeleton={CardsSectionSkeleton}
                 loader={(data) => (
                     <CardsSection
                         title="Recently Played"

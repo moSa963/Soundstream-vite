@@ -5,6 +5,7 @@ import { useOutletContext } from "react-router-dom";
 import PlaylistCard from "../../components/CardsSection/PlaylistCard";
 import PaginationList from "../../components/PaginationList";
 import PlaylistsList from "../../components/Playlist/PlaylistsList";
+import CardsSectionSkeleton from "../../components/CardsSection/CardsSectionSkeleton";
 
 
 const UserPlaylistsPage = () => {
@@ -14,6 +15,7 @@ const UserPlaylistsPage = () => {
         <Box sx={{ width: "100%" }}>
             <PaginationList 
                 url={`api/users/${user?.username}/playlists?count=2`}
+                Skeleton={CardsSectionSkeleton}
                 loader={
                     (list, next, setList, loadNext) => (
                         <PlaylistsList
