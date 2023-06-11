@@ -15,6 +15,7 @@ import ShowUserPage from "../pages/ShowUserPage/ShowUserPage";
 import UserAlbumsPage from "../pages/ShowUserPage/UserAlbumsPage";
 import UserPlaylistsPage from "../pages/ShowUserPage/UserPlaylistsPage";
 import UserLikedPage from "../pages/ShowUserPage/UserLikedPage";
+import AlbumsPage from "../pages/AlbumsPage";
 
 
 
@@ -78,11 +79,11 @@ export const createRoutes = () => createBrowserRouter([
                         children: [
                             {
                                 index: true,
-                                element: <PlaylistsPage albums/>,
+                                element: <AlbumsPage />,
                             },
                             {
                                 path: ":id",
-                                element: <ShowPlaylistPage album/>,
+                                element: <ShowPlaylistPage />,
                                 loader: async ({ params }) => request(`api/playlists/${params.id}`),
                             },
                         ],
