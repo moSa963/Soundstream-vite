@@ -1,12 +1,10 @@
-import { Button, Stack, TextField } from "@mui/material";
+import { Button, IconButton, Stack, TextField } from "@mui/material";
 import React from "react";
-import MenuItemLink from "../AppMenu/MenuItemLink";
-import { PlaylistAdd } from "@mui/icons-material";
 import request from "../../utils/Request";
 import Dialog from "./Dialog";
 import { usePlaylists } from "../../contexts/PlaylistsContext";
 import { useMessage } from "../../contexts/MessageContext";
-
+import { Add } from "@mui/icons-material";
 
 
 const CreatePlaylistCard = () => {
@@ -22,7 +20,9 @@ const CreatePlaylistCard = () => {
 
     return (
         <React.Fragment>
-            <MenuItemLink Icon={PlaylistAdd} title="Creat Playlist" onClick={() => setOpen(true)} />
+            <IconButton size="small" sx={{ height: "fit-content", width: "fit-content" }} onClick={() => setOpen(true)}>
+                <Add />
+            </IconButton>
 
             <Dialog open={open} setOpen={setOpen}>
                 <TextField fullWidth placeholder="Title..." value={title} onChange={(e) => setTitle(e.target.value)} />
