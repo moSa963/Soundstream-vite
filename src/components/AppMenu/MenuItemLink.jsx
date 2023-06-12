@@ -12,7 +12,7 @@ const MenuItemLink = ({ to, Icon, title, onClick, small}) => {
 export const itemBody = (Icon, title, onClick, small) => {
 
     return (
-        <Box onClick={onClick} sx={{ width: "100%", cursor: "pointer", py: small ? 1 : 1.5, px: 1, display: "flex", alignItems: "center", color: t => t.palette.text.secondary, ":hover": { color: t => t.palette.text.primary }, }} title={title}> 
+        <Box onClick={onClick} sx={{ width: "100%", cursor: "pointer", py: 1, px: 1, display: "flex", alignItems: "center", color: t => t.palette.text.secondary, ":hover": { color: t => t.palette.text.primary }, }} title={title}> 
             {
                 Icon &&
                 <ListItemIcon sx={{ color: "inherit", transition: "500ms all" }}>
