@@ -1,4 +1,4 @@
-import { Button, Divider, Stack, TextField } from "@mui/material";
+import { Button, Divider, Stack, Switch, TextField, Typography } from "@mui/material";
 import React from "react";
 import request from "../../utils/Request";
 import ConfirmationCard from "./ConfirmationCard";
@@ -10,14 +10,13 @@ import { useMessage } from "../../contexts/MessageContext";
 
 const UpdatePlaylistCard = ({ playlist, onChange, open, setOpen }) => {
     const [deleteCardOpen, setDeleteCardOpen] = React.useState(false);
-    const [inputs, setInputs] = React.useState({});
+    const [inputs, setInputs] = React.useState();
     const { setPlaylists } = usePlaylists();
     const nav = useNavigate();
     const { setError, setInfo } = useMessage();
 
-
     React.useEffect(() => {
-        setInputs({ title: playlist.title, description: playlist.description });
+        setInputs({ title: playlist.title, description: playlist.description, private: Boolean(playlist.private) });
     }, [playlist]);
 
     const handleSave = () => {
@@ -30,6 +29,11 @@ const UpdatePlaylistCard = ({ playlist, onChange, open, setOpen }) => {
             <TextField fullWidth placeholder="Title..." value={inputs?.title || ""} onChange={(e) => setInputs({ ...inputs, title: e.target.value })} label="Title" />
 
             <TextField fullWidth placeholder="Description..." value={inputs?.description || ""} onChange={(e) => setInputs({ ...inputs, description: e.target.value })} label="Description" />
+            
+            <Stack direction="row" spacing={2} width="100%" alignItems="center">
+                <Typography>Private</Typography>
+                <Switch checked={inputs?.private || false} onClick={() => setInputs({ ...inputs, private: !inputs?.private })}/>
+            </Stack>
 
             <Stack direction="row" spacing={2}>
                 <Button onClick={handleSave}>Save</Button>
@@ -55,6 +59,7 @@ const save = async (playlist, inputs, onChange, setError, setInfo) => {
 
         inputs?.title && (data["title"] = inputs?.title);
         inputs?.description && (data["description"] = inputs?.description);
+        inputs?.private != undefined && (data["private"] = inputs?.private ? 1 : 0);
 
         const res = await request(`api/playlists/${playlist.id}`, "POST", data);
         const js = await res.json();
