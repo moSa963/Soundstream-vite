@@ -19,7 +19,7 @@ const PlaylistBanner = ({ playlist, enableEdit, type, avatar, onAvatarChange, on
                 onAvatarChange={onAvatarChange}
                 avatar={avatar}
             >
-                <PlaylistInfo user={playlist?.user} trackCount={playlist?.tracks_count}/>
+                <PlaylistInfo user={playlist?.user} trackCount={playlist?.tracks_count} isPrivate={playlist.private}/>
             </Banner>
 
             <UpdatePlaylistCard
