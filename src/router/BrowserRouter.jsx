@@ -4,7 +4,7 @@ import ErrorPage from "../pages/ErrorPage";
 import HomePage from "../pages/HomePage";
 import LikesPage from "../pages/LikesPage";
 import SearchPage from "../pages/SearchPage";
-import ShowPlaylistPage from "../pages/ShowPlaylistPage";
+import ShowPlaylistPage from "../pages/ShowPlaylistPage/ShowPlaylistPage";
 import PlaylistsPage from "../pages/PlaylistsPage";
 import LibraryPage from "../pages/LibraryPage";
 import request from "../utils/Request";

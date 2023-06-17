@@ -10,7 +10,7 @@ const LibrarySection = () => {
     const { playlists } = usePlaylists();
 
     return (
-        <Box sx={{ display: "block", overflow: "hidden", width: "100%", height: "100%" }}>
+        <Box sx={{ display: "flex", flexDirection: "column", flex: 1, overflow: "hidden", width: "100%" }}>
             <Box alignItems="center" sx={{ display: "flex", flexDirection: { xs: "column", sm: "row" }, alignItems: { xs: "start", sm: "center" } }}>
                 <MenuItemLink Icon={LibraryAdd} title="Library" to="library" />
                 <Box sx={{ flexGrow: 1 }} />
