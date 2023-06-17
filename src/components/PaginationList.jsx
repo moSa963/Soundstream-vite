@@ -48,6 +48,7 @@ const loadData = async (url, setList, setNext, setError, setProgress, append) =>
         setNext(js?.links?.next);
         setList(data => append ? [...data, ...js.data] : js.data);
     } catch (error) {
+        setList(js => js || []);
         setError(error);
     }
 
