@@ -65,14 +65,14 @@ const request = async (url = APP_URL, method = "GET", data = null) => {
 
     try{
         res = await fetch(url, body);
-    }catch{
-        onError && onError(res.statusText);
+    }catch(err){
+        throw { status: err.status, statusText: err.statusText };
     }
 
     if (! res.ok)
     {
         const json = await res.json();
-        throw json.message;
+        throw { status: res.status, statusText: json.message };
     }
 
     return res;

@@ -6,8 +6,8 @@ const Context = React.createContext();
 const MessageProvider = ({ children }) => {
     const [message, setMessage] = React.useState({ title: "", type: "info" });
 
-    const setError = React.useCallback((v) => setMessage({ type: "error", title: v}), [setMessage]);
-    const setInfo = React.useCallback((v) => setMessage({ type: "info", title: v}), [setMessage]);
+    const setError = React.useCallback((v) => setMessage({ type: "error", title: v?.statusText || v}), [setMessage]);
+    const setInfo = React.useCallback((v) => setMessage({ type: "info", title: v?.statusText || v}), [setMessage]);
 
     React.useEffect(() => {
         if (! message?.title)
