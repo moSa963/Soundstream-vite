@@ -2,9 +2,9 @@ import { Box } from "@mui/system";
 import React from "react";
 import { Button, Stack, Typography } from "@mui/material";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
-import ShieldIcon from '@mui/icons-material/Shield';
 import SentimentDissatisfiedIcon from '@mui/icons-material/SentimentDissatisfied';
 import StorageIcon from '@mui/icons-material/Storage';
+import SecurityIcon from '@mui/icons-material/Security';
 
 const Error = ({ status, statusText, action, onAction, height, children, bgcolor }) => {
     const Icon = icons[parseInt(status)] || ErrorOutlineIcon;
@@ -46,7 +46,7 @@ const Error = ({ status, statusText, action, onAction, height, children, bgcolor
 };
 
 const icons = {
-    403: ShieldIcon,
+    403: SecurityIcon,
     404: SentimentDissatisfiedIcon,
     500: StorageIcon,
 }
