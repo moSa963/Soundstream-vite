@@ -16,6 +16,7 @@ import UserAlbumsPage from "../pages/ShowUserPage/UserAlbumsPage";
 import UserPlaylistsPage from "../pages/ShowUserPage/UserPlaylistsPage";
 import UserLikedPage from "../pages/ShowUserPage/UserLikedPage";
 import AlbumsPage from "../pages/AlbumsPage";
+import ShowPlaylistErrorPage from "../pages/ShowPlaylistPage/ShowPlaylistErrorPage";
 
 
 
@@ -97,6 +98,7 @@ export const createRoutes = () => createBrowserRouter([
                             },
                             {
                                 path: ":id",
+                                errorElement: <ShowPlaylistErrorPage />,
                                 element: <ShowPlaylistPage />,
                                 loader: async ({ params }) => request(`api/playlists/${params.id}`),
                             },
