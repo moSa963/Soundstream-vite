@@ -16,7 +16,7 @@ const ShowTrackPage = () => {
     return (
         <Box sx={{ width: "100%" }}>
             <Banner
-                avatar={`${APP_URL}api/tracks/${data.id}/photo`}
+                avatar={`${APP_URL}api/tracks/${data.id}/photo/${data.image}`}
                 title={data.title}
                 onEdit={() => setEditOpen(true)}
                 description={`@${data.user.username}`}

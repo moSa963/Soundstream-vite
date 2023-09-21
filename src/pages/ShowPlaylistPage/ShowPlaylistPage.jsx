@@ -22,7 +22,7 @@ const ShowPlaylistPage = () => {
             <PlaylistBanner 
                 type="playlist"
                 playlist={{...data, ...playlist}}
-                avatar={`${APP_URL}api/playlists/${data.id}/photo`}
+                avatar={`${APP_URL}api/playlists/${data.id}/photo/${data.image}`}
                 enableEdit={data.user.username == user.username}
                 onAvatarChange={(file) => UpdateImage(data, file, setError)}
                 onChange={(newData) => setPlaylists(ps => {

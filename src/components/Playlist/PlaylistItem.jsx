@@ -23,7 +23,7 @@ const PlaylistItem = ({ playlist, small }) => {
                 }}
             >
                 <Avatar
-                    src={`${APP_URL}api/playlists/${playlist.id}/photo`}
+                    src={`${APP_URL}api/playlists/${playlist.id}/photo/${playlist.image}`}
                     sx={{ width: small ? 40 : { xs: 75, sm: 100 }, height: small ? 40 : { xs: 75, sm: 100 }, boxShadow: t => t.shadows[2] }}
                     variant="square"
                 />
