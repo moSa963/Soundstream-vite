@@ -17,6 +17,7 @@ import UserPlaylistsPage from "../pages/ShowUserPage/UserPlaylistsPage";
 import UserLikedPage from "../pages/ShowUserPage/UserLikedPage";
 import AlbumsPage from "../pages/AlbumsPage";
 import ShowPlaylistErrorPage from "../pages/ShowPlaylistPage/ShowPlaylistErrorPage";
+import StoreLyricsPage from "../pages/StoreLyricsPage/StoreLyricsPage";
 
 
 
@@ -46,8 +47,18 @@ export const createRoutes = () => createBrowserRouter([
             },
             {
                 path: "track/:id",
-                element: <ShowTrackPage />,
-                loader: async ({ params }) => request(`api/tracks/${params.id}`)
+                loader: async ({ params }) => request(`api/tracks/${params.id}`),
+                id: "track_root",
+                children: [
+                    {
+                        index: true,
+                        element: <ShowTrackPage />,
+                    },
+                    {
+                        path: "lyrics",
+                        element: <StoreLyricsPage />
+                    }
+                ],
             },
             {
                 path: "user/:username",

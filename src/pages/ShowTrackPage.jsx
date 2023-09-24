@@ -1,6 +1,6 @@
-import { Box, IconButton, Stack, Typography } from "@mui/material";
+import { Box, Button, IconButton, Stack, Typography } from "@mui/material";
 import React from "react";
-import { useLoaderData } from "react-router-dom";
+import { Link, useRouteLoaderData } from "react-router-dom";
 import Banner from "../components/Banner/Banner";
 import { APP_URL } from "../utils/Request";
 import { PlayArrowRounded } from "@mui/icons-material";
@@ -9,7 +9,7 @@ import UpdateTrackCard from "../components/Dialogs/UpdateTrackCard";
 
 
 const ShowTrackPage = () => {
-    const { data } = useLoaderData();
+    const { data } = useRouteLoaderData("track_root");
     const [editOpen, setEditOpen] = React.useState(false);
 
 
@@ -31,6 +31,8 @@ const ShowTrackPage = () => {
                 setOpen={setEditOpen}
             />
 
+            <Link to={"lyrics"}><Button>add lyrics</Button></Link>
+
             <Box sx={{ width: "100%", p: 2 }}>
                 <Stack direction="row">
                     <IconButton size="large" color="success" sx={{ width: 75, height: 75, border: "1px solid" }} title="play">
@@ -38,6 +40,8 @@ const ShowTrackPage = () => {
                     </IconButton>
 
                     <Box sx={{ flexGrow: 1 }} />
+
+                    
 
                     <Box>
                         <Typography >created at: {new Date(data.created_at).toLocaleDateString()}</Typography>
