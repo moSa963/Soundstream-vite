@@ -4,7 +4,7 @@ import formatTime from "../../utils/formatTime";
 
 
 
-const ProgressLine = ({ audio }) => {
+const ProgressLine = ({ audio, onCurrentTimeChange }) => {
     const [currentTime, setCurrentTime] = React.useState(null);
 
     React.useEffect(() => {
@@ -24,6 +24,10 @@ const ProgressLine = ({ audio }) => {
             audio.current.removeEventListener('loadedmetadata', timeupdate);
         };
     }, [audio?.current]);
+
+    React.useEffect(() => {
+        onCurrentTimeChange && onCurrentTimeChange(currentTime);
+    }, [onCurrentTimeChange, currentTime])
 
     return (
         <Stack spacing={1} justifyContent="center" alignItems="center" direction="row" sx={{ width: "100%" }}>
