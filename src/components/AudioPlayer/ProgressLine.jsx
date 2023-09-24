@@ -4,7 +4,7 @@ import formatTime from "../../utils/formatTime";
 
 
 
-const ProgressLine = ({ audio, onCurrentTimeChange }) => {
+const ProgressLine = ({ audio, onCurrentTimeChange, noLabels }) => {
     const [currentTime, setCurrentTime] = React.useState(null);
 
     React.useEffect(() => {
@@ -31,8 +31,7 @@ const ProgressLine = ({ audio, onCurrentTimeChange }) => {
 
     return (
         <Stack spacing={1} justifyContent="center" alignItems="center" direction="row" sx={{ width: "100%" }}>
-            <Typography variant="caption" color="gray">{formatTime(currentTime)}</Typography>
-
+            {!noLabels && <Typography variant="caption" color="gray">{formatTime(currentTime)}</Typography>}
             <Slider
                 size="small"
                 value={currentTime}
@@ -64,7 +63,7 @@ const ProgressLine = ({ audio, onCurrentTimeChange }) => {
                     },
                 }}
             />
-            <Typography variant="caption" color="gray">{formatTime(audio?.current?.duration)}</Typography>
+            {!noLabels && <Typography variant="caption" color="gray">{formatTime(audio?.current?.duration)}</Typography>}
         </Stack >
     );
 }
