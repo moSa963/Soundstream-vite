@@ -2,7 +2,7 @@ import { Box, Typography } from "@mui/material";
 import React from "react";
 
 
-const LyricsViewer = ({ lyrics = "", stamps = [], current = 0 }) => {
+const LyricsViewer = ({ lyrics = "", stamps = [], current = 0, onClick }) => {
     const ref = React.useRef(null);
     const [index, setIndex] = React.useState(0);
 
@@ -30,7 +30,7 @@ const LyricsViewer = ({ lyrics = "", stamps = [], current = 0 }) => {
     }, [ref.current, index])
 
     return (
-        <Box sx={{ width: "100%", height: "100%", overflow: "auto" }} ref={ref} >
+        <Box sx={{ width: "100%", height: "100%", overflow: "auto", overflowX: "hidden" }} ref={ref} >
             {
                 lyrics.split(/[\r\n]/).map(
                     (line, i) =>
@@ -38,8 +38,9 @@ const LyricsViewer = ({ lyrics = "", stamps = [], current = 0 }) => {
                             {
                                 line.length > 0
                                     ? <Typography
+                                        onClick={() => onClick && onClick(line, i)}
                                         variant="h5"
-                                        sx={{ opacity: index == i ? 1 : 0.8 }}
+                                        sx={{ width: "fit-content", opacity: index == i ? 1 : 0.8, cursor: "pointer", transformOrigin: "left", ":hover": { transform: "scale(1.05)" } }}
                                         color={index == i ? "primary" : null}
                                         fontFamily="cursive"
                                         fontWeight="bold" >
