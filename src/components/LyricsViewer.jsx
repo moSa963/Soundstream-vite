@@ -39,7 +39,7 @@ const LyricsViewer = ({ lyrics = "", stamps = [], current = 0, onClick, flex }) 
                                     ? <Typography
                                         onClick={() => onClick && onClick(line, i)}
                                         variant="h5"
-                                        sx={{ width: "fit-content", opacity: index == i ? 1 : 0.8, cursor: "pointer", transformOrigin: "left", ":hover": { transform: "scale(1.05)" } }}
+                                        sx={{ width: "fit-content", opacity: index == i ? 1 : 0.8, cursor: "pointer", wordBreak: "break-word", transformOrigin: "left", ":hover": { transform: "scale(1.05)" } }}
                                         color={index == i ? "primary" : null}
                                         fontFamily="cursive"
                                         fontWeight="bold" >
