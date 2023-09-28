@@ -5,7 +5,7 @@ import VolumeMute from "@mui/icons-material/VolumeMute";
 import { QueueMusic } from "@mui/icons-material";
 import QueueListCard from "../Dialogs/QueueListCard";
 
-const PlayerController = ({ audio }) => {
+const PlayerController = ({ audio, track }) => {
     const [volume, setVolume] = React.useState(1);
     const [open, setOpen] = React.useState(false);
 

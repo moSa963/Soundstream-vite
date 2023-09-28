@@ -73,7 +73,7 @@ const AudioPlayer = ({ track, onForward, onBackward }) => {
             {
                 !isSmall &&
                 <Box sx={{ flex: 1, display: "flex", overflow: "hidden", justifyContent: "end", alignItems: "center" }}>
-                    <PlayerController audio={audioRef} />
+                    <PlayerController track={track} audio={audioRef} />
                 </Box>
             }
         </Paper>
