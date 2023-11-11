@@ -86,7 +86,7 @@ const create = (mode) => {
                 dark: purple[700],
                 light: purple[700],
             },
-            background: { default: "#ffffff", paper: "#f5f5f5" },
+            background: { default: "#cccccc", paper: "#f5f5f5" },
         },
     });
 };
