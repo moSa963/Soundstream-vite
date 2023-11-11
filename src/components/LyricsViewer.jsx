@@ -2,7 +2,7 @@ import { Box, Typography } from "@mui/material";
 import React from "react";
 
 
-const LyricsViewer = ({ lyrics = "", stamps = [], current = 0, onClick, flex }) => {
+const LyricsViewer = ({ seekTime, lyrics = "", stamps = [], current = 0, onClick, flex }) => {
     const ref = React.useRef(null);
     const [index, setIndex] = React.useState(0);
     const currentRef = React.useRef(null);
@@ -22,10 +22,17 @@ const LyricsViewer = ({ lyrics = "", stamps = [], current = 0, onClick, flex }) 
         currentRef.current?.scrollIntoView({ behavior: "smooth", block: "center", inline: "start" });
     }, [currentRef.current, index]);
 
+    
+    const handleClick = (line, index) => {
+        seekTime&&seekTime(getTime(stamps, index));
+
+        onClick&&onClick(line, index);
+    }
+
     return (
         <Box sx={{ width: "100%", height: "100%", overflow: "auto", overflowX: "hidden", flex: flex }} ref={ref} >
             {
-                mapLyrics(lyrics, index, onClick, currentRef)
+                mapLyrics(lyrics, index, handleClick, currentRef)
             }
         </Box>
     );
@@ -60,6 +67,17 @@ const mapLyrics = (lyrics, index, onClick, currentRef) => {
                 );
             }
         )
+}
+
+
+const getTime = (stamps, index) => {
+    var i = index;
+
+    if (i >= stamps.length) {
+        i = stamps.length - 1;
+    }
+
+    return stamps[i < 0 ? 0 : i] || 0;
 }
 
 export default LyricsViewer;
