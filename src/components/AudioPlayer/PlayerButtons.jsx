@@ -15,7 +15,7 @@ const PlayerButtons = ({ audio, onOptionChange, options, onBackward, onForward, 
     }
 
     return (
-        <Stack spacing={simple ? .5 : 1} justifyContent="center" alignItems="center" direction="row" sx={{ width: "100%" }}>
+        <Stack spacing={simple ? .5 : 1} justifyContent="center" alignItems="center" direction="row" sx={{ maxWidth: "100%" }}>
             {!simple && <ShuffleButton setOptions={onOptionChange} shuffle={options?.shuffle} />}
 
             <IconButton size="small"

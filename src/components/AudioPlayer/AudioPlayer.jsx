@@ -1,4 +1,4 @@
-import { Box, Paper, useMediaQuery } from "@mui/material";
+import { Box, Paper, Stack, useMediaQuery } from "@mui/material";
 import React from "react";
 import Track from "../Track/Track";
 import PlayerController from "./PlayerController";
@@ -52,30 +52,26 @@ const AudioPlayer = ({ track, onForward, onBackward }) => {
 
     return (
         <Paper sx={{ position: "relative", display: "flex", width: "100%", overflow: 'hidden', height: 100, borderRadius: 0, borderTop: "1px solid", borderColor: "divider" }} elevation={2}>
-            <Box sx={{ flex: isSmall ? 2 : 1, display: "flex", overflow: "hidden", justifyContent: "start", alignItems: "center" }}>
+            <Box sx={{ flex: 1, display: "flex", overflow: "hidden", justifyContent: "start", alignItems: "center" }}>
                 <Track track={track} small={isSmall} />
             </Box>
 
-            <Box sx={{ flex: isSmall ? 1 : 2, display: "flex", height: '100%', flexDirection: "column", overflow: "hidden", justifyContent: "center", alignItems: "center" }}>
-                <Box sx={{ width: "100%", maxWidth: 600 }}>
-                    <PlayerButtons
-                        simple={isSmall}
-                        audio={audioRef}
-                        options={options}
-                        onOptionChange={setOptions}
-                        onForward={() => onForward && onForward(options?.shuffle)}
-                        onBackward={() => onBackward && onBackward()} />
+            <Box sx={{ flex: isSmall ? 1 : 2, height: "100%", display: "flex", flexDirection: "column", overflow: "hidden", justifyContent: "center", alignItems: "center" }}>
+                <Box sx={{ width: "100%", maxWidth: 800 }}>
+                    <Stack flexWrap="wrap" justifyContent="space-evenly" direction="row">
+                        <PlayerButtons
+                            simple={isSmall}
+                            audio={audioRef}
+                            options={options}
+                            onOptionChange={setOptions}
+                            onForward={() => onForward && onForward(options?.shuffle)}
+                            onBackward={() => onBackward && onBackward()} />
+                        <PlayerController track={track} audio={audioRef}  simple={isSmall}/>
+                    </Stack>
 
                     <ProgressLine audio={audioRef} position={isSmall && "absolute"} inset="auto 0 0 0" noLabels={isSmall}/>
                 </Box>
             </Box>
-
-            {
-                !isSmall &&
-                <Box sx={{ flex: 1, display: "flex", overflow: "hidden", justifyContent: "end", alignItems: "center" }}>
-                    <PlayerController track={track} audio={audioRef} />
-                </Box>
-            }
         </Paper>
     );
 }

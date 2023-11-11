@@ -30,7 +30,7 @@ const ProgressLine = ({ audio, onCurrentTimeChange, noLabels, position, inset })
     }, [onCurrentTimeChange, currentTime])
 
     return (
-        <Stack spacing={1} justifyContent="center" alignItems="center" direction="row" sx={{ width: "100%", "overflow": "hidden", position: position, inset: inset }}>
+        <Stack spacing={1} justifyContent="center" alignItems="center" direction="row" sx={{ width: "100%", "& span": {p: 0}, "overflow": "hidden", position: position, inset: inset }}>
             {!noLabels && <Typography variant="caption" color="gray">{formatTime(currentTime)}</Typography>}
             <Slider
                 size="small"
@@ -43,7 +43,10 @@ const ProgressLine = ({ audio, onCurrentTimeChange, noLabels, position, inset })
                     width: "100%",
                     color: '#fff',
                     height: 4,
-                    p: 0,
+                    padding: 0,
+                    '$ *': {
+                        p: 0,
+                    },
                     '& .MuiSlider-track': {
                         bgcolor: t => t.palette.primary.main,
                     },
