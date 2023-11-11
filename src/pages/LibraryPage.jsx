@@ -38,11 +38,10 @@ const LibraryPage = () => {
                 Skeleton={CardsSectionSkeleton}
                 loader={(data) => (
                     <CardsSection
+                        key={data?.track}
                         title="Recently Played"
-                        onAction={() => nav("/likes")}
-                        actionTitle="ShowAll"
                         Card={TrackCard}
-                        data={data}
+                        data={data?.track}
                     />
                 )}
             />
