@@ -1,4 +1,4 @@
-import { Box, Paper, Stack, useMediaQuery } from "@mui/material";
+import { Box, Paper, useMediaQuery } from "@mui/material";
 import React from "react";
 import Track from "../Track/Track";
 import PlayerController from "./PlayerController";
@@ -51,12 +51,12 @@ const AudioPlayer = ({ track, onForward, onBackward }) => {
     }, [audioRef.current, options?.repeat]);
 
     return (
-        <Paper sx={{ display: "flex", width: "100%", overflow: 'hidden', height: 100, borderRadius: 0, borderTop: "1px solid", borderColor: "divider" }} elevation={2}>
+        <Paper sx={{ position: "relative", display: "flex", width: "100%", overflow: 'hidden', height: 100, borderRadius: 0, borderTop: "1px solid", borderColor: "divider" }} elevation={2}>
             <Box sx={{ flex: isSmall ? 2 : 1, display: "flex", overflow: "hidden", justifyContent: "start", alignItems: "center" }}>
-                <Track track={track} small={isSmall}/>
+                <Track track={track} small={isSmall} />
             </Box>
 
-            <Box sx={{ flex: isSmall ? 1 : 2, display: "flex", flexDirection: "column", overflow: "hidden", justifyContent: "center", alignItems: "center" }}>
+            <Box sx={{ flex: isSmall ? 1 : 2, display: "flex", height: '100%', flexDirection: "column", overflow: "hidden", justifyContent: "center", alignItems: "center" }}>
                 <Box sx={{ width: "100%", maxWidth: 600 }}>
                     <PlayerButtons
                         simple={isSmall}
@@ -66,7 +66,7 @@ const AudioPlayer = ({ track, onForward, onBackward }) => {
                         onForward={() => onForward && onForward(options?.shuffle)}
                         onBackward={() => onBackward && onBackward()} />
 
-                    {!isSmall && <ProgressLine audio={audioRef} />}
+                    <ProgressLine audio={audioRef} position={isSmall && "absolute"} inset="auto 0 0 0" noLabels={isSmall}/>
                 </Box>
             </Box>
 
