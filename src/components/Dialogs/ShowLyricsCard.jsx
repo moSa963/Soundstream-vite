@@ -34,15 +34,20 @@ const ShowLyricsCard = ({ track, audio }) => {
         getData(track, setLyrics, setStamps);
     }, [track]);
 
+    
+    const handleSeekTime = (time) => {
+        audio.current.currentTime = time;
+    }
+
     return (
         <React.Fragment>
             <IconButton size="small" onClick={() => setOpen(true)}>
                 <LyricsIcon />
             </IconButton>
 
-            <Backdrop open={open} onClick={() => setOpen(false)} sx={{ zIndex: 10000, margin: "0px !important" }}>
-                <Paper sx={{ width: "100%", height: "100%", maxWidth: 650, maxHeight: 650, p: 5, border: t => `1px solid ${t.palette.primary.light}`, borderTopRightRadius: 25, borderBottomLeftRadius: 25, }}>
-                    {lyrics?.length > 0 && <LyricsViewer current={currentTime} lyrics={lyrics} stamps={stamps} />}
+            <Backdrop open={open} onClick={(e) => e.currentTarget === e.target && setOpen(false)} sx={{ zIndex: 10000, margin: "0px !important", pt: 1, alignItems: "start" }}>
+                <Paper sx={{ width: "100%", height: "90%", maxWidth: 650, maxHeight: 600, p: 2, border: t => `1px solid ${t.palette.primary.light}`, borderTopRightRadius: 25, borderBottomLeftRadius: 25, }}>
+                    {lyrics?.length > 0 && <LyricsViewer seekTime={handleSeekTime} current={currentTime} lyrics={lyrics} stamps={stamps} />}
                 </Paper>
             </Backdrop>
 
