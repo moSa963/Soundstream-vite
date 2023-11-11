@@ -34,16 +34,6 @@ const StoreLyricsPage = () => {
         audioRef.current.currentTime = time;
     }
 
-    const seekIndex = (index) => {
-        var i = index;
-
-        if (i >= stamps.length) {
-            i = stamps.length - 1;
-        }
-
-        audioRef.current.currentTime = stamps[i < 0 ? 0 : i] || 0;
-    }
-
     if (lyrics === null) {
         return <LinearProgress />
     }
@@ -60,7 +50,7 @@ const StoreLyricsPage = () => {
         <Box sx={{ width: "100%", height: "90%", display: "flex", flexDirection: "column" }} >
             <LyricsViewer
                 flex={1}
-                onClick={(l, i) => seekIndex(i)}
+                seekTime={handleSeekTime}
                 current={currentTime}
                 stamps={stamps}
                 lyrics={lyrics} />
