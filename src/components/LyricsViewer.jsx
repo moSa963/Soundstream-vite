@@ -30,7 +30,7 @@ const LyricsViewer = ({ seekTime, lyrics = "", stamps = [], current = 0, onClick
     }
 
     return (
-        <Box sx={{ width: "100%", height: "100%", overflow: "auto", overflowX: "hidden", flex: flex }} ref={ref} >
+        <Box sx={{ width: "100%", height: "100%", overflow: "auto", overflowX: "hidden", flex: flex, }} ref={ref} >
             {
                 mapLyrics(lyrics, index, handleClick, currentRef)
             }
@@ -57,7 +57,7 @@ const mapLyrics = (lyrics, index, onClick, currentRef) => {
                     <Typography key={i}
                         onClick={() => onClick && onClick(line, key)}
                         variant="h5"
-                        sx={{ width: "fit-content", opacity: index == key ? 1 : 0.8, cursor: "pointer", wordBreak: "break-word", transformOrigin: "left", ":hover": { transform: "scale(1.05)" } }}
+                        sx={{ width: "fit-content", opacity: index == key ? 1 : 0.8, cursor: "pointer", wordBreak: "break-word", transformOrigin: "left", ":hover": { transform: "scale(1.05)" }, fontSize: { xs: 20, sm: 25 } }}
                         color={index == key ? "primary" : null}
                         fontFamily="cursive"
                         fontWeight="bold"
