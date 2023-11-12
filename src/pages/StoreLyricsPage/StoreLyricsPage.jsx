@@ -6,6 +6,7 @@ import TrackTimestamp from "../../components/TrackTimestamp/TrackTimestamp";
 import LyricsViewer from "../../components/LyricsViewer";
 import request, { APP_URL } from "../../utils/Request";
 import formatTime from "../../utils/formatTime";
+import { useMessage } from "../../contexts/MessageContext";
 
 
 const StoreLyricsPage = () => {
@@ -14,6 +15,7 @@ const StoreLyricsPage = () => {
     const [lyrics, setLyrics] = React.useState(null);
     const [currentTime, setCurrentTime] = React.useState(null);
     const [stamps, setStamps] = React.useState([]);
+    const { setInfo } = useMessage();
 
     React.useEffect(() => {
         loadData(track.data, setLyrics, setStamps);
@@ -59,7 +61,7 @@ const StoreLyricsPage = () => {
 
             <Stack direction="row" justifyContent="space-between" alignItems="center">
                 <Typography>{formatTime(currentTime)}</Typography>
-                <Button variant="contained" onClick={() => save(track.data, lyrics, stamps)}>Save</Button>
+                <Button variant="contained" onClick={() => save(track.data, lyrics, stamps, setInfo)}>Save</Button>
             </Stack>
 
             <Divider sx={{ my: 1 }} />
@@ -90,7 +92,7 @@ const loadData = async (track, setLyrics, setStamps) => {
     }
 }
 
-const save = async (track, lyrics = "", stamps = []) => {
+const save = async (track, lyrics = "", stamps = [], setInfo) => {
     var data = {
         "lyrics": lyrics,
     };
@@ -99,7 +101,11 @@ const save = async (track, lyrics = "", stamps = []) => {
         data["timestamps"] = stamps.join(',');
     }
 
-    await request(`api/lyrics/tracks/${track.id}`, "POST", data);
+    const res  = await request(`api/lyrics/tracks/${track.id}`, "POST", data);
+
+    if (res.ok) {
+        setInfo("Lyrics had been updated successfully");
+    }
 }
 
 export default StoreLyricsPage;
