@@ -56,7 +56,7 @@ const AudioPlayer = ({ track, onForward, onBackward }) => {
                 <Track track={track} />
             </Box>
 
-            <Box sx={{ display: "flex", flex: isSmall ? 1 : 2, display: "flex", overflow: "hidden", justifyContent: "center", alignItems: "center" }}>
+            <Box sx={{ display: "flex", flex: isSmall ? 1 : 2, overflow: "hidden", justifyContent: "center", alignItems: "center" }}>
                 <Box sx={{ flex: 2, height: "100%", display: "flex", flexDirection: "column", overflow: "hidden", justifyContent: "center", alignItems: "center" }}>
                     <Box sx={{ width: "100%", maxWidth: 800 }}>
                         <PlayerButtons
