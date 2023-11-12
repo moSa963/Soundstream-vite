@@ -22,7 +22,7 @@ const PlayerButtons = ({ audio, onOptionChange, options, onBackward, onForward, 
                 sx={{ border: "1px solid", borderColor: "divider" }}
                 onClick={handleRewind}
                 onDoubleClick={onBackward}>
-                <FastRewindRounded />
+                <FastRewindRounded sx={{ fontSize: "1.2rem" }}/>
             </IconButton>
 
             <PlayButton audio={audio} />
@@ -30,7 +30,7 @@ const PlayerButtons = ({ audio, onOptionChange, options, onBackward, onForward, 
             <IconButton size="small"
                 sx={{ border: "1px solid", borderColor: "divider" }}
                 onClick={onForward} >
-                <FastForwardRounded />
+                <FastForwardRounded sx={{ fontSize: "1.2rem" }} />
             </IconButton>
 
             {!simple && <RepeatButton repeat={options?.repeat} setOptions={onOptionChange} />}

@@ -33,7 +33,7 @@ const PlayerController = ({ audio, track, simple }) => {
     }, [audio?.current]);
 
     return (
-        <Stack spacing={1} justifyContent="center" alignItems="center" direction="row">
+        <Stack spacing={0.5} justifyContent="center" alignItems="center" direction="row" sx={{ "& svg": { fontSize: {xs: "1.3rem", sm: "1.5rem"} } }}>
             <ShowLyricsCard track={track} audio={audio} />
 
             <IconButton size="small" onClick={() => setOpen(true)} title="queue">

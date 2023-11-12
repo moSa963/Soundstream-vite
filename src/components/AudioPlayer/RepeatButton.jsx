@@ -19,15 +19,15 @@ const RepeatButton = ({ repeat, setOptions }) => {
 
 const options = {
     none: {
-        Icon: <Repeat />,
+        Icon: <Repeat sx={{ fontSize: "1.2rem" }}/>,
         title: "Enable repeat",
     },
     list: {
-        Icon: <Repeat color="info"/>,
+        Icon: <Repeat color="info" sx={{ fontSize: "1.2rem" }}/>,
         title: "Enable repeat one",
     },
     one: {
-        Icon: <RepeatOne color="info"/>,
+        Icon: <RepeatOne color="info" sx={{ fontSize: "1.2rem" }}/>,
         title: "Disable repeat",
     },
 }

@@ -11,7 +11,7 @@ const ShuffleButton = ({ shuffle, setOptions }) => {
 
     return (
         <IconButton size="small" onClick={handleClick} title={shuffle ? "Disable shuffle" : "Enable shuffle"}>
-            { shuffle ? <Shuffle color="info"/> : <Shuffle/> }
+            { shuffle ? <Shuffle color="info" sx={{ fontSize: "1.2rem" }}/> : <Shuffle sx={{ fontSize: "1.2rem" }}/> }
         </IconButton>
     );
 }

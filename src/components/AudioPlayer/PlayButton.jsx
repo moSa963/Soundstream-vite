@@ -35,7 +35,7 @@ const PlayButton = ({ audio }) => {
     
     return (
         <IconButton onClick={handleClick}
-            size="medium" sx={{ border: "1px solid", borderColor: "primary.light" }}>
+            size="small" sx={{ border: "1px solid", borderColor: "primary.light" }}>
             {paused ? <PlayArrowRounded /> : <Pause />}
         </IconButton>
     );
