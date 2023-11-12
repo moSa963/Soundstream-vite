@@ -33,18 +33,18 @@ const PlayerController = ({ audio, track, simple }) => {
     }, [audio?.current]);
 
     return (
-        <Stack spacing={0.5} justifyContent="center" alignItems="center" direction="row" sx={{ "& svg": { fontSize: {xs: "1.3rem", sm: "1.5rem"} } }}>
+        <Stack spacing={0.5} justifyContent="center" alignItems="center" direction="row" sx={{ width: "100%", px: { sm: 0, md: 3 }, "& svg": { fontSize: {xs: "1.3rem", sm: "1.5rem"} }, flexWrap: "wrap" }}>
             <ShowLyricsCard track={track} audio={audio} />
 
             <IconButton size="small" onClick={() => setOpen(true)} title="queue">
                 <QueueMusic />
             </IconButton>
 
-            {/* {!simple && <IconButton size="small" onClick={(_, v) => handleVolumeChange(volume ? 0 : 0.5)}>
+            <IconButton size="small" onClick={(_, v) => handleVolumeChange(volume ? 0 : 0.5)}>
                 {volume ? <VolumeUpIcon /> : <VolumeMute />}
-            </IconButton>} */}
-{/* 
-            {!simple && <Slider min={0} max={1} step={.01} value={volume} onChange={(_, v) => handleVolumeChange(v)} />} */}
+            </IconButton>
+
+            {!simple && <Slider min={0} max={1} step={.01} value={volume} onChange={(_, v) => handleVolumeChange(v)} />}
 
             <QueueListCard open={open} setOpen={setOpen} />
         </Stack>
