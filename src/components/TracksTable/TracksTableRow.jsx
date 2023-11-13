@@ -5,6 +5,7 @@ import Track from "../Track/Track";
 import LikeTrackButton from "../Track/LikeTrackButton";
 import TracksTableRowList from "./TracksTableRowList";
 import { Link } from "react-router-dom";
+import formatTime from "../../utils/formatTime";
 
 
 const TracksTableRow = ({ track, index, setLiked, onPlay, actions, onAction, simple }) => {
@@ -47,7 +48,7 @@ const TracksTableRow = ({ track, index, setLiked, onPlay, actions, onAction, sim
 
             {
                 !simple && <TableCell align="center">
-                    {track.duration}
+                    {formatTime(track.duration)}
                 </TableCell>
             }
 
