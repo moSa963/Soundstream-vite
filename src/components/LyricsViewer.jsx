@@ -1,5 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import React from "react";
+import { textDirection } from "../utils/text";
 
 
 const LyricsViewer = ({ seekTime, lyrics = "", stamps = [], current = 0, onClick, flex }) => {
@@ -30,16 +31,16 @@ const LyricsViewer = ({ seekTime, lyrics = "", stamps = [], current = 0, onClick
     }
 
     return (
-        <Box sx={{ width: "100%", height: "100%", overflow: "auto", overflowX: "hidden", flex: flex, }} ref={ref} >
+        <Box sx={{ width: "100%", height: "100%", overflow: "auto", overflowX: "hidden", flex: flex, direction: textDirection(lyrics) }}  ref={ref} >
             {
-                mapLyrics(lyrics, index, handleClick, currentRef)
+                mapLyrics(lyrics, index, handleClick, currentRef, textDirection(lyrics) === "ltr")
             }
         </Box>
     );
 }
 
 
-const mapLyrics = (lyrics, index, onClick, currentRef) => {
+const mapLyrics = (lyrics, index, onClick, currentRef, left) => {
     var whitespace = 0;
 
     return lyrics
@@ -57,7 +58,7 @@ const mapLyrics = (lyrics, index, onClick, currentRef) => {
                     <Typography key={i}
                         onClick={() => onClick && onClick(line, key)}
                         variant="h5"
-                        sx={{ width: "fit-content", opacity: index == key ? 1 : 0.8, cursor: "pointer", wordBreak: "break-word", transformOrigin: "left", ":hover": { transform: "scale(1.05)" }, fontSize: { xs: 20, sm: 25 } }}
+                        sx={{ width: "fit-content", opacity: index == key ? 1 : 0.8, cursor: "pointer", wordBreak: "break-word", transformOrigin: left ? "left" : "right", ":hover": { transform: "scale(1.05)" }, fontSize: { xs: 20, sm: 25 } }}
                         color={index == key ? "primary" : null}
                         fontFamily="cursive"
                         fontWeight="bold"

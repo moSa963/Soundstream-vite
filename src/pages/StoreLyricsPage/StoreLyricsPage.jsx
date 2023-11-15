@@ -49,7 +49,7 @@ const StoreLyricsPage = () => {
     }
 
     return (
-        <Box sx={{ width: "100%", height: "90%", display: "flex", flexDirection: "column" }} >
+        <Box sx={{ width: "100%", height: "90%", display: "flex", flexDirection: "column", p: 1 }} >
             <LyricsViewer
                 flex={1}
                 seekTime={handleSeekTime}

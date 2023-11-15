@@ -1,5 +1,6 @@
 import { Button, Card, InputBase, Typography } from "@mui/material";
 import React from "react";
+import { textDirection } from "../../utils/text";
 
 
 
@@ -27,7 +28,7 @@ const AddLyricsForm = ({ onAdded }) => {
                 border: t => `1px solid ${t.palette.primary.light}`
             }}
                 elevation={0}>
-                <InputBase value={data} onChange={(e) => setData(e.currentTarget.value)} placeholder="Write the lyrics here..." sx={{ width: "100%", minHeight: "100%", textAlign: "start", justifyContent: "start", alignItems: "start" }} multiline></InputBase>
+                <InputBase value={data} onChange={(e) => setData(e.currentTarget.value)} placeholder="Write the lyrics here..." sx={{ width: "100%", minHeight: "100%", textAlign: "start", justifyContent: "start", alignItems: "start", direction: textDirection(data) }} multiline></InputBase>
             </Card>
             <Button variant="contained" onClick={handleClick}>Add</Button>
         </React.Fragment>
