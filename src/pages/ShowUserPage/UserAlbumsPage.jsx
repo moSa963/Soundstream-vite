@@ -18,7 +18,7 @@ const UserAlbumsPage = () => {
                 url={`api/users/${user?.username}/albums`}
                 Skeleton={CardsSectionSkeleton}
                 loader={
-                    (list, setList, loadNext) => (
+                    ({list, setList}) => (
                         <PlaylistsList
                             playlists={list}
                             setPlaylists={setList}

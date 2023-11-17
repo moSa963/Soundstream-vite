@@ -17,7 +17,7 @@ const UserLikedPage = () => {
                 url={`api/likes?username=${user?.username}`}
                 Skeleton={CardsSectionSkeleton}
                 loader={
-                    (list, setList, loadNext) => (
+                    ({list}) => (
                         <CardsSection
                             Card={TrackCard}
                             data={list}

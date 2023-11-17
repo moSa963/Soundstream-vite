@@ -1,4 +1,4 @@
-import { Box, Button, ButtonGroup, IconButton, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import React from "react";
 import CardsSection from "../components/CardsSection/CardsSection";
 import { Link, useNavigate } from "react-router-dom";
@@ -7,7 +7,6 @@ import PaginationList from "../components/PaginationList";
 import TrackCard from "../components/CardsSection/TrackCard";
 import CardsSectionSkeleton from "../components/CardsSection/CardsSectionSkeleton";
 import HorizontalList from "../components/HorizontalList";
-import { Add } from "@mui/icons-material";
 import CreateAlbumCard from "../components/Dialogs/CreateAlbumCard";
 
 
@@ -36,12 +35,12 @@ const LibraryPage = () => {
             <PaginationList
                 url="api/history/tracks"
                 Skeleton={CardsSectionSkeleton}
-                loader={(data) => (
+                loader={({list}) => (
                     <CardsSection
-                        key={data?.track}
+                        key={list?.track}
                         title="Recently Played"
                         Card={TrackCard}
-                        data={data?.track}
+                        data={list?.track}
                     />
                 )}
             />

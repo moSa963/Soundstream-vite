@@ -28,13 +28,13 @@ const HomePage = () => {
             <PaginationList
                 url="api/likes?count=6"
                 Skeleton={CardsSectionSkeleton}
-                loader={(data) => (
+                loader={({list}) => (
                     <CardsSection
                         title="Liked Tracks"
                         onAction={() => nav("/likes")}
                         actionTitle="ShowAll"
                         Card={TrackCard}
-                        data={data}
+                        data={list}
                     />
                 )}
             />

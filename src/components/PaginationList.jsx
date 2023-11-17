@@ -15,7 +15,7 @@ const PaginationList = ({ url, loader, Skeleton }) => {
 
     const loadNext = React.useCallback(() => !progress && loadData(next, setList, setNext, setError, setProgress, true), [next, progress]);
 
-    const loadedData = React.useMemo(() => loader(list, next, setList, loadNext), [list, next, loadNext]);
+    const loadedData = React.useMemo(() => loader({list, next, setList, loadNext}), [list, next, loadNext]);
 
     React.useEffect(() => {
         setList(null);
