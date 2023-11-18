@@ -1,23 +1,8 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
 import ErrorPage from "../pages/ErrorPage";
-import HomePage from "../pages/HomePage";
-import LikesPage from "../pages/LikesPage";
-import SearchPage from "../pages/SearchPage";
-import ShowPlaylistPage from "../pages/ShowPlaylistPage/ShowPlaylistPage";
-import PlaylistsPage from "../pages/PlaylistsPage";
-import LibraryPage from "../pages/LibraryPage";
 import request from "../utils/Request";
-import ProfilePage from "../pages/AccountPage/ProfilePage";
-import AccountPage from "../pages/AccountPage/AccountPage";
-import ShowTrackPage from "../pages/ShowTrackPage";
-import ShowUserPage from "../pages/ShowUserPage/ShowUserPage";
-import UserAlbumsPage from "../pages/ShowUserPage/UserAlbumsPage";
-import UserPlaylistsPage from "../pages/ShowUserPage/UserPlaylistsPage";
-import UserLikedPage from "../pages/ShowUserPage/UserLikedPage";
-import AlbumsPage from "../pages/AlbumsPage";
 import ShowPlaylistErrorPage from "../pages/ShowPlaylistPage/ShowPlaylistErrorPage";
-import StoreLyricsPage from "../pages/StoreLyricsPage/StoreLyricsPage";
 
 
 
@@ -29,19 +14,19 @@ export const createRoutes = () => createBrowserRouter([
         children: [
             {
                 index: true,
-                element: <HomePage />,
+                lazy: () => getLazyComponent(import("../pages/HomePage")),
             },
             {
                 path: "search",
-                element: <SearchPage />,
+                lazy: () => getLazyComponent(import("../pages/SearchPage")),
             },
             {
                 path: "account",
-                element: <AccountPage />,
+                lazy: () => getLazyComponent(import("../pages/AccountPage/AccountPage")),
                 children: [
                     {
                         index: true,
-                        element: <ProfilePage />,
+                        lazy: () => getLazyComponent(import("../pages/AccountPage/ProfilePage")),
                     },
                 ]
             },
@@ -52,30 +37,30 @@ export const createRoutes = () => createBrowserRouter([
                 children: [
                     {
                         index: true,
-                        element: <ShowTrackPage />,
+                        lazy: () => getLazyComponent(import("../pages/ShowTrackPage")),
                     },
                     {
                         path: "lyrics",
-                        element: <StoreLyricsPage />
+                        lazy: () => getLazyComponent(import("../pages/StoreLyricsPage/StoreLyricsPage")),
                     }
                 ],
             },
             {
                 path: "user/:username",
-                element: <ShowUserPage />,
+                lazy: () => getLazyComponent(import("../pages/ShowUserPage/ShowUserPage")),
                 loader: async ({ params }) => request(`api/users/${params.username}`),
-                children:[
+                children: [
                     {
                         index: true,
-                        element: <UserAlbumsPage />,
+                        lazy: () => getLazyComponent(import("../pages/ShowUserPage/UserAlbumsPage")),
                     },
                     {
                         path: "liked",
-                        element: <UserLikedPage />
+                        lazy: () => getLazyComponent(import("../pages/ShowUserPage/UserLikedPage")),
                     },
                     {
                         path: "playlists",
-                        element: <UserPlaylistsPage />
+                        lazy: () => getLazyComponent(import("../pages/ShowUserPage/UserPlaylistsPage")),
                     },
                 ],
             },
@@ -84,18 +69,18 @@ export const createRoutes = () => createBrowserRouter([
                 children: [
                     {
                         index: true,
-                        element: <LibraryPage />,
+                        lazy: () => getLazyComponent(import("../pages/LibraryPage")),
                     },
                     {
                         path: "albums",
                         children: [
                             {
                                 index: true,
-                                element: <AlbumsPage />,
+                                lazy: () => getLazyComponent(import("../pages/AlbumsPage")),
                             },
                             {
                                 path: ":id",
-                                element: <ShowPlaylistPage />,
+                                lazy: () => getLazyComponent(import("../pages/ShowPlaylistPage/ShowPlaylistPage")),
                                 loader: async ({ params }) => request(`api/playlists/${params.id}`),
                             },
                         ],
@@ -105,12 +90,12 @@ export const createRoutes = () => createBrowserRouter([
                         children: [
                             {
                                 index: true,
-                                element: <PlaylistsPage />,
+                                lazy: () => getLazyComponent(import("../pages/PlaylistsPage")),
                             },
                             {
                                 path: ":id",
                                 errorElement: <ShowPlaylistErrorPage />,
-                                element: <ShowPlaylistPage />,
+                                lazy: () => getLazyComponent(import("../pages/ShowPlaylistPage/ShowPlaylistPage")),
                                 loader: async ({ params }) => request(`api/playlists/${params.id}`),
                             },
                         ]
@@ -119,8 +104,15 @@ export const createRoutes = () => createBrowserRouter([
             },
             {
                 path: "likes",
-                element: <LikesPage />,
+                lazy: () => getLazyComponent(import("../pages/LikesPage")),
             },
         ]
     }
 ]);
+
+
+const getLazyComponent = async (op) => {
+    return {
+        Component: (await op).default
+    };
+}
