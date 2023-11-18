@@ -18,20 +18,19 @@ const Playlist = ({ url, playlist, setPlaylist, actions, onAction, stickyHeader,
     }
 
     return (
-        <Box sx={{ width: "100%", ...sx }}>
-            <PlaylistToolsBar
-                playlist={playlist}
-                onTrackAdded={(t) => setTracks(ts => [...ts, t])}
-                filter={filter}
-                setPlaylist={setPlaylist}
-                setFilter={setFilter}
-            />
-
-            <PaginationList
-                url={url}
-                Skeleton={TracksTableSkeleton}
-                playlist={playlist}
-                loader={({ list, setTracks }) => (
+        <PaginationList
+            url={url}
+            Skeleton={TracksTableSkeleton}
+            payload={playlist}
+            loader={({ list, setTracks }) => (
+                <Box sx={{ width: "100%", ...sx }}>
+                    <PlaylistToolsBar
+                        playlist={playlist}
+                        onTrackAdded={(t) => setTracks(ts => [...ts, t])}
+                        filter={filter}
+                        setPlaylist={setPlaylist}
+                        setFilter={setFilter}
+                    />
                     <TracksTable
                         simple={small}
                         onPlay={(_, index) => handlePlay(list, index, setList)}
@@ -41,9 +40,9 @@ const Playlist = ({ url, playlist, setPlaylist, actions, onAction, stickyHeader,
                         onAction={(action, track) => onAction(action, track, setTracks)}
                         stickyHeader={stickyHeader}
                     />
-                )}
-            />
-        </Box>
+                </Box>
+            )}
+        />
     );
 }
 

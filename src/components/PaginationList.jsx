@@ -5,7 +5,7 @@ import { Box } from "@mui/material";
 import { useScroll } from "../contexts/ScrollContext";
 
 
-const PaginationList = ({ url, loader, Skeleton }) => {
+const PaginationList = ({ url, loader, Skeleton, payload }) => {
     const ref = React.useRef();
     const [list, setList] = React.useState(null);
     const [next, setNext] = React.useState(null);
@@ -15,7 +15,7 @@ const PaginationList = ({ url, loader, Skeleton }) => {
 
     const loadNext = React.useCallback(() => !progress && loadData(next, setList, setNext, setError, setProgress, true), [next, progress]);
 
-    const loadedData = React.useMemo(() => loader({list, next, setList, loadNext}), [list, next, loadNext]);
+    const loadedData = React.useMemo(() => loader({list, next, setList, loadNext, payload}), [list, next, loadNext, payload]);
 
     React.useEffect(() => {
         setList(null);
