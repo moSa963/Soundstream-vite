@@ -22,22 +22,22 @@ const Playlist = ({ url, playlist, setPlaylist, actions, onAction, stickyHeader,
             url={url}
             Skeleton={TracksTableSkeleton}
             payload={playlist}
-            loader={({ list, setTracks }) => (
+            loader={(loader) => (
                 <Box sx={{ width: "100%", ...sx }}>
                     <PlaylistToolsBar
                         playlist={playlist}
-                        onTrackAdded={(t) => setTracks(ts => [...ts, t])}
+                        onTrackAdded={(t) => loader.setList(ts => [...ts, t])}
                         filter={filter}
                         setPlaylist={setPlaylist}
                         setFilter={setFilter}
                     />
                     <TracksTable
                         simple={small}
-                        onPlay={(_, index) => handlePlay(list, index, setList)}
-                        tracks={list?.filter((v) => v.title.toLowerCase().startsWith(filter.toLowerCase()))}
-                        setTracks={setTracks}
+                        onPlay={(_, index) => handlePlay(loader.list, index, setList)}
+                        tracks={loader.list?.filter((v) => v.title.toLowerCase().startsWith(filter.toLowerCase()))}
+                        setTracks={loader.setList}
                         actions={actions}
-                        onAction={(action, track) => onAction(action, track, setTracks)}
+                        onAction={(action, track) => onAction(action, track, loader.setList)}
                         stickyHeader={stickyHeader}
                     />
                 </Box>
