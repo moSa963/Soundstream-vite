@@ -1,4 +1,3 @@
-"use client"
 import { Paper } from "@mui/material";
 import React, { createContext, useContext } from "react";
 
