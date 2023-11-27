@@ -16,7 +16,7 @@ const ShowUserPage = () => {
     return (
         <Box sx={{ width: "100%" }}>
             <Banner
-                avatar={`${APP_URL}api/account/${data.username}/profile/photo`}
+                avatar={`${APP_URL}api/account/${data.username}/profile/photo/${data.photo}`}
                 title={data.name}
                 description={`@${data.username}`}
                 type="profile"

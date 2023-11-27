@@ -18,7 +18,7 @@ const AppBar = () => {
                     <ThemeToggle />
 
                     <Link to="/account">
-                        <Avatar src={`${APP_URL}api/account/${user.username}/profile/photo`}
+                        <Avatar src={`${APP_URL}api/account/${user.username}/profile/photo/${user.photo}`}
                             sx={{ transform: "scale(0.95)", ":hover": { transform: "scale(1)" }, cursor: "pointer" }} />
                     </Link>
                 </Stack>

@@ -13,7 +13,7 @@ const PlaylistInfo = ({ user, trackCount, isPrivate }) => {
                 user &&
                 <Link to={`/user/${user.username}`}>
                     <Stack direction="row" spacing={.5} sx={{ cursor: "pointer", color: t => t.palette.text.secondary, ":hover": { color: t => t.palette.text.primary } }}>
-                        <Avatar sx={{ width: 25, height: 25 }} src={`${APP_URL}api/account/${user.username}/profile/photo`} />
+                        <Avatar sx={{ width: 25, height: 25 }} src={`${APP_URL}api/account/${user.username}/profile/photo/${user.photo}`} />
                         <Typography noWrap>{user.username}</Typography>
                     </Stack>
                 </Link>

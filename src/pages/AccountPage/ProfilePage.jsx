@@ -14,7 +14,7 @@ const ProfilePage = () => {
     return (
         <Box sx={{ width: "100%" }}>
             <Banner
-                avatar={`${APP_URL}api/account/${user.username}/profile/photo`}
+                avatar={`${APP_URL}api/account/${user.username}/profile/photo/${user.photo}`}
                 title={user.name}
                 description={`@${user.username}`}
                 onAvatarChange={(file) => UpdateImage(file, setError)}
