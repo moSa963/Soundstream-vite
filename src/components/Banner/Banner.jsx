@@ -6,12 +6,13 @@ import BannerBase from "./BannerBase";
 
 
 
-const Banner = ({ description, title, type, avatar, onEdit, onAvatarChange, color, children }) => {
+const Banner = ({ description, title, type, avatar, onEdit, onAvatarChange, defColor, children }) => {
+    const [color, setColor] = React.useState();
 
     return (
-        <BannerBase color={color} >
-
+        <BannerBase color={defColor || color} >
             <AvatarInput src={avatar}
+                onDominantColorLoad={(color) => setColor(color)}
                 disabled={!onAvatarChange}
                 sx={{ width: { xs: 150, sm: 220 }, height: { xs: 150, sm: 200 }, boxShadow: t => t.shadows[4] }}
                 onChange={onAvatarChange}
