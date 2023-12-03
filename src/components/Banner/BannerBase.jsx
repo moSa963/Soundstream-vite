@@ -23,7 +23,7 @@ const BannerBase = ({ children, color }) => {
                 alignItems: "center",
                 opacity: interpolate(scroll, [0, max/3, max], [1, 1, 0]),
                 transform: `translateY(${interpolate(scroll, [0, max], [0, max / 2])}px) scale(${interpolate(scroll, [0, max/2, max], [1, 1, .95])})`,
-                background: t => `linear-gradient(to top, ${t.palette.background.paper}, ${color || t.palette.primary.light} 1000px)`
+                background: t => `linear-gradient(to top, ${t.palette.background.paper}, ${color || t.palette.primary.light} 110%)`
             }} elevation={0}>
                 {children}
             </Paper>
