@@ -1,25 +1,50 @@
-
-
 export const dominantColor = (pixels) => {
     const colors = {};
     var max = 0;
     var res = null;
 
-    for (let i = 0; i < pixels.length; i += 80) {
-        const r = pixels[i];
-        const g = pixels[i + 1];
-        const b = pixels[i + 2];
-        const a = pixels[i + 3];
+    for (let i = 0; i < pixels.length; i += 160) {
+        const rgba = {
+            r: pixels[i],
+            g: pixels[i + 1],
+            b: pixels[i + 2],
+            a: pixels[i + 3],
+        };
 
-        if (a >= 150) {
-            const color = `rgb(${r} ${g} ${b})`;
-            colors[color] = (colors[color] || 0) + 1;
+        if (rgba.a < 150) {
+            continue;
+        }
 
-            if (colors[color] > max) {
-                max = colors[color];
-                res = color;
+        var values = Object.values(colors);
+
+        var j = 0;
+        for (j; j < values.length; ++j) {
+            if (colorDifference(rgba, values[j]) < 50) {
+                values[j].count += 1;
+                if (max <= values[j].count) {
+                    max = values[j].count;
+                    res = `rgb(${values[j].r}, ${values[j].g}, ${values[j].b})`;
+                }
+
+                break;
+            }
+        }
+
+        if (j == values.length) {
+            colors[`${rgba.r}, ${rgba.g}, ${rgba.b}`] = {
+                ...rgba, count: 0,
             }
         }
     }
+
     return res;
+}
+
+
+const colorDifference = (rgb1, rgb2) => {
+    return Math.sqrt(
+        Math.pow(rgb1.r - rgb2.r, 2) +
+        Math.pow(rgb1.g - rgb2.g, 2) +
+        Math.pow(rgb1.b - rgb2.b, 2)
+    );
 }
