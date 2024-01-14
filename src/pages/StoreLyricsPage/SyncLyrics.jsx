@@ -1,13 +1,14 @@
-import { Button, Divider, Stack, Typography } from "@mui/material";
+import { Button, Divider, IconButton, Stack, Typography } from "@mui/material";
 import React from "react"
 import LyricsViewer from "../../components/LyricsViewer";
 import TrackTimestamp from "../../components/TrackTimestamp/TrackTimestamp";
 import formatTime from "../../utils/formatTime";
+import { Edit } from "@mui/icons-material";
 
 
-const SyncLyrics = ({ audio, onTimeChange, stamps, setStamps, lyrics, onSave }) => {
+const SyncLyrics = ({ audio, onTimeChange, stamps, setStamps, lyrics, onEdit, onSave }) => {
     const [currentTime, setCurrentTime] = React.useState(null);
-d
+
 
 
     return (
@@ -23,6 +24,9 @@ d
 
             <Stack direction="row" justifyContent="space-between" alignItems="center">
                 <Typography>{formatTime(currentTime)}</Typography>
+                <IconButton onClick={onEdit}>
+                    <Edit />
+                </IconButton>
                 <Button variant="contained" onClick={onSave}>Save</Button>
             </Stack>
 
