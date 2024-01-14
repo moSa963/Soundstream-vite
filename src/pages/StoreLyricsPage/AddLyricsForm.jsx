@@ -5,8 +5,8 @@ import { textDirection } from "../../utils/text";
 
 
 
-const AddLyricsForm = ({ onAdded }) => {
-    const [data, setData] = React.useState("");
+const AddLyricsForm = ({ onAdded, defaultVal}) => {
+    const [data, setData] = React.useState(defaultVal);
 
     const handleClick = () => {
         onAdded && onAdded(data);
