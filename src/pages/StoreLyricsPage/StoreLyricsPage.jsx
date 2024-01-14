@@ -12,6 +12,7 @@ const StoreLyricsPage = () => {
     const audioRef = React.useRef(new Audio());
     const [lyrics, setLyrics] = React.useState(null);
     const [stamps, setStamps] = React.useState([]);
+    const [edit, setEdit] = React.useState(false);
     const { setInfo } = useMessage();
 
     React.useEffect(() => {
@@ -37,13 +38,14 @@ const StoreLyricsPage = () => {
         return <LinearProgress />
     }
 
-    if (lyrics === "") {
+    if (lyrics === "" || edit) {
         return (
             <Stack sx={{ width: "100%", height: "85%", alignItems: "center" }} spacing={2}>
                 <AddLyricsForm 
                 defaultVal={lyrics}
                 onAdded={(data) => {
                     setLyrics(data);
+                    setEdit(false);
                 }} />
             </Stack>
         );
@@ -56,6 +58,7 @@ const StoreLyricsPage = () => {
             stamps={stamps}
             setStamps={setStamps}
             onTimeChange={handleSeekTime}
+            onEdit={() => setEdit(true)}
             onSave={() => save(track.data, lyrics, stamps, setInfo)}
         />
     )
