@@ -1,19 +1,16 @@
-import { Box, Button, Divider, LinearProgress, Stack, Typography } from "@mui/material";
+import { LinearProgress, Stack } from "@mui/material";
 import React from "react";
 import { useRouteLoaderData } from "react-router-dom";
 import AddLyricsForm from "./AddLyricsForm";
-import TrackTimestamp from "../../components/TrackTimestamp/TrackTimestamp";
-import LyricsViewer from "../../components/LyricsViewer";
 import request, { APP_URL } from "../../utils/Request";
-import formatTime from "../../utils/formatTime";
 import { useMessage } from "../../contexts/MessageContext";
+import SyncLyrics from "./SyncLyrics";
 
 
 const StoreLyricsPage = () => {
     const track = useRouteLoaderData("track_root");
     const audioRef = React.useRef(new Audio());
     const [lyrics, setLyrics] = React.useState(null);
-    const [currentTime, setCurrentTime] = React.useState(null);
     const [stamps, setStamps] = React.useState([]);
     const { setInfo } = useMessage();
 
@@ -43,39 +40,25 @@ const StoreLyricsPage = () => {
     if (lyrics === "") {
         return (
             <Stack sx={{ width: "100%", height: "85%", alignItems: "center" }} spacing={2}>
-                <AddLyricsForm onAdded={(data) => setLyrics(data)} />
+                <AddLyricsForm 
+                defaultVal={lyrics}
+                onAdded={(data) => {
+                    setLyrics(data);
+                }} />
             </Stack>
         );
     }
 
     return (
-        <Box sx={{ width: "100%", height: "90%", display: "flex", flexDirection: "column", p: 1 }} >
-            <LyricsViewer
-                flex={1}
-                seekTime={handleSeekTime}
-                current={currentTime}
-                stamps={stamps}
-                lyrics={lyrics} />
-
-            <Divider sx={{ mb: 1 }} />
-
-            <Stack direction="row" justifyContent="space-between" alignItems="center">
-                <Typography>{formatTime(currentTime)}</Typography>
-                <Button variant="contained" onClick={() => save(track.data, lyrics, stamps, setInfo)}>Save</Button>
-            </Stack>
-
-            <Divider sx={{ my: 1 }} />
-
-            <TrackTimestamp
-                stamps={stamps}
-                setStamps={setStamps}
-                audio={audioRef}
-                setCurrentTime={handleSeekTime}
-                currentTime={currentTime}
-                onCurrentTimeChange={setCurrentTime}
-                max={audioRef?.current.duration} />
-        </Box>
-    );
+        <SyncLyrics 
+            audio={audioRef}
+            lyrics={lyrics}
+            stamps={stamps}
+            setStamps={setStamps}
+            onTimeChange={handleSeekTime}
+            onSave={() => save(track.data, lyrics, stamps, setInfo)}
+        />
+    )
 }
 
 const loadData = async (track, setLyrics, setStamps) => {
